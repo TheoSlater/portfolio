@@ -39,7 +39,7 @@ export default function Projects() {
             time. Here is some of the open source stuff I&apos;m working/worked
             on.
           </p>
-          <Stack spacing={5} direction="row">
+          <Stack spacing={7} direction="row">
             <Box
               sx={{
                 bgcolor: "rgb(48,48,48)",
@@ -51,7 +51,16 @@ export default function Projects() {
                 padding: "20px",
               }}
             >
-              PLACEHOLDER PROJECT NAME
+              <h1
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "500",
+                  marginBottom: "15px",
+                  textAlign: "center",
+                }}
+              >
+                This Website
+              </h1>
               <Box>
                 <Image
                   src={"/pfp1.png"}
@@ -62,8 +71,104 @@ export default function Projects() {
                     borderColor: "rgb(55,55,55)",
                     borderWidth: "1px",
                     borderRadius: "20px",
+                    marginBottom: "15px",
                   }}
                 ></Image>
+                <p style={{ fontSize: "20px" }}>
+                  This portfolio is one of my projects introducing my self and
+                  my open source projects I work on in my free time. <br />{" "}
+                  <br />
+                  More in the future?
+                </p>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                bgcolor: "rgb(48,48,48)",
+                width: "30%",
+                height: "50vh",
+                borderColor: "rgb(55,55,55)",
+                borderWidth: "1px",
+                borderRadius: "15px",
+                padding: "20px",
+              }}
+            >
+              <h1
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "500",
+                  marginBottom: "15px",
+                  textAlign: "center",
+                }}
+              >
+                Youtube To Mp3
+              </h1>
+              <Box>
+                <Image
+                  src={"/ytmp3.png"}
+                  alt={"PLACEHOLDER"}
+                  width={1000}
+                  height={1000}
+                  style={{
+                    borderColor: "rgb(55,55,55)",
+                    borderWidth: "1px",
+                    borderRadius: "20px",
+                    marginBottom: "15px",
+                  }}
+                ></Image>
+                <p style={{ fontSize: "20px" }}>
+                  A youtube to mp3 converter app programmed in python and allows
+                  you to select if you want to download an mp4 or mp3.
+                </p>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                bgcolor: "rgb(48,48,48)",
+                width: "30%",
+                height: "50vh",
+                borderColor: "rgb(55,55,55)",
+                borderWidth: "1px",
+                borderRadius: "15px",
+                padding: "20px",
+              }}
+            >
+              <h1
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "500",
+                  marginBottom: "15px",
+                  textAlign: "center",
+                }}
+              >
+                Coming Soon...
+              </h1>
+              <Box
+                sx={{
+                  width: "280px",
+                  height: "280px",
+                  bgcolor: "black",
+                  borderColor: "rgb(55,55,55)",
+                  borderWidth: "1px",
+                  borderRadius: "20px",
+                  marginBottom: "15px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center", // Align vertically
+                  flexDirection: "column", // To allow for vertical alignment
+                }}
+              >
+                <h1
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "500",
+                    marginBottom: "15px",
+                    textAlign: "center",
+                  }}
+                >
+                  Coming Soon...
+                </h1>
+                <p style={{ fontSize: "20px" }}></p>
               </Box>
             </Box>
           </Stack>
