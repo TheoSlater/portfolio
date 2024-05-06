@@ -11,6 +11,7 @@ import {
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MailIcon from "@mui/icons-material/Mail";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import Link from "next/link";
 
 const ColorButton = styled(Button)<ButtonProps>(() => ({
   color: "white",
@@ -38,16 +39,20 @@ export default function Navbar() {
       }}
     >
       <Stack spacing={1} direction="row" sx={{ flexGrow: 1 }}>
-        <ColorButton
-          style={{ height: "48px", width: "100px", borderRadius: "12px" }}
-        >
-          Home
-        </ColorButton>
-        <ColorButton
-          style={{ height: "48px", width: "100px", borderRadius: "12px" }}
-        >
-          Projects
-        </ColorButton>
+        <Link href={"/"} passHref>
+          <ColorButton
+            style={{ height: "48px", width: "100px", borderRadius: "12px" }}
+          >
+            Home
+          </ColorButton>
+        </Link>
+        <Link href={"/projects"} passHref>
+          <ColorButton
+            style={{ height: "48px", width: "100px", borderRadius: "12px" }}
+          >
+            Projects
+          </ColorButton>
+        </Link>
         <ColorButton
           style={{ height: "48px", width: "100px", borderRadius: "12px" }}
         >
