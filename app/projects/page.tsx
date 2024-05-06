@@ -49,6 +49,7 @@ export default function Projects() {
                 borderWidth: "1px",
                 borderRadius: "15px",
                 padding: "20px",
+                overflow: "auto", // Add overflow: auto
               }}
             >
               <h1
@@ -91,6 +92,7 @@ export default function Projects() {
                 borderWidth: "1px",
                 borderRadius: "15px",
                 padding: "20px",
+                overflow: "auto", // Add overflow: auto
               }}
             >
               <h1
@@ -131,6 +133,7 @@ export default function Projects() {
                 borderWidth: "1px",
                 borderRadius: "15px",
                 padding: "20px",
+                overflow: "auto", // Add overflow: auto
               }}
             >
               <h1
