@@ -16,3 +16,18 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.page-container {
+  opacity: 0; /* Start with transparency */
+  animation: fadeIn 0.35s ease-in-out forwards; /* Animation properties */
+}
+
+/* Keyframes for the fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start from transparency */
+  }
+  to {
+    opacity: 1; /* Fade to fully visible */
+  }
+}

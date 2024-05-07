@@ -12,14 +12,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MailIcon from "@mui/icons-material/Mail";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Link from "next/link";
-
-const ColorButton = styled(Button)<ButtonProps>(() => ({
-  color: "white",
-  backgroundColor: "rgb(48, 48, 48)",
-  "&:hover": {
-    backgroundColor: "rgb(44, 44, 44)",
-  },
-}));
+import ColorButton from "./ColorButton";
 
 export default function Navbar() {
   return (
@@ -53,11 +46,13 @@ export default function Navbar() {
             Projects
           </ColorButton>
         </Link>
-        <ColorButton
-          style={{ height: "48px", width: "100px", borderRadius: "12px" }}
-        >
-          Contact
-        </ColorButton>
+        <Link href={"/contact"} passHref>
+          <ColorButton
+            style={{ height: "48px", width: "100px", borderRadius: "12px" }}
+          >
+            Contact
+          </ColorButton>
+        </Link>
       </Stack>
       <Box
         sx={{

@@ -1,11 +1,15 @@
-import { Container, Box, Stack, Paper } from "@mui/material";
+"use client";
+
+import { Container, Box, Stack, Paper, Button } from "@mui/material";
 import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import ColorButton from "../components/ColorButton";
 
 export default function Projects() {
   return (
     <div
+      className="page-container"
       style={{
         height: "100vh",
         display: "flex",
@@ -77,10 +81,23 @@ export default function Projects() {
                 ></Image>
                 <p style={{ fontSize: "20px" }}>
                   This portfolio is one of my projects introducing my self and
-                  my open source projects I work on in my free time. <br />{" "}
-                  <br />
-                  More in the future?
+                  my open source projects I work on in my free time.
                 </p>
+                <Button
+                  sx={{
+                    marginTop: "10px",
+                    bgcolor: "rgb(60,60,60)",
+                    color: "white",
+                    height: "50px",
+                    width: "150px",
+                    borderRadius: "15px",
+                    "&:hover": {
+                      backgroundColor: "rgb(44, 44, 44)",
+                    },
+                  }}
+                >
+                  Learn More
+                </Button>
               </Box>
             </Box>
             <Box
@@ -122,6 +139,27 @@ export default function Projects() {
                   A youtube to mp3 converter app programmed in python and allows
                   you to select if you want to download an mp4 or mp3.
                 </p>
+                <Button
+                  sx={{
+                    marginTop: "10px",
+                    bgcolor: "rgb(60,60,60)",
+                    color: "white",
+                    height: "50px",
+                    width: "150px",
+                    borderRadius: "15px",
+                    "&:hover": {
+                      backgroundColor: "rgb(44, 44, 44)",
+                    },
+                  }}
+                  onClick={() =>
+                    window.open(
+                      "https://github.com/TheoSlater/YoutubeToMp3-Mp4/releases",
+                      "_blank"
+                    )
+                  }
+                >
+                  Learn More
+                </Button>
               </Box>
             </Box>
             <Box

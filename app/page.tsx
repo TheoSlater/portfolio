@@ -3,10 +3,12 @@
 import { Container, Box, Avatar } from "@mui/material";
 import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div
+      className="page-container"
       style={{
         height: "100vh",
         display: "flex",
@@ -65,9 +67,17 @@ export default function Home() {
               experimenting and developing new ideas for websites or apps. While
               doing my studies, my times will also be available for freelance
               work. If you are looking for someone to cooperate with on projects
-              related to digital space, I will be glad to share how we can join
-              forces. If you want to team up with me, I&apos;m all ears, so feel
-              free to get in touch
+              related to the digital space, I will be glad to share how we can
+              join forces. If you want to team up with me, I&apos;m all ears, so
+              feel free to,{" "}
+              <Link
+                href="/contact"
+                style={{ textDecoration: "underline", fontWeight: "bold" }}
+                passHref
+              >
+                get in touch
+              </Link>
+              .
             </p>
           </Container>
         </Box>
