@@ -59,7 +59,6 @@ export default function Skills() {
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
-
                   padding: "15px",
                   display: "flex",
                   flexDirection: "column",
@@ -73,8 +72,17 @@ export default function Skills() {
                   width={150}
                   height={150}
                   style={{ marginBottom: "15px" }}
+                  className="selector"
                 />
-                <p style={{ marginTop: "10px", color: "white" }}>NEXT.JS</p>
+                <p
+                  style={{
+                    marginTop: "10px",
+                    color: "white",
+                    fontWeight: "400",
+                  }}
+                >
+                  Next.js
+                </p>
               </Paper>
             </Grid>
             <Grid item xs={4}>
@@ -99,8 +107,17 @@ export default function Skills() {
                   width={150}
                   height={150}
                   style={{ marginBottom: "15px" }}
+                  className="selector"
                 />
-                <p style={{ marginTop: "10px", color: "white" }}>TYPESCRIPT</p>
+                <p
+                  style={{
+                    marginTop: "10px",
+                    color: "white",
+                    fontWeight: "400",
+                  }}
+                >
+                  Typescript
+                </p>
               </Paper>
             </Grid>
             <Grid item xs={4}>
@@ -125,8 +142,17 @@ export default function Skills() {
                   width={150}
                   height={150}
                   style={{ marginBottom: "15px" }}
+                  className="selector"
                 />
-                <p style={{ marginTop: "10px", color: "white" }}>JAVASCRIPT</p>
+                <p
+                  style={{
+                    marginTop: "10px",
+                    color: "white",
+                    fontWeight: "400",
+                  }}
+                >
+                  Javascript
+                </p>
               </Paper>
             </Grid>
           </Grid>
@@ -147,8 +173,22 @@ export default function Skills() {
                   alignItems: "center",
                 }}
               >
-                <Image src="/" alt="logo" width={80} height={80} />
-                <p style={{ marginTop: "10px", color: "white" }}>PLACEHOLDER</p>
+                <Image
+                  src="/csharp.png"
+                  alt="logo"
+                  width={150}
+                  height={150}
+                  className="selector"
+                />
+                <p
+                  style={{
+                    marginTop: "10px",
+                    color: "white",
+                    fontWeight: "400",
+                  }}
+                >
+                  CSharp
+                </p>
               </Paper>
             </Grid>
             <Grid item xs={4}>
@@ -167,8 +207,22 @@ export default function Skills() {
                   alignItems: "center",
                 }}
               >
-                <Image src="/" alt="logo" width={80} height={80} />
-                <p style={{ marginTop: "10px", color: "white" }}>PLACEHOLDER</p>
+                <Image
+                  src="/python.png"
+                  alt="logo"
+                  width={150}
+                  height={150}
+                  className="selector"
+                />
+                <p
+                  style={{
+                    marginTop: "10px",
+                    color: "white",
+                    fontWeight: "400",
+                  }}
+                >
+                  Python
+                </p>
               </Paper>
             </Grid>
             <Grid item xs={4}>
@@ -187,8 +241,22 @@ export default function Skills() {
                   alignItems: "center",
                 }}
               >
-                <Image src="/" alt="logo" width={80} height={80} />
-                <p style={{ marginTop: "10px", color: "white" }}>PLACEHOLDER</p>
+                <Image
+                  src="/mui.png"
+                  alt="logo"
+                  width={150}
+                  height={150}
+                  className="selector"
+                />
+                <p
+                  style={{
+                    marginTop: "10px",
+                    color: "white",
+                    fontWeight: "400",
+                  }}
+                >
+                  Material UI
+                </p>
               </Paper>
             </Grid>
           </Grid>

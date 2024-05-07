@@ -21,6 +21,13 @@ body {
   opacity: 0; /* Start with transparency */
   animation: fadeIn 0.35s ease-in-out forwards; /* Animation properties */
 }
+.selector {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
 
 /* Keyframes for the fade-in animation */
 @keyframes fadeIn {
