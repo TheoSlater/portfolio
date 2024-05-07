@@ -1,8 +1,9 @@
 "use client";
 
-import { Container, Box, Avatar, Paper, Grid, Stack } from "@mui/material";
+import { Container, Box, Paper, Grid } from "@mui/material";
 import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Skills() {
   return (
@@ -58,8 +59,23 @@ export default function Skills() {
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
+
+                  padding: "15px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-              />
+              >
+                <Image
+                  src="/nextJS-Logo.png"
+                  alt="Next.js Logo"
+                  width={150}
+                  height={150}
+                  style={{ marginBottom: "15px" }}
+                />
+                <p style={{ marginTop: "10px", color: "white" }}>NEXT.JS</p>
+              </Paper>
             </Grid>
             <Grid item xs={4}>
               <Paper
@@ -70,8 +86,22 @@ export default function Skills() {
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
+                  padding: "15px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-              />
+              >
+                <Image
+                  src="/typescript.png"
+                  alt="logo"
+                  width={150}
+                  height={150}
+                  style={{ marginBottom: "15px" }}
+                />
+                <p style={{ marginTop: "10px", color: "white" }}>TYPESCRIPT</p>
+              </Paper>
             </Grid>
             <Grid item xs={4}>
               <Paper
@@ -82,11 +112,25 @@ export default function Skills() {
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
+                  padding: "15px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-              />
+              >
+                <Image
+                  src="/javascript.png"
+                  alt="logo"
+                  width={150}
+                  height={150}
+                  style={{ marginBottom: "15px" }}
+                />
+                <p style={{ marginTop: "10px", color: "white" }}>JAVASCRIPT</p>
+              </Paper>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} sx={{ marginBottom: "20px" }}>
             <Grid item xs={4}>
               <Paper
                 elevation={5}
@@ -96,8 +140,16 @@ export default function Skills() {
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
+                  padding: "15px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-              />
+              >
+                <Image src="/" alt="logo" width={80} height={80} />
+                <p style={{ marginTop: "10px", color: "white" }}>PLACEHOLDER</p>
+              </Paper>
             </Grid>
             <Grid item xs={4}>
               <Paper
@@ -108,8 +160,16 @@ export default function Skills() {
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
+                  padding: "15px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-              />
+              >
+                <Image src="/" alt="logo" width={80} height={80} />
+                <p style={{ marginTop: "10px", color: "white" }}>PLACEHOLDER</p>
+              </Paper>
             </Grid>
             <Grid item xs={4}>
               <Paper
@@ -120,8 +180,16 @@ export default function Skills() {
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
+                  padding: "15px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-              />
+              >
+                <Image src="/" alt="logo" width={80} height={80} />
+                <p style={{ marginTop: "10px", color: "white" }}>PLACEHOLDER</p>
+              </Paper>
             </Grid>
           </Grid>
         </Box>

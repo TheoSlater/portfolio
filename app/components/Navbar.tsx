@@ -46,6 +46,13 @@ export default function Navbar() {
             Projects
           </ColorButton>
         </Link>
+        <Link href={"/skills"} passHref>
+          <ColorButton
+            style={{ height: "48px", width: "100px", borderRadius: "12px" }}
+          >
+            Skills
+          </ColorButton>
+        </Link>
         <Link href={"/contact"} passHref>
           <ColorButton
             style={{ height: "48px", width: "100px", borderRadius: "12px" }}
