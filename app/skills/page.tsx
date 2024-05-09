@@ -55,7 +55,6 @@ export default function Skills() {
                 elevation={5}
                 sx={{
                   bgcolor: "rgb(48,48,48)",
-                  height: "20vh",
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
@@ -64,6 +63,7 @@ export default function Skills() {
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
+                  overflow: "hidden", // Add this
                 }}
               >
                 <Image
@@ -90,7 +90,6 @@ export default function Skills() {
                 elevation={5}
                 sx={{
                   bgcolor: "rgb(48,48,48)",
-                  height: "20vh",
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
@@ -99,6 +98,7 @@ export default function Skills() {
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
+                  overflow: "hidden", // Add this
                 }}
               >
                 <Image
@@ -125,7 +125,6 @@ export default function Skills() {
                 elevation={5}
                 sx={{
                   bgcolor: "rgb(48,48,48)",
-                  height: "20vh",
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
@@ -134,6 +133,7 @@ export default function Skills() {
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
+                  overflow: "hidden", // Add this
                 }}
               >
                 <Image
@@ -162,7 +162,6 @@ export default function Skills() {
                 elevation={5}
                 sx={{
                   bgcolor: "rgb(48,48,48)",
-                  height: "20vh",
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
@@ -171,13 +170,14 @@ export default function Skills() {
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
+                  overflow: "hidden", // Add this
                 }}
               >
                 <Image
                   src="/csharp.png"
                   alt="logo"
-                  width={150}
-                  height={150}
+                  width={134}
+                  height={134}
                   className="selector"
                 />
                 <p
@@ -196,7 +196,6 @@ export default function Skills() {
                 elevation={5}
                 sx={{
                   bgcolor: "rgb(48,48,48)",
-                  height: "20vh",
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
@@ -205,6 +204,7 @@ export default function Skills() {
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
+                  overflow: "hidden", // Add this
                 }}
               >
                 <Image
@@ -230,7 +230,6 @@ export default function Skills() {
                 elevation={5}
                 sx={{
                   bgcolor: "rgb(48,48,48)",
-                  height: "20vh",
                   borderRadius: "25px",
                   borderWidth: "1px",
                   borderColor: "rgb(55, 55, 55)",
@@ -239,6 +238,7 @@ export default function Skills() {
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
+                  overflow: "hidden", // Add this
                 }}
               >
                 <Image
