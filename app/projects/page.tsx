@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import ColorButton from "../components/ColorButton";
+import Link from "next/link";
 
 export default function Projects() {
   return (
@@ -83,21 +84,25 @@ export default function Projects() {
                   This portfolio is one of my projects introducing my self and
                   my open source projects I work on in my free time.
                 </p>
-                <Button
-                  sx={{
-                    marginTop: "10px",
-                    bgcolor: "rgb(60,60,60)",
-                    color: "white",
-                    height: "50px",
-                    width: "150px",
-                    borderRadius: "15px",
-                    "&:hover": {
-                      backgroundColor: "rgb(44, 44, 44)",
-                    },
-                  }}
-                >
-                  Learn More
-                </Button>
+                <Link href={"/"} passHref>
+                  <Button
+                    component="a" // Ensure the Button behaves like an anchor tag
+                    href="/" // Specify the href attribute
+                    sx={{
+                      marginTop: "10px",
+                      bgcolor: "rgb(60,60,60)",
+                      color: "white",
+                      height: "50px",
+                      width: "150px",
+                      borderRadius: "15px",
+                      "&:hover": {
+                        backgroundColor: "rgb(44, 44, 44)",
+                      },
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </Link>
               </Box>
             </Box>
             <Box

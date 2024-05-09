@@ -53,13 +53,13 @@ export default function Navbar() {
             Skills
           </ColorButton>
         </Link>
-        <Link href={"/contact"} passHref>
+        {/* <Link href={"/contact"} passHref>
           <ColorButton
             style={{ height: "48px", width: "100px", borderRadius: "12px" }}
           >
             Contact
           </ColorButton>
-        </Link>
+        </Link> */}
       </Stack>
       <Box
         sx={{

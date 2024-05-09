@@ -25,7 +25,7 @@ export default function Skills() {
             borderColor: "rgb(55, 55, 55)",
             borderWidth: "1px",
             width: "100%",
-            minHeight: "55vh",
+            minHeight: "50vh",
             borderRadius: "15px",
             margin: "auto",
           }}
