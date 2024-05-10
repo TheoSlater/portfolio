@@ -54,7 +54,7 @@ export default function Projects() {
                 borderWidth: "1px",
                 borderRadius: "15px",
                 padding: "20px",
-                overflow: "auto", // Add overflow: auto
+                overflow: "auto",
               }}
             >
               <h1
@@ -86,8 +86,8 @@ export default function Projects() {
                 </p>
                 <Link href={"/"} passHref>
                   <Button
-                    component="a" // Ensure the Button behaves like an anchor tag
-                    href="/" // Specify the href attribute
+                    component="a"
+                    href="/"
                     sx={{
                       marginTop: "10px",
                       bgcolor: "rgb(60,60,60)",
@@ -114,7 +114,7 @@ export default function Projects() {
                 borderWidth: "1px",
                 borderRadius: "15px",
                 padding: "20px",
-                overflow: "auto", // Add overflow: auto
+                overflow: "auto",
               }}
             >
               <h1
@@ -193,7 +193,7 @@ export default function Projects() {
                 borderWidth: "1px",
                 borderRadius: "15px",
                 padding: "20px",
-                overflow: "auto", // Add overflow: auto
+                overflow: "auto",
               }}
             >
               <h1
@@ -217,8 +217,8 @@ export default function Projects() {
                   marginBottom: "15px",
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center", // Align vertically
-                  flexDirection: "column", // To allow for vertical alignment
+                  alignItems: "center",
+                  flexDirection: "column",
                 }}
               >
                 <h1
