@@ -140,31 +140,48 @@ export default function Projects() {
                     marginBottom: "15px",
                   }}
                 ></Image>
-                <p style={{ fontSize: "20px" }}>
+                <p style={{ fontSize: "20px", marginBottom: "10px" }}>
                   A youtube to mp3 converter app programmed in python and allows
                   you to select if you want to download an mp4 or mp3.
                 </p>
-                <Button
-                  sx={{
-                    marginTop: "10px",
-                    bgcolor: "rgb(60,60,60)",
-                    color: "white",
-                    height: "50px",
-                    width: "150px",
-                    borderRadius: "15px",
-                    "&:hover": {
-                      backgroundColor: "rgb(44, 44, 44)",
-                    },
-                  }}
-                  onClick={() =>
-                    window.open(
-                      "https://github.com/TheoSlater/YoutubeToMp3-Mp4/releases",
-                      "_blank"
-                    )
-                  }
-                >
-                  Learn More
-                </Button>
+                <Stack direction="row" spacing={1}>
+                  <Button
+                    sx={{
+                      bgcolor: "rgb(60,60,60)",
+                      color: "white",
+                      height: "50px",
+                      width: "150px",
+                      borderRadius: "15px",
+                      "&:hover": {
+                        backgroundColor: "rgb(44, 44, 44)",
+                      },
+                    }}
+                    onClick={() =>
+                      window.open(
+                        "https://github.com/TheoSlater/YoutubeToMp3-Mp4/releases",
+                        "_blank"
+                      )
+                    }
+                  >
+                    Download
+                  </Button>
+                  <Link href={"/blogs/ytmp3"} passHref>
+                    <Button
+                      sx={{
+                        bgcolor: "rgb(60,60,60)",
+                        color: "white",
+                        height: "50px",
+                        width: "150px",
+                        borderRadius: "15px",
+                        "&:hover": {
+                          backgroundColor: "rgb(44, 44, 44)",
+                        },
+                      }}
+                    >
+                      Learn More
+                    </Button>
+                  </Link>
+                </Stack>
               </Box>
             </Box>
             <Box
