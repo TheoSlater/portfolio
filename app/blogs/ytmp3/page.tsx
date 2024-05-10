@@ -26,6 +26,7 @@ export default function Ytmp3() {
           alignItems: "center",
           width: "80vh",
           margin: "auto",
+          marginTop: "16px",
         }}
       >
         <Navbar />
@@ -36,9 +37,9 @@ export default function Ytmp3() {
             borderColor: "rgb(55, 55, 55)",
             borderWidth: "1px",
             width: "100%",
-            minHeight: "100vh",
+            minHeight: "90vh",
             borderRadius: "15px",
-            marginTop: "15px",
+            marginTop: "1px",
           }}
         >
           <Box
