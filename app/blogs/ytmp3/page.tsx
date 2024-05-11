@@ -41,6 +41,7 @@ export default function Ytmp3() {
             minHeight: "90vh",
             borderRadius: "15px",
             marginTop: "1px",
+            marginBottom: "15px",
           }}
         >
           <Box
@@ -134,6 +135,87 @@ export default function Ytmp3() {
               thrilling.
             </p>
           </Box>
+
+          <Box
+            sx={{
+              padding: "15px",
+              bgcolor: "rgb(38, 38, 38)",
+              borderColor: "rgb(55, 55, 55)",
+              borderWidth: "1px",
+              width: "100%",
+              minHeight: "5vh",
+              borderRadius: "15px",
+              marginBottom: "30px",
+            }}
+          >
+            <Typography variant="h4" color="white" fontWeight={"550"}>
+              Building the app
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              padding: "15px",
+              bgcolor: "rgb(38, 38, 38)",
+              borderColor: "rgb(55, 55, 55)",
+              borderWidth: "1px",
+              width: "100%",
+              minHeight: "20vh",
+              borderRadius: "15px",
+              display: "flex",
+              flexDirection: "column",
+              marginBottom: "30px",
+            }}
+          >
+            {" "}
+            <p>
+              Of course, creating the actual backend for the Python application
+              turned out to be a quite complex yet very rewarding task that
+              demanded an attentive approach, as well as creative
+              problem-solving skills. At the very beginning of this project, I
+              developed a Python script which features the integration of the
+              two respective libraries which are PyTube and MoviePy for the
+              script to perform the primary functions. <br /> <br /> In the
+              process of reading the documentation about both PyTube and
+              MoviePy, I came up with a unique delivery of my solution which
+              meets the goal of the application and that is downloading videos
+              from YouTube with ease. It was a process of devising a mechanism
+              through which users could provide the YouTube URLs via the
+              command-line interface and which the script would automatically
+              parse and get the PyTube capabilities to download the most
+              relevant video in the background. <br /> <br /> Nonetheless, the
+              very launch of the project faced a restriction - it could only
+              download videos in MP4 format so users were allowed to only get
+              the videos on their machines to watch and listen to them locally.
+              The recognition that the application's usability can be further
+              improved by including video-to-audio conversion prompted me to
+              delve into implementing such a solution through the exploitation
+              of features provided by the MoviePy library. <br /> <br /> This
+              smart technical concept was based on MoviePy's Convert() function,
+              which would not only allow users to fetch the video file in the
+              MP4 format but also convert this file to MP3 directly. This
+              further increased the applicability of the application. This
+              involved the creation of a complex coding system, which was then
+              tested and refined to guarantee smooth and user-friendly
+              operation. <br /> <br /> The path of the Python application design
+              back-end represented the whole concept of software development as
+              a dynamic mixture of technical skills, creative problem-solving,
+              and undeterred commitment to deliver an advanced and feature-rich
+              solution, supposed to meet the growing market requirements.
+              <br /> <br />
+              Lately, I&apos;ve created the multi-threading functionality in the
+              Python app which is to optimize its performance and make it
+              faster, too. Realizing the need to be efficient, I incorporated
+              multi-threading to allow for multiple processes to run in a
+              concurrent fashion that minimizes the processing time and creates
+              a great user experience. This is the indication that such an
+              update is critical towards the long-lasting of this application
+              being a competition and addressing the changing users&apos;
+              requirements. <br /> <br />
+              With a now finalised back end for my project, we move onto the
+              front-end design.
+            </p>
+          </Box>
+
           <Box
             sx={{
               padding: "15px",
@@ -173,12 +255,74 @@ export default function Ytmp3() {
             </p>
             <Image
               src="/ytmp3v1.png"
-              alt="ytmp3poster"
+              alt="ytmp3v1"
               layout="responsive"
               width={1000}
               height={500}
-              style={{ borderRadius: "15px" }}
+              style={{ borderRadius: "15px", marginBottom: "15px" }}
             />
+            <p style={{ marginBottom: "15px" }}>
+              After that, I implemented the design into the code to make a
+              working YouTube video downloader. <br /> <br />
+              It worked just fine. But, I needed something better. I created 2
+              different buttons to download an MP4 or download and convert to
+              MP3. For some reason, I just felt like I also had to add a console
+              to the right.
+            </p>
+            <Image
+              src="/ytmp3v2.png"
+              alt="ytmp3v2"
+              layout="responsive"
+              width={1000}
+              height={500}
+              style={{ borderRadius: "15px", marginBottom: "15px" }}
+            />
+            <p>
+              At the moment that is currently it. But Tkinter did indeed help me
+              with some simple UI. It works exactly as a Youtube To Mp3
+              converter website but as an app built entirely in Python.
+            </p>
+          </Box>
+          <Box
+            sx={{
+              padding: "15px",
+              bgcolor: "rgb(38, 38, 38)",
+              borderColor: "rgb(55, 55, 55)",
+              borderWidth: "1px",
+              width: "100%",
+              minHeight: "5vh",
+              borderRadius: "15px",
+              marginBottom: "30px",
+            }}
+          >
+            <Typography variant="h4" color="white" fontWeight={"550"}>
+              Conclusion
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              padding: "15px",
+              bgcolor: "rgb(38, 38, 38)",
+              borderColor: "rgb(55, 55, 55)",
+              borderWidth: "1px",
+              width: "100%",
+              minHeight: "20vh",
+              borderRadius: "15px",
+            }}
+          >
+            <p style={{ fontSize: "18px" }}>
+              So what did we get from this project? <br /> <br />
+              Well, we no longer need to rely on terrible converter websites
+              with loads of adverts popping up and potential viruses to just
+              download an mp3. <br /> <br />
+              Now that I&apos;ve developed this app to meet people&apos;s needs,
+              it&apos;s truly a game-changer. In the near future I&apos;m going
+              to update this project with better UI and even a website anyone
+              can use.
+              <br /> <br />I hope you enjoyed and got something out of this blog
+              post. If you have any questions, feel free to reach out to me via
+              email or text message. I&apos;d love to hear from you!
+            </p>
           </Box>
         </Box>
       </Container>
