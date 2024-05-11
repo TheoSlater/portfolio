@@ -1,14 +1,9 @@
 import { Container, Box, Typography, Button } from "@mui/material";
 import Navbar from "@/app/components/Navbar";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Ytmp3() {
-  const currentDate = new Date();
-  const dateString = `${currentDate.getDate()} · ${currentDate.toLocaleString(
-    "default",
-    { month: "long" }
-  )} · ${currentDate.getFullYear()}`;
-
   return (
     <div
       className="page-container"
@@ -186,21 +181,22 @@ export default function Ytmp3() {
               very launch of the project faced a restriction - it could only
               download videos in MP4 format so users were allowed to only get
               the videos on their machines to watch and listen to them locally.
-              The recognition that the application's usability can be further
-              improved by including video-to-audio conversion prompted me to
-              delve into implementing such a solution through the exploitation
-              of features provided by the MoviePy library. <br /> <br /> This
-              smart technical concept was based on MoviePy's Convert() function,
-              which would not only allow users to fetch the video file in the
-              MP4 format but also convert this file to MP3 directly. This
-              further increased the applicability of the application. This
-              involved the creation of a complex coding system, which was then
-              tested and refined to guarantee smooth and user-friendly
-              operation. <br /> <br /> The path of the Python application design
-              back-end represented the whole concept of software development as
-              a dynamic mixture of technical skills, creative problem-solving,
-              and undeterred commitment to deliver an advanced and feature-rich
-              solution, supposed to meet the growing market requirements.
+              The recognition that the application&apos;s usability can be
+              further improved by including video-to-audio conversion prompted
+              me to delve into implementing such a solution through the
+              exploitation of features provided by the MoviePy library. <br />{" "}
+              <br /> This smart technical concept was based on MoviePy&apos;s
+              Convert() function, which would not only allow users to fetch the
+              video file in the MP4 format but also convert this file to MP3
+              directly. This further increased the applicability of the
+              application. This involved the creation of a complex coding
+              system, which was then tested and refined to guarantee smooth and
+              user-friendly operation. <br /> <br /> The path of the Python
+              application design back-end represented the whole concept of
+              software development as a dynamic mixture of technical skills,
+              creative problem-solving, and undeterred commitment to deliver an
+              advanced and feature-rich solution, supposed to meet the growing
+              market requirements.
               <br /> <br />
               Lately, I&apos;ve created the multi-threading functionality in the
               Python app which is to optimize its performance and make it
@@ -321,7 +317,16 @@ export default function Ytmp3() {
               can use.
               <br /> <br />I hope you enjoyed and got something out of this blog
               post. If you have any questions, feel free to reach out to me via
-              email or text message. I&apos;d love to hear from you!
+              email or text message. I&apos;d love to hear from you! <br />{" "}
+              <br />
+              You can download it here:{" "}
+              <Link
+                href="https://github.com/TheoSlater/YoutubeToMp3-Mp4/releases/tag/v1.1"
+                passHref
+                style={{ fontWeight: "500", textDecoration: "underline" }}
+              >
+                DOWNLOAD
+              </Link>
             </p>
           </Box>
         </Box>
