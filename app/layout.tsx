@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Component, useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
+import Copyright from "./components/copyright";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html>
       <body className={inter.className}>
         {children}
+        {/* <Copyright></Copyright> */}
         {/* <Navbar></Navbar> */}
       </body>
 
