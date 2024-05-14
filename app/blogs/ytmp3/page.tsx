@@ -273,11 +273,23 @@ export default function Ytmp3() {
               height={500}
               style={{ borderRadius: "15px", marginBottom: "15px" }}
             />
-            <p>
-              At the moment that is currently it. But Tkinter did indeed help me
-              with some simple UI. It works exactly as a Youtube To Mp3
-              converter website but as an app built entirely in Python.
+            <p style={{ marginBottom: "15px" }}>
+              I&apos;ve recently updated my YTMP3 Converter to look much more
+              user friendly by using CustomTkinter instead of Tkinter. Although
+              tkinter had its flaws it worked just fine but didnt look very
+              appealing for the users. <br /> <br /> I believe that having the
+              console on the right was too overwhelming for the users causing
+              them to not know what to do. <br /> <br /> Here is what is
+              currently looks like (this is subject to change. "v1.2"):
             </p>
+            <Image
+              src="/ytmp3v3.png"
+              alt="ytmp3v3"
+              layout="responsive"
+              width={800}
+              height={400}
+              style={{ borderRadius: "15px", marginBottom: "15px" }}
+            />
           </Box>
           <Box
             sx={{
@@ -321,7 +333,7 @@ export default function Ytmp3() {
               <br />
               You can download it here:{" "}
               <Link
-                href="https://github.com/TheoSlater/YoutubeToMp3-Mp4/releases/tag/v1.1"
+                href="https://github.com/TheoSlater/YoutubeToMp3-Mp4/releases/tag/v1.2"
                 passHref
                 style={{ fontWeight: "500", textDecoration: "underline" }}
               >
