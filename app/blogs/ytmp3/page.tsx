@@ -280,7 +280,8 @@ export default function Ytmp3() {
               appealing for the users. <br /> <br /> I believe that having the
               console on the right was too overwhelming for the users causing
               them to not know what to do. <br /> <br /> Here is what is
-              currently looks like (this is subject to change. "v1.2"):
+              currently looks like (this is subject to change.
+              &quot;v1.2&quot;):
             </p>
             <Image
               src="/ytmp3v3.png"
