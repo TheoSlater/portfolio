@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "flask-dev": "python app/api/convert.py",
     "start": "next start",
     "lint": "next lint"
   },
