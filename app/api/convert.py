@@ -1,4 +1,3 @@
-
 from pytube import YouTube
 from moviepy.editor import VideoFileClip
 import os
@@ -9,13 +8,15 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+DOWNLOAD_DIR = './downloads'
+
 def download_and_convert(url):
     try:
         yt = YouTube(url)
         mp4_stream = yt.streams.filter(file_extension='mp4').first()
 
         if mp4_stream:
-            mp4_file_path = mp4_stream.download('.')
+            mp4_file_path = mp4_stream.download(output_path=DOWNLOAD_DIR)
             return convert_to_mp3(mp4_file_path)
         else:
             return {'error': 'MP4 stream not found'}, 400
