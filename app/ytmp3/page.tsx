@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 
 const YtMp3 = () => {
@@ -7,7 +9,7 @@ const YtMp3 = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/convert", {
+      const res = await fetch("http://localhost:5000/api/convert", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
