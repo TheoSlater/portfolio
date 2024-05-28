@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const YtMp3 = () => {
   const [url, setUrl] = useState("");
@@ -8,7 +8,7 @@ const YtMp3 = () => {
   const handleConvert = async () => {
     try {
       const currentUrl = url;
-      const res = await fetch("https://ytmp3-server.vercel.app/api/index", {
+      const res = await fetch("https://ytmp3-server.vercel.app/api/convert", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
