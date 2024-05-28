@@ -8,7 +8,7 @@ const YtMp3 = () => {
   const handleConvert = async () => {
     try {
       const currentUrl = url;
-      const res = await fetch("https://ytmp3-server.vercel.app/api/convert", {
+      const res = await fetch("https://ytmp3-server.vercel.app/api/index", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
