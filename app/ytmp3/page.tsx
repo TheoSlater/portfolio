@@ -1,60 +1,65 @@
-"use client";
+import { useState } from "react";
 
-import React, { useState } from "react";
-
-const YtMp3 = () => {
+export default function YTMP3() {
   const [url, setUrl] = useState("");
-  const [response, setResponse] = useState<string | null>(null);
+  const [message, setMessage] = useState("");
 
-  const handleConvert = async () => {
-    try {
-      const currentUrl = url;
-      const res = await fetch(
-        "https://ytmp3-server.vercel.app/api/index", // Replace this URL with the actual URL of your FastAPI server
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ url: currentUrl }),
-        }
-      );
-      if (!res.ok) {
-        throw new Error("Conversion failed");
+  const handleDownload = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setMessage("Downloading MP4...");
+
+    const response = await fetch("http://127.0.0.1:8000/download", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({ url }),
+    });
+
+    const data = await response.json();
+    setMessage(data.message);
+  };
+
+  const handleDownloadAndConvert = async (e: {
+    preventDefault: () => void;
+  }) => {
+    e.preventDefault();
+    setMessage("Downloading and Converting to MP3...");
+
+    const response = await fetch(
+      "http://127.0.0.1:8000//download_and_convert",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ url }),
       }
-      const data = await res.json();
-      if ("error" in data) {
-        throw new Error(data.error);
-      }
-      const audioUrl = data.audio_file_path;
-      const link = document.createElement("a");
-      link.href = audioUrl;
-      link.setAttribute("download", "converted.mp3");
-      document.body.appendChild(link);
-      link.click();
-      if (link.parentNode) {
-        link.parentNode.removeChild(link);
-      }
-      setResponse("Conversion successful. File will be downloaded.");
-    } catch (error: any) {
-      console.error("Error converting:", error);
-      setResponse(error.message);
-    }
+    );
+
+    const data = await response.json();
+    setMessage(data.message);
   };
 
   return (
     <div>
       <h1>YouTube to MP3 Converter</h1>
-      <input
-        type="text"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        placeholder="Enter YouTube URL"
-      />
-      <button onClick={handleConvert}>Convert</button>
-      {response && <p>{response}</p>}
+      <form onSubmit={handleDownload}>
+        <label htmlFor="url">YouTube URL:</label>
+        <input
+          type="text"
+          id="url"
+          name="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          required
+        />
+        <button type="submit">Download MP4</button>
+      </form>
+      <form onSubmit={handleDownloadAndConvert}>
+        <button type="submit">Download and Convert to MP3</button>
+      </form>
+      <p>{message}</p>
     </div>
   );
-};
-
-export default YtMp3;
+}
