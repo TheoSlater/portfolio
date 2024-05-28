@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 
 const YtMp3 = () => {
@@ -8,13 +7,16 @@ const YtMp3 = () => {
   const handleConvert = async () => {
     try {
       const currentUrl = url;
-      const res = await fetch("https://ytmp3-server.vercel.app/api/convert", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: currentUrl }),
-      });
+      const res = await fetch(
+        "https://ytmp3-server.vercel.app/api/index", // Replace this URL with the actual URL of your FastAPI server
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url: currentUrl }),
+        }
+      );
       if (!res.ok) {
         throw new Error("Conversion failed");
       }
