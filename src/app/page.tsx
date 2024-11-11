@@ -3,9 +3,21 @@ import { Box, Typography, Button, Grid } from "@mui/material";
 import Navbar from "../components/Navbar";
 
 export default function Home() {
+  const handleScroll = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      // Scroll to the section with the desired offset to center it
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "center", // This aligns the section in the center of the viewport
+      });
+    }
+  };
+
   return (
     <Box sx={{ width: "100%", height: "100vh", overflowX: "hidden" }}>
-      <Navbar />
+      <Navbar onNavClick={handleScroll} />
+
       <Box
         sx={{
           width: "100%",
@@ -48,28 +60,17 @@ export default function Home() {
               backgroundColor: "#D95A5A",
             },
           }}
-          onClick={() => {}}
+          onClick={() => handleScroll("projects")}
         >
           View My Work
         </Button>
-
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            width: "100%",
-            height: "80px",
-            background: "transparent",
-            clipPath:
-              "polygon(100% 100%, 0% 100% , 0.00% 84.33%, 2.00% 84.11%, 4.00% 83.46%, 6.00% 82.38%, 8.00% 80.88%, 10.00% 78.99%, 12.00% 76.73%, 14.00% 74.12%, 16.00% 71.21%, 18.00% 68.03%, 20.00% 64.62%, 22.00% 61.02%, 24.00% 57.28%, 26.00% 53.45%, 28.00% 49.57%, 30.00% 45.70%, 32.00% 41.88%, 34.00% 38.17%, 36.00% 34.61%, 38.00% 31.24%, 40.00% 28.12%, 42.00% 25.27%, 44.00% 22.74%, 46.00% 20.56%, 48.00% 18.75%, 50.00% 17.35%, 52.00% 16.36%, 54.00% 15.80%, 56.00% 15.68%, 58.00% 15.99%, 60.00% 16.75%, 62.00% 17.92%, 64.00% 19.51%, 66.00% 21.48%, 68.00% 23.82%, 70.00% 26.50%, 72.00% 29.47%, 74.00% 32.71%, 76.00% 36.17%, 78.00% 39.80%, 80.00% 43.57%, 82.00% 47.41%, 84.00% 51.29%, 86.00% 55.16%, 88.00% 58.96%, 90.00% 62.64%, 92.00% 66.16%, 94.00% 69.48%, 96.00% 72.54%, 98.00% 75.32%, 100.00% 77.78%)",
-            backgroundColor: "white",
-          }}
-        ></Box>
       </Box>
+
       <Box
+        id="about"
         sx={{
           padding: { xs: "20px", sm: "40px", md: "60px" },
+          paddingTop: "80px", // Add space for the sticky navbar
           bgcolor: "background.default",
         }}
       >
@@ -134,6 +135,123 @@ export default function Home() {
               <Typography variant="body2">
                 Focused on user-centric design and accessible interfaces
               </Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+
+      <Box
+        id="projects"
+        sx={{
+          padding: { xs: "20px", sm: "40px", md: "60px" },
+          paddingTop: "80px", // Adjust padding for sticky navbar here as well
+          bgcolor: "background.default",
+        }}
+      >
+        <Typography variant="h4" fontWeight="bold" color="text.primary" mb={3}>
+          My Projects
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                bgcolor: "primary.main",
+                color: "white",
+                padding: 2,
+                borderRadius: 2,
+                textAlign: "center",
+              }}
+            >
+              <Typography variant="h6" fontWeight="bold">
+                Project 1
+              </Typography>
+              <Typography variant="body2">
+                Description of your project, highlighting the main technologies
+                used.
+              </Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  fontSize: { xs: "14px", sm: "16px" },
+                  backgroundColor: "#FF6B6B",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#D95A5A",
+                  },
+                }}
+                onClick={() => {}}
+              >
+                View Project
+              </Button>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                bgcolor: "primary.main",
+                color: "white",
+                padding: 2,
+                borderRadius: 2,
+                textAlign: "center",
+              }}
+            >
+              <Typography variant="h6" fontWeight="bold">
+                Project 2
+              </Typography>
+              <Typography variant="body2">
+                Description of your project, highlighting the main technologies
+                used.
+              </Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  fontSize: { xs: "14px", sm: "16px" },
+                  backgroundColor: "#FF6B6B",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#D95A5A",
+                  },
+                }}
+                onClick={() => {}}
+              >
+                View Project
+              </Button>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                bgcolor: "primary.main",
+                color: "white",
+                padding: 2,
+                borderRadius: 2,
+                textAlign: "center",
+              }}
+            >
+              <Typography variant="h6" fontWeight="bold">
+                Project 3
+              </Typography>
+              <Typography variant="body2">
+                Description of your project, highlighting the main technologies
+                used.
+              </Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  fontSize: { xs: "14px", sm: "16px" },
+                  backgroundColor: "#FF6B6B",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#D95A5A",
+                  },
+                }}
+                onClick={() => {}}
+              >
+                View Project
+              </Button>
             </Box>
           </Grid>
         </Grid>
