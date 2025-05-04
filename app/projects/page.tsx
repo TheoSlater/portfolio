@@ -1,0 +1,93 @@
+"use client";
+import {
+  Box,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import Link from "next/link";
+import FadeIn from "../components/FadeIn";
+import Navigation from "../components/Navigation";
+
+export default function Home() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  return (
+    <FadeIn>
+      <Container
+        maxWidth="xl"
+        sx={{
+          display: "grid",
+          placeItems: "center",
+          height: "100dvh",
+          overflow: "hidden",
+          px: { xs: 1, sm: 2 },
+          py: { xs: 1, sm: 2 },
+        }}
+      >
+        <Stack direction="column" alignItems="center">
+          <Navigation />
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: "800px",
+              border: 1,
+              borderColor: "divider",
+              padding: { xs: 1.5, sm: 5 },
+              borderRadius: 4,
+              boxSizing: "border-box",
+            }}
+          >
+            <Stack
+              direction={isMobile ? "column" : "row"}
+              spacing={isMobile ? 2 : 4}
+              alignItems={isMobile ? "center" : "flex-start"}
+            >
+              <Box sx={{ width: "100%" }}>
+                <Typography
+                  variant="h3"
+                  fontWeight="600"
+                  fontSize={{ xs: "2rem", sm: "3rem" }}
+                  textAlign={isMobile ? "center" : "left"}
+                >
+                  Projects.
+                </Typography>
+              </Box>
+            </Stack>
+            <Box sx={{ marginTop: 2 }}>
+              <Typography variant="h6" fontWeight={"400"}>
+                I&apos;m into solving problems and building clean, practical
+                solutions—usually just for fun. Here&apos;s some open source
+                stuff I&apos;ve contributed to or built along the way.
+              </Typography>
+            </Box>
+            <Divider
+              sx={{
+                marginTop: 2,
+              }}
+            />
+            <Box sx={{ marginTop: 2 }}>
+              <Typography variant="h4" fontWeight={"600"} mb={2}>
+                Ollama Chatbot
+              </Typography>
+              <Typography variant="h6">
+                A chatbot web app that uses Ollama to locally host a LLM.
+                It&apos;s built in Vite, Typescript and MUI.
+              </Typography>
+              <Link
+                href={"https://github.com/TheoSlater/chatbot-ui"}
+                style={{ color: "inherit" }}
+              >
+                Download Ollama Chatbot
+              </Link>
+            </Box>
+          </Box>
+        </Stack>
+      </Container>
+    </FadeIn>
+  );
+}
