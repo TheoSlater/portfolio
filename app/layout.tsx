@@ -85,6 +85,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Theo Slater | Portfolio</title>
+      </head>
       <body className={roboto.className}>
         <ThemeProvider>
           <ThemedApp>{children}</ThemedApp>
