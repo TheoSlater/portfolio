@@ -7,8 +7,8 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+  Link as MuiLink,
 } from "@mui/material";
-import Link from "next/link";
 import FadeIn from "../components/FadeIn";
 import Navigation from "../components/Navigation";
 
@@ -59,32 +59,43 @@ export default function Home() {
               </Box>
             </Stack>
             <Box sx={{ marginTop: 2 }}>
-              <Typography variant="h6" fontWeight={"400"}>
+              <Typography variant="h6" fontWeight={"400"} sx={{ mb: 4 }}>
                 I&apos;m into solving problems and building clean, practical
                 solutions—usually just for fun. Here&apos;s some open source
                 stuff I&apos;ve contributed to or built along the way.
               </Typography>
             </Box>
-            <Divider
-              sx={{
-                marginTop: 2,
-              }}
-            />
-            <Box sx={{ marginTop: 2 }}>
-              <Typography variant="h4" fontWeight={"600"} mb={2}>
-                Ollama Chatbot
-              </Typography>
-              <Typography variant="h6">
-                A chatbot web app that uses Ollama to locally host a LLM.
-                It&apos;s built in Vite, Typescript and MUI.
-              </Typography>
-              <Link
-                href={"https://github.com/TheoSlater/chatbot-ui"}
-                style={{ color: "inherit" }}
-              >
-                Download Ollama Chatbot
-              </Link>
-            </Box>
+            <Divider />
+            <Stack spacing={4} sx={{ mt: 4 }}>
+              <Box>
+                <Typography variant="h4" fontWeight={"600"} sx={{ mb: 2 }}>
+                  Ollama Chatbot
+                </Typography>
+                <Typography variant="h6" sx={{ mb: 2, opacity: 0.9 }}>
+                  A chatbot web app that uses Ollama to locally host a LLM.
+                  It&apos;s built in Vite, Typescript and MUI.
+                </Typography>
+                <MuiLink
+                  href="https://github.com/TheoSlater/chatbot-ui"
+                  target="_blank"
+                  rel="noopener"
+                  sx={{
+                    color: "inherit",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "1.1rem",
+                    opacity: 0.8,
+                    transition: "opacity 0.2s ease",
+                    "&:hover": {
+                      opacity: 1,
+                      textDecoration: "none",
+                    },
+                  }}
+                >
+                  View Project →
+                </MuiLink>
+              </Box>
+            </Stack>
           </Box>
         </Stack>
       </Container>

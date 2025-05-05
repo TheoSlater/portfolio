@@ -54,9 +54,8 @@ export default function Home() {
                   fontSize: { xs: 32, sm: 40 },
                   boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
                 }}
-              >
-                T
-              </Avatar>
+                src="https://avatars.githubusercontent.com/u/155472213?v=4"
+              ></Avatar>
               <Box sx={{ width: "100%", alignSelf: "center" }}>
                 <Typography
                   variant="h3"

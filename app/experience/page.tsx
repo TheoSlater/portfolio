@@ -59,7 +59,7 @@ export default function Home() {
               </Box>
             </Stack>
             <Box sx={{ marginTop: 2 }}>
-              <Typography variant="h6" fontWeight={"400"}>
+              <Typography variant="h6" fontWeight={"400"} sx={{ mb: 4 }}>
                 I have some experience in software development, with most of my
                 work focused on web development. I&apos;ve contributed to
                 projects ranging from simple sites to more complex web
@@ -67,29 +67,33 @@ export default function Home() {
                 and take on new challenges.
               </Typography>
             </Box>
-            <Divider
-              sx={{
-                marginTop: 2,
-              }}
-            />
-            <Box sx={{ marginTop: 2 }}>
-              <Typography variant="h4" fontWeight={"600"} mb={2}>
-                Freelance
-              </Typography>
-              <Typography variant="h6">
-                I&apos;ve collaborated with a few clients to bring their web
-                applications to life. I&apos;m currently open to freelance work
-                — so if you&apos;ve got a project in mind or just want to
-                connect, feel free to{" "}
-                <Link
-                  href="mailto:theoslater4@gmail.com"
-                  style={{ fontWeight: "600", color: "inherit" }}
-                >
-                  reach out
-                </Link>
-                .
-              </Typography>
-            </Box>
+            <Divider />
+            <Stack spacing={4} sx={{ mt: 4 }}>
+              <Box>
+                <Typography variant="h4" fontWeight={"600"} sx={{ mb: 2 }}>
+                  Freelance
+                </Typography>
+                <Typography variant="h6" sx={{ opacity: 0.9 }}>
+                  I&apos;ve collaborated with a few clients to bring their web
+                  applications to life. I&apos;m currently open to freelance
+                  work — so if you&apos;ve got a project in mind or just want to
+                  connect, feel free to{" "}
+                  <Link
+                    href="mailto:theoslater4@gmail.com"
+                    style={{
+                      fontWeight: "600",
+                      color: "inherit",
+                      textDecoration: "none",
+                      borderBottom: "2px solid",
+                    }}
+                    className="hover-opacity"
+                  >
+                    reach out
+                  </Link>
+                  .
+                </Typography>
+              </Box>
+            </Stack>
           </Box>
         </Stack>
       </Container>

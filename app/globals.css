@@ -23,3 +23,11 @@ body {
 body.fade-in {
   opacity: 1;
 }
+
+.hover-opacity {
+  transition: opacity 0.2s ease;
+}
+
+.hover-opacity:hover {
+  opacity: 1 !important;
+}
