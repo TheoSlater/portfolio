@@ -1,90 +1,95 @@
-"use client";
-import {
-  Avatar,
-  Box,
-  Container,
-  Stack,
-  Typography,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
-import FadeIn from "./components/FadeIn";
-import Navigation from "./components/Navigation";
+import Image from "next/image";
+import styles from "./page.module.css";
 
 export default function Home() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
-    <FadeIn>
-      <Container
-        maxWidth="xl"
-        sx={{
-          display: "grid",
-          placeItems: "center",
-          height: "100dvh",
-          overflow: "hidden",
-          px: { xs: 1, sm: 2 },
-          py: { xs: 1, sm: 2 },
-        }}
-      >
-        <Stack direction="column" alignItems="center">
-          <Navigation />
-          <Box
-            sx={{
-              width: "100%",
-              maxWidth: "800px",
-              borderRadius: 4,
-              padding: { xs: 1.5, sm: 5 },
-              boxSizing: "border-box",
-              borderWidth: 1,
-              borderStyle: "solid",
-              borderColor: "divider",
-            }}
+    <div className={styles.page}>
+      <main className={styles.main}>
+        <Image
+          className={styles.logo}
+          src="/next.svg"
+          alt="Next.js logo"
+          width={180}
+          height={38}
+          priority
+        />
+        <ol>
+          <li>
+            Get started by editing <code>app/page.tsx</code>.
+          </li>
+          <li>Save and see your changes instantly.</li>
+        </ol>
+
+        <div className={styles.ctas}>
+          <a
+            className={styles.primary}
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Stack
-              direction={isMobile ? "column" : "row"}
-              spacing={4}
-              alignItems={isMobile ? "center" : "flex-start"}
-            >
-              <Avatar
-                sx={{
-                  width: { xs: 80, sm: 100 },
-                  height: { xs: 80, sm: 100 },
-                  fontSize: { xs: 32, sm: 40 },
-                  boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
-                }}
-                src="https://avatars.githubusercontent.com/u/155472213?v=4"
-              ></Avatar>
-              <Box sx={{ width: "100%", alignSelf: "center" }}>
-                <Typography
-                  variant="h3"
-                  fontWeight="600"
-                  fontSize={{ xs: "2rem", sm: "3rem" }}
-                  textAlign={isMobile ? "center" : "left"}
-                >
-                  Hello, I&apos;m Theo.
-                </Typography>
-              </Box>
-            </Stack>
-            <Box sx={{ marginTop: 2 }}>
-              <Typography
-                variant="h6"
-                fontWeight={"400"}
-                textAlign={isMobile ? "center" : "left"}
-              >
-                I am a 15 year old full stack junior developer, guitarist and
-                pianist based in the UK. I am passionate about building clean,
-                practical and user-friendly applications. I have experience in a
-                variety of programming languages and frameworks, and I am always
-                looking to learn new skills and take on new challenges. I am
-                currently working on a few personal projects, and I am open to
-                freelance work.
-              </Typography>
-            </Box>
-          </Box>
-        </Stack>
-      </Container>
-    </FadeIn>
+            <Image
+              className={styles.logo}
+              src="/vercel.svg"
+              alt="Vercel logomark"
+              width={20}
+              height={20}
+            />
+            Deploy now
+          </a>
+          <a
+            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.secondary}
+          >
+            Read our docs
+          </a>
+        </div>
+      </main>
+      <footer className={styles.footer}>
+        <a
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/file.svg"
+            alt="File icon"
+            width={16}
+            height={16}
+          />
+          Learn
+        </a>
+        <a
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/window.svg"
+            alt="Window icon"
+            width={16}
+            height={16}
+          />
+          Examples
+        </a>
+        <a
+          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/globe.svg"
+            alt="Globe icon"
+            width={16}
+            height={16}
+          />
+          Go to nextjs.org →
+        </a>
+      </footer>
+    </div>
   );
 }
