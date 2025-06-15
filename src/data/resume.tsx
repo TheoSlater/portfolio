@@ -8,9 +8,9 @@ export const DATA = {
   location: "Ross-on-Wye, Herefordshire, UK",
   locationLink: "https://www.google.com/maps/place/Ross-on-Wye",
   description:
-    "Full Stack Junior Developer and enthusiast of all things tech and I love building things.",
+    "Full Stack Junior Developer with a passion for technology and a love for building creative, functional solutions.",
   summary:
-    "Just before Covid-19 hit, I started getting into coding with python and javascript. I started building small projects and then I got into web development. I started building websites for friends and family, and then I started building my own projects and I'm currently doing GCSE business and computer science degrees. I love building things, and I love learning new things. I am always looking for new challenges and opportunities to learn. [Check out my projects](#projects).",
+    "Just before Covid-19 hit, I started exploring coding with Python and JavaScript. I began with small projects, which quickly led me into the world of web development. I started creating websites for friends and family, and soon after, I began building my own passion projects. I'm currently studying GCSE Business and Computer Science, and I'm always driven by a deep love for learning and building. Whether it's experimenting with new technologies or solving real-world problems, I'm constantly looking for new challenges and opportunities to grow. [Check out my projects](#projects).  ",
 
   avatarUrl: "/headshot 2.jpg",
   skills: ["React", "Next.js", "Typescript", "Node.js", "Python", "Go", "C#"],
@@ -60,18 +60,18 @@ export const DATA = {
   ],
   education: [
     {
-      school: "John Kyrle High School",
-      href: "https://jkhs.org.uk",
+      school: "GCSE",
+      href: "/",
       degree: "GCSE Computer Science, GCSE Business, GCSE Music",
-      logoUrl: "https://www.jkhs.org.uk/_site/images/design/logo.png",
-      start: "2021",
+      logoUrl: "",
+      start: "2024",
       end: "Present",
     },
   ],
   projects: [
     {
       title: "Mockmate (unreleased)",
-      href: "https://llm.report",
+      href: "https://github.com/TheoSlater/mockmate",
       dates: "Apr 2025 - Present",
       active: true,
       description:
@@ -79,13 +79,8 @@ export const DATA = {
       technologies: ["Next.js", "Typescript", "Shadcn UI", "TailwindCSS"],
       links: [
         {
-          type: "Website",
-          href: "https://llm.report",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
           type: "Source",
-          href: "https://github.com/dillionverma/llm.report",
+          href: "https://github.com/TheoSlater/mockmate",
           icon: <Icons.github className="size-3" />,
         },
       ],
