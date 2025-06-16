@@ -16,8 +16,8 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name,
-    template: `%s | ${DATA.name}`,
+    default: DATA.name + " | Portfolio",
+    template: `%s | ${DATA.name} `,
   },
   description: DATA.description,
   openGraph: {
@@ -56,20 +56,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Analytics />
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
-          fontSans.variable
-        )}
-      >
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <TooltipProvider delayDuration={0}>
-            {children}
-            <Navbar />
-          </TooltipProvider>
-        </ThemeProvider>
-      </body>
+      <head>
+        <meta
+          name="google-site-verification"
+          content="u4RNoQi70-hSfV4GxcuUAEk8jRSWyKIWI3ZGqW8mq-A"
+        />
+        <Analytics />
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
+            fontSans.variable
+          )}
+        >
+          <ThemeProvider attribute="class" defaultTheme="light">
+            <TooltipProvider delayDuration={0}>
+              {children}
+              <Navbar />
+            </TooltipProvider>
+          </ThemeProvider>
+        </body>
+      </head>
     </html>
   );
 }
