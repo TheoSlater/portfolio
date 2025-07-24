@@ -170,7 +170,6 @@ export default function Page() {
                     href="mailto:theoslater1@gmail.com"
                     style={{
                       textDecoration: "underline",
-                      color: "white",
                     }}
                   >
                     email

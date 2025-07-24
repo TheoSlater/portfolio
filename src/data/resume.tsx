@@ -70,21 +70,27 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Mockmate (unreleased)",
-      href: "https://github.com/TheoSlater/mockmate",
-      dates: "Apr 2025 - Present",
+      title: "Stak.",
+      href: "https://github.com/TheoSlater/stak.dev",
+      dates: "June 2025 - Present",
       active: true,
       description:
-        "A free revision tool for GCSE and A-Level students. Designed precisely to pull students into revision instantly. Mockmate offers a range of features including flashcards, quizzes, and practice exams. It is designed to be simple and easy to use.",
-      technologies: ["Next.js", "Typescript", "Shadcn UI", "TailwindCSS"],
+        "A code generation platform that utilises Ollama to run local LLMs. This is in development and guaranteed to have issues.",
+      technologies: [
+        "Next.js",
+        "Typescript",
+        "Material UI",
+        "TailwindCSS",
+        "StackBlitz WebContainers",
+      ],
       links: [
         {
           type: "Source",
-          href: "https://github.com/TheoSlater/mockmate",
+          href: "https://github.com/TheoSlater/stak.dev",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/1.png",
+      image: "/stak.svg",
       video: "",
     },
     {
@@ -130,21 +136,21 @@ export const DATA = {
       video: "",
     },
     {
-      title: "Chatbot UI (ollama)",
-      href: "https://github.com/TheoSlater/chatbot-ui",
-      dates: "Apr 2025 - Present",
+      title: "Ollama UI",
+      href: "https://github.com/TheoSlater/ollama-ui",
+      dates: "July 2025 - Present",
       active: true,
       description:
-        "With the rise of AI and the release of Ollama, I wanted to create a simple and easy to use chatbot UI that anyone can use. This project uses Ollama to run the models locally. Installation tutorials are available on the GitHub page.",
+        "This is a frontend for Ollama that utilises their CLI to pull, create and run Ollama models. Installation tutorials are available on the GitHub page. In development.",
       technologies: ["Next.js", "Typescript", "Ollama", "Material UI"],
       links: [
         {
           type: "Source and installation",
-          href: "https://github.com/TheoSlater/chatbot-ui",
+          href: "https://github.com/TheoSlater/ollama-ui",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "ollama-ui.svg",
       video: "",
     },
   ],
