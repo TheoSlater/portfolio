@@ -1,18 +1,21 @@
-"use client"
+"use client";
 
-import { ArrowDown } from "lucide-react"
-import { motion } from "framer-motion"
+import { ArrowDown } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Hero() {
   const scrollToProjects = () => {
-    const element = document.getElementById("projects")
+    const element = document.getElementById("projects");
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-6 lg:px-12 md:pl-32">
+    <section
+      id="hero"
+      className="min-h-screen flex items-center justify-center px-6 lg:px-12 md:pl-32"
+    >
       <div className="max-w-5xl w-full">
         <div className="space-y-8">
           <motion.div
@@ -27,7 +30,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm text-muted-foreground tracking-wide uppercase"
             >
-              Rookie Software Developer
+              Full-Stack Rookie Developer
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -44,8 +47,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed"
           >
-            Full Stack Junior Developer with a passion for technology and a love for building creative, functional
-            solutions.
+            Full Stack Rookie Developer with a passion for technology and a love
+            for building creative, functional solutions.
           </motion.p>
           <motion.button
             initial={{ opacity: 0 }}
@@ -62,5 +65,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
