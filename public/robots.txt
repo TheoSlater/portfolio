@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://theoslater.xyz
-
-# Sitemaps
-Sitemap: https://theoslater.xyz/sitemap.xml
