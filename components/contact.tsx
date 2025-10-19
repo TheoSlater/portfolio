@@ -1,12 +1,17 @@
-"use client"
+"use client";
 
-import { Github, Mail } from "lucide-react"
-import { motion } from "framer-motion"
+import { Github, Mail, Instagram } from "lucide-react";
+import { motion } from "framer-motion";
 
 const socials = [
   { icon: Github, label: "GitHub", href: "https://github.com/TheoSlater" },
+  {
+    icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/theoslatwork/",
+  },
   { icon: Mail, label: "Email", href: "mailto:theoslater1@gmail.com" },
-]
+];
 
 export function Contact() {
   return (
@@ -22,6 +27,7 @@ export function Contact() {
           >
             Get in Touch
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +35,8 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-muted-foreground leading-relaxed mb-12"
           >
-            Want to chat? Just shoot me an email and I'll respond whenever I can. I will ignore all soliciting.
+            Want to chat? Just shoot me an email and I'll respond whenever I
+            can. I will ignore all soliciting.
           </motion.p>
 
           <motion.div
@@ -64,10 +71,11 @@ export function Contact() {
           className="mt-32 pt-8 border-t border-border"
         >
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Theo Slater. Designed and built with care.
+            © {new Date().getFullYear()} Theo Slater. Designed and built with
+            care.
           </p>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

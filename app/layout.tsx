@@ -9,8 +9,8 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Theo Slater | Full-Stack Developer",
-  description: "Theo T Slater. Full-Stack Rookie Developer.",
-  generator: "v0.app",
+  description:
+    "Explore the portfolio of Theo T. Slater, a full-stack web developer specializing in TypeScript, React, and backend systems built for performance.",
 };
 
 export default function RootLayout({
