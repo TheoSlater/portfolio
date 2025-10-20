@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { ArrowUpRight, Github } from "lucide-react"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { motion } from "framer-motion"
+import { ArrowUpRight, Github } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -30,7 +30,7 @@ const projects = [
     title: "Monolabs Landing Page",
     description:
       "A minimalistic website landing page designed for Monolabs, showcasing clean design principles and smooth user experience.",
-    tags: ["Next.js", "TypeScript", "TailwindCSS"],
+    tags: ["Next.js", "TypeScript", "Material UI", "Framer Motion"],
     year: "2025",
     link: "https://www.monolabs.site/",
     status: "Live",
@@ -40,13 +40,13 @@ const projects = [
     title: "Vocab App",
     description:
       "Scroll through endless words to expand your vocabulary. Like words, see their definitions, word types, and pronunciations in an engaging interface.",
-    tags: ["Expo", "React Native", "Swift" ,"API Integration"],
+    tags: ["Expo", "React Native", "Swift", "API Integration"],
     year: "2025",
     link: "https://www.monolabs.site/",
     status: "In Development",
     isOpenSource: false,
   },
-]
+];
 
 export function Projects() {
   return (
@@ -59,9 +59,12 @@ export function Projects() {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-light tracking-tight mb-4">Selected Work</h2>
+          <h2 className="text-4xl md:text-5xl font-light tracking-tight mb-4">
+            Selected Work
+          </h2>
           <p className="text-muted-foreground max-w-2xl leading-relaxed">
-            A collection of projects from 2025 showcasing my approach to building clean, functional applications.
+            A collection of projects from 2025 showcasing my approach to
+            building clean, functional applications.
           </p>
         </motion.div>
 
@@ -77,14 +80,19 @@ export function Projects() {
               <Card className="group p-8 hover:shadow-lg transition-all duration-300 border-border/50 h-full flex flex-col">
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center gap-3">
-                    <span className="text-sm text-muted-foreground">{project.year}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {project.year}
+                    </span>
                     {project.status === "In Development" && (
                       <Badge variant="secondary" className="text-xs">
                         In Dev
                       </Badge>
                     )}
                     {project.isOpenSource && (
-                      <Badge variant="outline" className="text-xs flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="text-xs flex items-center gap-1"
+                      >
                         <Github className="h-3 w-3" />
                         MIT
                       </Badge>
@@ -105,11 +113,16 @@ export function Projects() {
                 <h3 className="text-2xl font-medium mb-3 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">{project.description}</p>
+                <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
+                  {project.description}
+                </p>
 
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="text-xs px-3 py-1 bg-accent text-accent-foreground rounded-full">
+                    <span
+                      key={tagIndex}
+                      className="text-xs px-3 py-1 bg-accent text-accent-foreground rounded-full"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -120,5 +133,5 @@ export function Projects() {
         </div>
       </div>
     </section>
-  )
+  );
 }

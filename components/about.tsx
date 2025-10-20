@@ -1,9 +1,17 @@
-"use client"
+"use client";
 
-import { Briefcase, GraduationCap } from "lucide-react"
-import { motion } from "framer-motion"
+import { Briefcase, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
 
-const skills = ["React", "Next.js", "TypeScript", "Node.js", "Python", "Go", "C#"]
+const skills = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "Python",
+  "Go",
+  "C#",
+];
 
 export function About() {
   return (
@@ -28,17 +36,20 @@ export function About() {
               className="space-y-4 text-muted-foreground leading-relaxed"
             >
               <p>
-                Just before Covid-19 hit, I started exploring coding with Python and JavaScript. I began with small
-                projects, which quickly led me into the world of web development.
+                Just before Covid-19 hit, I started exploring coding with Python
+                and JavaScript. I began with small projects, which quickly led
+                me into the world of web development.
               </p>
               <p>
-                I started creating websites for friends and family, and soon after, I began building my own passion
-                projects. I'm currently studying GCSE Business and Computer Science, and I'm always driven by a deep
-                love for learning and building.
+                I started creating websites for friends and family, and soon
+                after, I began building my own passion projects. I'm currently
+                studying GCSE Business and Computer Science, and I'm always
+                driven by a deep love for learning and building.
               </p>
               <p>
-                Whether it's experimenting with new technologies or solving real-world problems, I'm constantly looking
-                for new challenges and opportunities to grow.
+                Whether it's experimenting with new technologies or solving
+                real-world problems, I'm constantly looking for new challenges
+                and opportunities to grow.
               </p>
             </motion.div>
 
@@ -54,11 +65,17 @@ export function About() {
                   <Briefcase className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-medium mb-1">Freelance Software Engineer</h3>
-                  <p className="text-sm text-muted-foreground mb-2">Nov 2022 - Present</p>
+                  <h3 className="text-lg font-medium mb-1">
+                    Freelance Software Engineer
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Nov 2022 - Present
+                  </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Building custom software solutions for clients ranging from startups to small businesses. Projects
-                    include web applications, automation scripts, and consulting on architecture and scaling.
+                    Building custom software solutions for clients ranging from
+                    startups to small businesses. Projects include web
+                    applications, automation scripts, and consulting on
+                    architecture and scaling.
                   </p>
                 </div>
               </motion.div>
@@ -75,8 +92,12 @@ export function About() {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium mb-1">GCSE</h3>
-                  <p className="text-sm text-muted-foreground mb-2">2024 - Present</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Computer Science, Business, Music</p>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    2024 - Present
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Computer Science, Business, Music
+                  </p>
                 </div>
               </motion.div>
             </div>
@@ -111,5 +132,5 @@ export function About() {
         </div>
       </div>
     </section>
-  )
+  );
 }
