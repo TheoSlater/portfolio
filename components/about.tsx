@@ -87,7 +87,7 @@ export function About() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="flex gap-4"
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-background flex items-center justify-center">
+                <div className="shrink-0 w-12 h-12 rounded-lg bg-background flex items-center justify-center">
                   <GraduationCap className="h-5 w-5" />
                 </div>
                 <div>

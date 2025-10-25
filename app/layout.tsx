@@ -9,7 +9,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Theo Slater | Full-Stack Rookie Developer",
+  title: "Theo Slater | Full-Stack Developer",
   description:
     "Explore the portfolio of Theo T. Slater, a full-stack developer specializing in TypeScript, React, and backend systems built for performance.",
 };

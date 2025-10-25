@@ -113,7 +113,7 @@ export function Projects() {
                 <h3 className="text-2xl font-medium mb-3 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
+                <p className="text-muted-foreground leading-relaxed mb-6 grow">
                   {project.description}
                 </p>
 

@@ -30,7 +30,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-sm text-muted-foreground tracking-wide uppercase"
             >
-              Full-Stack Rookie Developer
+              Full-Stack Software Developer
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -47,8 +47,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed"
           >
-            Full Stack Rookie Developer with a passion for technology and a love
-            for building creative, functional solutions.
+            Full Stack Amateur Developer with a passion for technology and a
+            love for building creative, functional solutions.
           </motion.p>
           <motion.button
             initial={{ opacity: 0 }}
