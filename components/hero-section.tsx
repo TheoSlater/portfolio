@@ -1,9 +1,27 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Link from "next/link"
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export function HeroSection() {
+  const [displayedName, setDisplayedName] = useState("");
+  const fullName = "Theo Slater";
+
+  useEffect(() => {
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      if (i <= fullName.length) {
+        setDisplayedName(fullName.slice(0, i));
+        i++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 100);
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
   return (
     <section className="grid-bg relative flex min-h-screen items-center justify-center px-6">
       <div className="mx-auto max-w-5xl">
@@ -24,7 +42,7 @@ export function HeroSection() {
             </motion.p>
 
             <h1 className="text-5xl font-bold tracking-tight text-foreground md:text-7xl">
-              Theo Slater
+              {displayedName}
               <span className="caret ml-1 inline-block h-12 w-[3px] bg-primary md:h-16" />
             </h1>
           </div>
@@ -57,7 +75,9 @@ export function HeroSection() {
               style={{ borderRadius: "6px" }}
             >
               Projects
-              <span className="transition-transform group-hover:translate-x-1">→</span>
+              <span className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
             </Link>
             <Link
               href="#contact"
@@ -77,7 +97,9 @@ export function HeroSection() {
           transition={{ delay: 1, duration: 0.5 }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">Scroll</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">
+            Scroll
+          </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
@@ -86,5 +108,5 @@ export function HeroSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
