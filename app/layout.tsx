@@ -1,32 +1,45 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { ThemeProvider } from "@/components/theme-provider";
-import "./globals.css";
+import type React from "react"
+import type { Metadata, Viewport } from "next"
+import { Inter, JetBrains_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+})
 
 export const metadata: Metadata = {
   title: "Theo Slater | Full-Stack Developer",
-  description:
-    "Explore the portfolio of Theo T. Slater, a full-stack developer specializing in TypeScript, React, and backend systems built for performance.",
-};
+  description: "15-year-old Full-Stack Developer & Founder of Monolabs. Building minimal, powerful software.",
+  keywords: ["developer", "full-stack", "react", "typescript", "golang", "monolabs"],
+  authors: [{ name: "Theo Slater" }],
+  creator: "Theo Slater",
+    generator: 'v0.app'
+}
+
+export const viewport: Viewport = {
+  themeColor: "#0B0B0C",
+  width: "device-width",
+  initialScale: 1,
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        {children}
         <Analytics />
       </body>
     </html>
-  );
+  )
 }
