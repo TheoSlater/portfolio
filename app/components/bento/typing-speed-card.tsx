@@ -30,12 +30,6 @@ interface TypingSpeedCardProps {
   sx?: SxProps<Theme>;
 }
 
-declare global {
-  interface Window {
-    forceTypingSpeedRefresh?: () => Promise<void>;
-  }
-}
-
 export default function TypingSpeedCard({
   // ignore minHeight if you want true full-height behavior
   minHeight,
@@ -58,14 +52,10 @@ export default function TypingSpeedCard({
       }
     };
 
-    window.forceTypingSpeedRefresh = load;
     void load();
 
     return () => {
       isMounted = false;
-      if (window.forceTypingSpeedRefresh === load) {
-        delete window.forceTypingSpeedRefresh;
-      }
     };
   }, []);
 
