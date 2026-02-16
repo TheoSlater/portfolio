@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import Providers from "./providers";
 import "./globals.css";
+import "leaflet/dist/leaflet.css";
 import { Geist } from "next/font/google";
 import GradualBlur from "./components/GradualBlur";
 

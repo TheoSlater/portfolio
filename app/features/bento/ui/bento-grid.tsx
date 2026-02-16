@@ -30,6 +30,8 @@ export function BentoGrid({
   return (
     <Box
       sx={{
+        "--bento-gap": `${gap}px`,
+        "--bento-cols": `${columns}`,
         display: "grid",
         gridTemplateColumns: {
           xs: "minmax(0, 1fr)",

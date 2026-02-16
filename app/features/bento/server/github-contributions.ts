@@ -1,8 +1,8 @@
 import { GraphQLClient, gql } from "graphql-request";
-import { getGithubUsername } from "./metadata";
-import type { GithubContributionData } from "./types/github-types";
-import { ONE_DAY_SECONDS } from "./cache";
-import { createTimedCache } from "./simple-cache";
+import { getGithubUsername } from "@/lib/metadata";
+import type { GithubContributionData } from "@/lib/types/github-types";
+import { ONE_DAY_SECONDS } from "@/lib/cache";
+import { createTimedCache } from "@/lib/simple-cache";
 
 const GetGithubContributions = gql`
   query ($userName: String!, $from: DateTime!, $to: DateTime!) {

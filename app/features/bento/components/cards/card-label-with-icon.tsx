@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import type { ReactNode } from "react";
-import CardLabel from "../../components/bento/card-label";
+import CardLabel from "../../ui/card-label";
 
 interface CardLabelWithIconProps {
   icon: ReactNode;

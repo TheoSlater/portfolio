@@ -22,7 +22,6 @@ export function BentoLinkCard({
   colSpan,
   rowSpan,
   minHeight,
-  sx,
 }: BentoLinkCardProps) {
   const theme = useTheme();
   return (
@@ -60,7 +59,6 @@ export function BentoLinkCard({
               boxShadow: theme.palette.bento.cardHoverShadow,
             },
           },
-          sx,
         ]}
       >
         {children}

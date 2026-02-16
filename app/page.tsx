@@ -1,6 +1,6 @@
 import { HomeClient } from "./components/HomeClient";
 import { UnderConstruction } from "./components/UnderConstruction";
-import GridSection from "./grid/GridSection";
+import GridSection from "./features/bento/components/GridSection";
 
 export const revalidate = 86400;
 

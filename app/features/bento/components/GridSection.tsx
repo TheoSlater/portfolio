@@ -1,13 +1,13 @@
-import { Box } from "@mui/material";
+import { Container } from "@mui/material";
 import type { ElementType } from "react";
-import { BentoGrid } from "../components/bento/bento-grid";
+import { BentoGrid } from "../ui/bento-grid";
 
-import { getGithubContributions } from "@/lib/github-contributions";
-import TypingSpeedCard from "../components/bento/typing-speed-card";
+import { getGithubContributions } from "@/app/features/bento/server/github-contributions";
+import TypingSpeedCard from "./typing-speed-card";
 import FeaturedWorkCard from "./cards/featured-work-card";
 import GitHubActivityCardSection from "./cards/github-activity-card-section";
 import TechStackCard from "./cards/tech-stack-card";
-import PortfolioPlaceholderCard from "./cards/portfolio-placeholder-card";
+import MapLocationCard from "./cards/map-location-card";
 
 type GridSectionProps = {
   component?: ElementType;
@@ -19,11 +19,11 @@ export default async function GridSection({
   const contributions = await getGithubContributions();
 
   return (
-    <Box
+    <Container
       component={component}
+      maxWidth="lg"
       sx={{
         minHeight: "100vh",
-        px: { xs: 3, md: 6, lg: 10 },
         py: { xs: 5, md: 8 },
       }}
     >
@@ -32,6 +32,7 @@ export default async function GridSection({
         gap={16}
         rowHeight={200}
         sx={{
+          containerType: "inline-size",
           gap: { xs: "12px", sm: "16px", lg: "20px" },
           gridAutoRows: {
             xs: "minmax(180px, auto)",
@@ -40,12 +41,12 @@ export default async function GridSection({
           },
         }}
       >
+        <MapLocationCard />
         <FeaturedWorkCard />
-        <PortfolioPlaceholderCard />
         <TypingSpeedCard />
         <GitHubActivityCardSection contributions={contributions} />
         <TechStackCard />
       </BentoGrid>
-    </Box>
+    </Container>
   );
 }

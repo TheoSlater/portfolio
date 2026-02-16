@@ -1,20 +1,16 @@
-// i stole half this code from: https://github.com/jestsee/jestsee.com/blob/master/src/pages/_components/bento/BentoItemGithubActivity/BentoItemGithubActivityChart.tsx
-
 "use client";
 
-import { Box, Typography, useTheme } from "@mui/material";
-import HeatMap, { type SVGProps } from "@uiw/react-heat-map";
-import React from "react";
-
-import {
-  formatDate,
-  formatMonthDay,
-  formatNumber,
-  // getDateSuffix,
-} from "@/lib/formatters";
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import type { SVGProps } from "@uiw/react-heat-map";
 import type { GithubContributionData } from "@/lib/types/github-types";
+import { formatMonthDay, formatNumber } from "@/lib/formatters";
 
-const getDateProps = () => {
+const RECT_SIZE = 16;
+const SPACE = 4;
+const HEATMAP_LEFT_PAD = 5;
+
+const getDateRange = () => {
   const endDate = new Date();
   endDate.setHours(23, 59, 59, 999);
 
@@ -33,17 +29,12 @@ const toLocalDateKey = (date: Date) =>
 
 const toLocalDateFromIso = (date: string) => new Date(`${date}T00:00:00`);
 
-const RECT_SIZE = 16;
-const SPACE = 4;
-const HEATMAP_LEFT_PAD = 5;
-
-const renderRect =
+const createRectRenderer =
   (handleMouseEnter: (value: string) => void): SVGProps["rectRender"] =>
   // just to shut the error up, will find better solution
   // eslint-disable-next-line react/display-name
   (props, data) => {
     const date = new Date(data.date);
-    // const formattedDate = `${formatMonthDay(date)}${getDateSuffix(date.getDate())}`;
     const formattedDate = `${formatMonthDay(date)}`;
     const tileInfo = `${data.count ? formatNumber(data.count) : "No"} contributions on ${formattedDate}`;
 
@@ -56,13 +47,10 @@ const renderRect =
     );
   };
 
-interface Props {
-  data: GithubContributionData;
-}
-
-export default function GitHubActivityCard({ data }: Props) {
+export function useGithubActivityHeatmap(data: GithubContributionData) {
   const theme = useTheme();
-  const { startDate, endDate } = getDateProps();
+  const { startDate, endDate } = React.useMemo(getDateRange, []);
+
   const filledContributions = React.useMemo(() => {
     const contributions = data.contributions ?? [];
     const map = new Map(
@@ -90,11 +78,16 @@ export default function GitHubActivityCard({ data }: Props) {
     640,
   );
 
-  const defaultLabel = `${formatNumber(data.totalContributions)} contributions in the last year`;
+  const defaultLabel = React.useMemo(
+    () => `${formatNumber(data.totalContributions)} contributions in the last year`,
+    [data.totalContributions],
+  );
   const [hoveredTile, setHoveredTile] = React.useState<string>(defaultLabel);
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
 
-  const heatmapColors = theme.palette.bento.heatmap;
+  React.useEffect(() => {
+    setHoveredTile(defaultLabel);
+  }, [defaultLabel]);
 
   React.useEffect(() => {
     if (scrollRef.current) {
@@ -102,39 +95,27 @@ export default function GitHubActivityCard({ data }: Props) {
     }
   }, [filledContributions.length]);
 
-  return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, pt: 2 }}>
-      <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}>
-        <Typography variant="body2" color="text.secondary" noWrap>
-          {hoveredTile}
-        </Typography>
-      </Box>
-
-      <Box sx={{ overflowX: "auto", width: "100%" }} ref={scrollRef}>
-        <HeatMap
-          startDate={startDate}
-          endDate={endDate}
-          onMouseLeave={() => setHoveredTile(defaultLabel)}
-          value={filledContributions}
-          weekLabels={false}
-          monthLabels={false}
-          legendCellSize={0}
-          space={SPACE}
-          rectSize={RECT_SIZE}
-          rectProps={{ rx: 4 }}
-          rectRender={renderRect((value) => setHoveredTile(value))}
-          panelColors={heatmapColors}
-          style={{
-            color: theme.palette.text.primary,
-            width: "100%",
-            minWidth: `${heatmapMinWidth}px`,
-          }}
-        />
-      </Box>
-
-      <Typography variant="caption" color="text.secondary">
-        Last pushed on {formatDate(new Date(data.lastPushedAt))}
-      </Typography>
-    </Box>
+  const rectRender = React.useMemo(
+    () => createRectRenderer((value) => setHoveredTile(value)),
+    [],
   );
+
+  const handleMouseLeave = React.useCallback(() => {
+    setHoveredTile(defaultLabel);
+  }, [defaultLabel]);
+
+  return {
+    startDate,
+    endDate,
+    filledContributions,
+    hoveredTile,
+    defaultLabel,
+    rectRender,
+    handleMouseLeave,
+    heatmapMinWidth,
+    heatmapColors: theme.palette.bento.heatmap,
+    scrollRef,
+    rectSize: RECT_SIZE,
+    space: SPACE,
+  };
 }

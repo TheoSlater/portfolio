@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material";
@@ -10,22 +9,13 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import TranslateIcon from "@mui/icons-material/Translate";
 import Link from "next/link";
-import CardLabel from "./card-label";
-import { BentoCard } from "./bento-card";
+import CardLabel from "../ui/card-label";
+import { BentoCard } from "../ui/bento-card";
+import { useTypingSpeed } from "@/app/features/bento/hooks/useTypingSpeed";
 
-type TypingSpeedPayload = {
-  wpm: number;
-  accuracy: number;
-  duration: string;
-  language: string;
-  timestamp: number;
-};
-
-const TYPING_SPEED_ENDPOINT = "/api/monkeytype/typing-speed";
 const MONKEYTYPE_PROFILE_URL = "https://monkeytype.com/profile/TheoSlater";
 
 interface TypingSpeedCardProps {
-  colSpan?: number;
   minHeight?: number | string;
   sx?: SxProps<Theme>;
 }
@@ -33,36 +23,15 @@ interface TypingSpeedCardProps {
 export default function TypingSpeedCard({
   // ignore minHeight if you want true full-height behavior
   minHeight,
-  sx,
 }: TypingSpeedCardProps) {
   const theme = useTheme();
-  const [data, setData] = React.useState<TypingSpeedPayload | null>(null);
-
-  React.useEffect(() => {
-    let isMounted = true;
-
-    const load = async () => {
-      try {
-        const res = await fetch(TYPING_SPEED_ENDPOINT);
-        const json = await res.json();
-        if (!isMounted || json?.error) return;
-        setData(json);
-      } catch {
-        // ignore
-      }
-    };
-
-    void load();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const { data } = useTypingSpeed();
 
   const wpm = data ? String(data.wpm) : "—";
   const duration = data ? data.duration : "—";
   const accuracy = data ? `${data.accuracy}%` : "—";
-  const lang = data ? data.language : "—";
+  // const lang = data ? data.language : "EN";
+  const lang = "EN";
 
   return (
     <BentoCard
@@ -71,10 +40,11 @@ export default function TypingSpeedCard({
       target="_blank"
       rel="noreferrer"
       ariaLabel="Open Monkeytype profile"
-      rowSpan={1}
+      size="sm"
       minHeight={minHeight}
       sx={[
         {
+          overflow: "hidden",
           cursor: "pointer",
           textDecoration: "none !important",
           textDecorationColor: "transparent",
@@ -98,16 +68,6 @@ export default function TypingSpeedCard({
             textDecoration: "none",
             textDecorationColor: "transparent",
           },
-          "& *": {
-            textDecoration: "none !important",
-            textDecorationColor: "transparent",
-            color: "inherit",
-          },
-          "& .MuiTypography-root": {
-            textDecoration: "none !important",
-            textDecorationColor: "transparent",
-            color: "inherit",
-          },
           "&:focus-visible": {
             outline: `2px solid ${theme.palette.bento.focusOutline}`,
             outlineOffset: "4px",
@@ -119,7 +79,6 @@ export default function TypingSpeedCard({
           display: "flex",
           flexDirection: "column",
         },
-        sx,
       ]}
     >
       <CardLabel>

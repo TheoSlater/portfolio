@@ -1,4 +1,4 @@
-import { refreshGithubContributionsCache } from "@/lib/github-contributions";
+import { refreshGithubContributionsCache } from "@/app/features/bento/server/github-contributions";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
