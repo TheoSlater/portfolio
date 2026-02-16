@@ -1,4 +1,3 @@
-
 export const formatNumber = (value: number): string =>
   new Intl.NumberFormat("en-GB").format(value);
 
@@ -15,16 +14,16 @@ export const formatMonthDay = (value: Date): string =>
     day: "numeric",
   }).format(value);
 
-const suffixes: Record<number, string> = {
-  1: "st",
-  2: "nd",
-  3: "rd",
-};
+// const suffixes: Record<number, string> = {
+//   1: "st",
+//   2: "nd",
+//   3: "rd",
+// };
 
-export const getDateSuffix = (day: number): string => {
-  if (day >= 11 && day <= 13) {
-    return "th";
-  }
+// export const getDateSuffix = (day: number): string => {
+//   if (day >= 11 && day <= 13) {
+//     return "th";
+//   }
 
-  return suffixes[day % 10] ?? "th";
-};
+//   return suffixes[day % 10] ?? "th";
+// };

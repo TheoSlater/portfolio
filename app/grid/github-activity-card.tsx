@@ -10,7 +10,7 @@ import {
   formatDate,
   formatMonthDay,
   formatNumber,
-  getDateSuffix,
+  // getDateSuffix,
 } from "@/lib/formatters";
 import type { GithubContributionData } from "@/lib/types/github-types";
 
@@ -43,7 +43,8 @@ const renderRect =
   // eslint-disable-next-line react/display-name
   (props, data) => {
     const date = new Date(data.date);
-    const formattedDate = `${formatMonthDay(date)}${getDateSuffix(date.getDate())}`;
+    // const formattedDate = `${formatMonthDay(date)}${getDateSuffix(date.getDate())}`;
+    const formattedDate = `${formatMonthDay(date)}`;
     const tileInfo = `${data.count ? formatNumber(data.count) : "No"} contributions on ${formattedDate}`;
 
     return (
