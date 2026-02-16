@@ -2,6 +2,7 @@ import { GraphQLClient, gql } from "graphql-request";
 import { getGithubUsername } from "./metadata";
 import type { GithubContributionData } from "./types/github-types";
 import { ONE_DAY_SECONDS } from "./cache";
+import { createTimedCache } from "./simple-cache";
 
 const GetGithubContributions = gql`
   query ($userName: String!, $from: DateTime!, $to: DateTime!) {
@@ -30,13 +31,6 @@ const GITHUB_GRAPHQL_ENDPOINT = "https://api.github.com/graphql";
 
 const CACHE_TTL_MS = ONE_DAY_SECONDS * 1000;
 
-type ContributionsCache = {
-  expiresAt: number;
-  hasValue: boolean;
-  promise: Promise<GithubContributionData | null> | null;
-  value: GithubContributionData | null;
-};
-
 type GithubContributionsResponse = {
   user: {
     repositories: {
@@ -56,13 +50,6 @@ type GithubContributionsResponse = {
       };
     };
   };
-};
-
-const contributionsCache: ContributionsCache = {
-  expiresAt: 0,
-  hasValue: false,
-  promise: null,
-  value: null,
 };
 
 const getGithubContributionsUncached =
@@ -121,43 +108,19 @@ const getGithubContributionsUncached =
     }
   };
 
-const cacheResult = (value: GithubContributionData | null) => {
-  contributionsCache.value = value;
-  contributionsCache.hasValue = true;
-  contributionsCache.expiresAt = Date.now() + CACHE_TTL_MS;
-};
-
-const startCacheRefresh = () => {
-  const promise = (async () => {
-    try {
-      const data = await getGithubContributionsUncached();
-      cacheResult(data);
-      return data;
-    } finally {
-      contributionsCache.promise = null;
-    }
-  })();
-
-  contributionsCache.promise = promise;
-  return promise;
-};
+const contributionsCache = createTimedCache(
+  getGithubContributionsUncached,
+  CACHE_TTL_MS,
+);
 
 export function invalidateGithubContributionsCache() {
-  contributionsCache.hasValue = false;
-  contributionsCache.expiresAt = 0;
+  contributionsCache.invalidate();
 }
 
 export function refreshGithubContributionsCache() {
-  invalidateGithubContributionsCache();
-  return startCacheRefresh();
+  return contributionsCache.refresh();
 }
 
 export async function getGithubContributions() {
-  const now = Date.now();
-  const cacheIsFresh =
-    contributionsCache.hasValue && contributionsCache.expiresAt > now;
-
-  if (cacheIsFresh) return contributionsCache.value;
-  if (contributionsCache.promise) return contributionsCache.promise;
-  return startCacheRefresh();
+  return contributionsCache.get();
 }

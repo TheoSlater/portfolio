@@ -1,16 +1,16 @@
 
 export const formatNumber = (value: number): string =>
-  new Intl.NumberFormat("en-US").format(value);
+  new Intl.NumberFormat("en-GB").format(value);
 
 export const formatDate = (value: Date): string =>
-  new Intl.DateTimeFormat("en-US", {
+  new Intl.DateTimeFormat("en-GB", {
     month: "long",
     day: "numeric",
     year: "numeric",
   }).format(value);
 
 export const formatMonthDay = (value: Date): string =>
-  new Intl.DateTimeFormat("en-US", {
+  new Intl.DateTimeFormat("en-GB", {
     month: "long",
     day: "numeric",
   }).format(value);

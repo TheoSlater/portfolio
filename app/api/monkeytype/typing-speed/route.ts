@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { ONE_DAY_SECONDS, ONE_HOUR_SECONDS } from "@/lib/cache";
+import { createTimedCache } from "@/lib/simple-cache";
 
 type MonkeytypeResult = {
   wpm: number;
@@ -18,6 +19,8 @@ type TypingSpeedPayload = {
   language: string;
   timestamp: number;
 };
+
+const CACHE_TTL_MS = ONE_DAY_SECONDS * 1000;
 
 const fetchTypingSpeed = async (): Promise<TypingSpeedPayload | null> => {
   const apeKey = process.env.MONKEYTYPE_APE_KEY;
@@ -66,8 +69,10 @@ const fetchTypingSpeed = async (): Promise<TypingSpeedPayload | null> => {
   };
 };
 
+const typingSpeedCache = createTimedCache(fetchTypingSpeed, CACHE_TTL_MS);
+
 export async function GET() {
-  const data = await fetchTypingSpeed();
+  const data = await typingSpeedCache.get();
 
   if (!data) {
     return NextResponse.json(
