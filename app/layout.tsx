@@ -6,6 +6,7 @@ import "./globals.css";
 import "leaflet/dist/leaflet.css";
 import { Geist } from "next/font/google";
 import GradualBlur from "./components/GradualBlur";
+import ConstructionDialog from "./components/ConstructionDialog";
 
 export const metadata: Metadata = {
   title: "Theo Slater | Full-Stack Developer",
@@ -49,6 +50,7 @@ export default function RootLayout({
           opacity={1}
           zIndex={2000}
         />
+        <ConstructionDialog />
         <Providers>{children}</Providers>
         <Analytics />
       </body>

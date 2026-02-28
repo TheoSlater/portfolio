@@ -62,10 +62,35 @@ export function BentoCard({
   const componentProps = component
     ? { component, href, target, rel, "aria-label": ariaLabel }
     : {};
+
+  const cardStyles = {
+    backgroundColor: theme.palette.bento.cardBackground,
+    borderRadius: "24px",
+    border: "1px solid",
+    borderColor: theme.palette.bento.cardBorder,
+    padding: cardPadding,
+    minHeight: cardMinHeight,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+  };
+
+  if (width !== undefined) {
+    (cardStyles as any).width = toCssSize(width);
+  }
+  if (height !== undefined) {
+    (cardStyles as any).height = toCssSize(height);
+  }
+  if (aspectRatio) {
+    (cardStyles as any).aspectRatio = aspectRatio;
+  }
+
   return (
     <Box
       {...componentProps}
       sx={[
+        cardStyles,
         {
           gridColumn: {
             xs: "span 1",
@@ -77,19 +102,6 @@ export function BentoCard({
             sm: `span ${resolvedRowSpan}`,
             md: `span ${resolvedRowSpan}`,
           },
-          backgroundColor: theme.palette.bento.cardBackground,
-          borderRadius: "24px",
-          border: "1px solid",
-          borderColor: theme.palette.bento.cardBorder,
-          padding: cardPadding,
-          minHeight: cardMinHeight,
-          height: toCssSize(height),
-          width: toCssSize(width),
-          minWidth: 0,
-          aspectRatio,
-          display: "flex",
-          flexDirection: "column",
-          position: "relative",
         },
         ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
       ]}

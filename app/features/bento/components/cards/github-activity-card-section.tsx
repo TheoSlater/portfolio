@@ -1,3 +1,4 @@
+import type { SxProps, Theme } from "@mui/material";
 import { GitHub } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import { BentoCard } from "../../ui/bento-card";
@@ -7,13 +8,19 @@ import CardLabelWithIcon from "./card-label-with-icon";
 
 interface GitHubActivityCardSectionProps {
   contributions: GithubContributionData | null;
+  colSpan?: number;
+  rowSpan?: number;
+  sx?: SxProps<Theme>;
 }
 
 export default function GitHubActivityCardSection({
   contributions,
+  colSpan,
+  rowSpan,
+  sx,
 }: GitHubActivityCardSectionProps) {
   return (
-    <BentoCard widthSize="md" heightSize="sm">
+    <BentoCard widthSize="md" heightSize="sm" colSpan={colSpan} rowSpan={rowSpan} sx={sx}>
       <CardLabelWithIcon
         icon={<GitHub fontSize="small" sx={{ fontSize: 18 }} />}
       >

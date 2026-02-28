@@ -18,11 +18,15 @@ const MONKEYTYPE_PROFILE_URL = "https://monkeytype.com/profile/TheoSlater";
 interface TypingSpeedCardProps {
   minHeight?: number | string;
   sx?: SxProps<Theme>;
+  colSpan?: number;
+  rowSpan?: number;
 }
 
 export default function TypingSpeedCard({
   // ignore minHeight if you want true full-height behavior
   minHeight,
+  colSpan,
+  rowSpan,
 }: TypingSpeedCardProps) {
   const theme = useTheme();
   const { data } = useTypingSpeed();
@@ -41,6 +45,8 @@ export default function TypingSpeedCard({
       rel="noreferrer"
       ariaLabel="Open Monkeytype profile"
       size="sm"
+      colSpan={colSpan}
+      rowSpan={rowSpan}
       minHeight={minHeight}
       sx={[
         {
@@ -110,7 +116,7 @@ export default function TypingSpeedCard({
       >
         <Typography
           sx={{
-            fontSize: { xs: 160, md: 180 },
+            fontSize: { xs: 130, md: 150 },
             fontWeight: 700,
             color: alpha(theme.palette.text.primary, 0.04),
             maskImage:
