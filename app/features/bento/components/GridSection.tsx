@@ -28,7 +28,7 @@ export default async function GridSection({
       }}
     >
       <BentoGrid
-        columns={4}
+        columns={12}
         gap={16}
         rowHeight={200}
         sx={{
@@ -41,11 +41,11 @@ export default async function GridSection({
           },
         }}
       >
-        <MapLocationCard />
-        <FeaturedWorkCard />
-        <TypingSpeedCard />
-        <GitHubActivityCardSection contributions={contributions} />
-        <TechStackCard />
+        <MapLocationCard colSpan={3} />
+        <FeaturedWorkCard colSpan={5} />
+        <TypingSpeedCard colSpan={4} />
+        <GitHubActivityCardSection contributions={contributions} colSpan={6} />
+        <TechStackCard colSpan={6} />
       </BentoGrid>
     </Container>
   );
