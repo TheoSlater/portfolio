@@ -17,8 +17,8 @@ const TileLayer = dynamic(
 const LATITUDE = 51.91;
 const LONGITUDE = -2.58;
 
-const MAX_ZOOM = 13;
-const MIN_ZOOM = 9;
+const MAX_ZOOM = 10;
+const MIN_ZOOM = 8;
 
 const MAP_URL = "/api/map/{z}/{x}/{y}.png";
 
