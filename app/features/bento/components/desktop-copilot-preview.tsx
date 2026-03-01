@@ -48,12 +48,20 @@ const dotVariants: Variants = {
 
 export default function DesktopCopilotPreview() {
   const theme = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [promptIndex, setPromptIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
+  const [isTyping, setIsTyping] = useState(false);
   const [showResponse, setShowResponse] = useState(false);
 
+  // Only start animations after client mount to avoid hydration mismatch
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const currentPrompt = PROMPTS[promptIndex];
     let charIndex = 0;
     let timeout: ReturnType<typeof setTimeout>;
@@ -66,7 +74,7 @@ export default function DesktopCopilotPreview() {
       if (charIndex < currentPrompt.length) {
         setDisplayedText(currentPrompt.slice(0, charIndex + 1));
         charIndex++;
-        timeout = setTimeout(typeChar, 50 + Math.random() * 40);
+        timeout = setTimeout(typeChar, 65);
       } else {
         setIsTyping(false);
         timeout = setTimeout(() => setShowResponse(true), 600);
@@ -76,7 +84,7 @@ export default function DesktopCopilotPreview() {
     timeout = setTimeout(typeChar, 800);
 
     return () => clearTimeout(timeout);
-  }, [promptIndex]);
+  }, [promptIndex, mounted]);
 
   useEffect(() => {
     if (!showResponse) return;
