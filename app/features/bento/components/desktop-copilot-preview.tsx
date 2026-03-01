@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
@@ -15,7 +15,8 @@ const PROMPTS = [
 type Phase =
   | "idle"
   | "typing"
-  | "send-hover"
+  | "cursor-move"
+  | "cursor-click"
   | "sent"
   | "thinking"
   | "responding"
@@ -31,7 +32,7 @@ const overlayVariants: Variants = {
   },
 };
 
-const cursorVariants: Variants = {
+const textCursorVariants: Variants = {
   blink: {
     opacity: [1, 1, 0, 0, 1],
     transition: {
@@ -55,8 +56,28 @@ const dotVariants: Variants = {
   }),
 };
 
-/* Skeleton line widths for the AI "response" */
 const SKELETON_LINES = ["85%", "100%", "70%", "90%", "50%"];
+
+/* macOS-style pointer cursor SVG */
+function PointerCursor({ color = "#fff" }: { color?: string }) {
+  return (
+    <svg
+      width="18"
+      height="22"
+      viewBox="0 0 18 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 1L1 16.2L5.4 12.4L8.8 19.8L11.6 18.6L8.2 11.2L13.8 10.8L1 1Z"
+        fill={color}
+        stroke="rgba(0,0,0,0.5)"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export default function DesktopCopilotPreview() {
   const theme = useTheme();
@@ -64,7 +85,11 @@ export default function DesktopCopilotPreview() {
   const [promptIndex, setPromptIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [phase, setPhase] = useState<Phase>("idle");
-  const [sendHovered, setSendHovered] = useState(false);
+
+  /* Refs for measuring send button position */
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sendBtnRef = useRef<HTMLDivElement>(null);
+  const [cursorTarget, setCursorTarget] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     setMounted(true);
@@ -73,7 +98,17 @@ export default function DesktopCopilotPreview() {
   const resetCycle = useCallback(() => {
     setDisplayedText("");
     setPhase("idle");
-    setSendHovered(false);
+  }, []);
+
+  /* Measure send button position relative to container */
+  const measureSendButton = useCallback(() => {
+    if (!containerRef.current || !sendBtnRef.current) return;
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const btnRect = sendBtnRef.current.getBoundingClientRect();
+    setCursorTarget({
+      x: btnRect.left - containerRect.left + btnRect.width / 2,
+      y: btnRect.top - containerRect.top + btnRect.height / 2,
+    });
   }, []);
 
   /* Phase 1: Type out the prompt */
@@ -92,11 +127,10 @@ export default function DesktopCopilotPreview() {
         charIndex++;
         timeout = setTimeout(typeChar, 60);
       } else {
-        // Brief pause then hover send button
         timeout = setTimeout(() => {
-          setSendHovered(true);
-          setPhase("send-hover");
-        }, 500);
+          measureSendButton();
+          setPhase("cursor-move");
+        }, 400);
       }
     };
 
@@ -106,37 +140,44 @@ export default function DesktopCopilotPreview() {
     }, 700);
 
     return () => clearTimeout(timeout);
-  }, [promptIndex, mounted, resetCycle]);
+  }, [promptIndex, mounted, resetCycle, measureSendButton]);
 
-  /* Phase 2: Send hover -> press send */
+  /* Phase 2: Cursor arrives -> click */
   useEffect(() => {
-    if (phase !== "send-hover") return;
-    const timeout = setTimeout(() => setPhase("sent"), 450);
+    if (phase !== "cursor-move") return;
+    const timeout = setTimeout(() => setPhase("cursor-click"), 600);
     return () => clearTimeout(timeout);
   }, [phase]);
 
-  /* Phase 3: Sent -> thinking */
+  /* Phase 3: Click -> sent */
+  useEffect(() => {
+    if (phase !== "cursor-click") return;
+    const timeout = setTimeout(() => setPhase("sent"), 300);
+    return () => clearTimeout(timeout);
+  }, [phase]);
+
+  /* Phase 4: Sent -> thinking */
   useEffect(() => {
     if (phase !== "sent") return;
     const timeout = setTimeout(() => setPhase("thinking"), 300);
     return () => clearTimeout(timeout);
   }, [phase]);
 
-  /* Phase 4: Thinking -> responding */
+  /* Phase 5: Thinking -> responding */
   useEffect(() => {
     if (phase !== "thinking") return;
     const timeout = setTimeout(() => setPhase("responding"), 1400);
     return () => clearTimeout(timeout);
   }, [phase]);
 
-  /* Phase 5: Responding -> done */
+  /* Phase 6: Responding -> done */
   useEffect(() => {
     if (phase !== "responding") return;
     const timeout = setTimeout(() => setPhase("done"), 1800);
     return () => clearTimeout(timeout);
   }, [phase]);
 
-  /* Phase 6: Done -> next prompt */
+  /* Phase 7: Done -> next prompt */
   useEffect(() => {
     if (phase !== "done") return;
     const timeout = setTimeout(() => {
@@ -148,15 +189,23 @@ export default function DesktopCopilotPreview() {
   const inputBg = alpha(theme.palette.common.white, 0.06);
   const inputBorder = alpha(theme.palette.common.white, 0.1);
   const subtleText = alpha(theme.palette.text.primary, 0.35);
+
   const isSentOrLater =
     phase === "sent" ||
     phase === "thinking" ||
     phase === "responding" ||
     phase === "done";
-  const showSendActive = sendHovered || phase === "send-hover";
+
+  const showCursor =
+    phase === "cursor-move" || phase === "cursor-click";
+
+  const sendActive =
+    phase === "cursor-move" ||
+    phase === "cursor-click";
 
   return (
     <Box
+      ref={containerRef}
       sx={{
         position: "relative",
         flex: 1,
@@ -182,6 +231,36 @@ export default function DesktopCopilotPreview() {
           pointerEvents: "none",
         }}
       />
+
+      {/* Animated mouse cursor */}
+      <AnimatePresence>
+        {showCursor && (
+          <motion.div
+            initial={{ opacity: 0, x: cursorTarget.x - 50, y: cursorTarget.y + 30 }}
+            animate={{
+              opacity: 1,
+              x: cursorTarget.x - 4,
+              y: cursorTarget.y - 4,
+              scale: phase === "cursor-click" ? 0.85 : 1,
+            }}
+            exit={{ opacity: 0, scale: 0.6 }}
+            transition={{
+              x: { type: "spring", stiffness: 120, damping: 18 },
+              y: { type: "spring", stiffness: 120, damping: 18 },
+              opacity: { duration: 0.2 },
+              scale: { type: "spring", stiffness: 500, damping: 20 },
+            }}
+            style={{
+              position: "absolute",
+              zIndex: 20,
+              pointerEvents: "none",
+              filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))",
+            }}
+          >
+            <PointerCursor color={alpha(theme.palette.common.white, 0.9)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.div
         variants={overlayVariants}
@@ -252,7 +331,7 @@ export default function DesktopCopilotPreview() {
             {/* Typed text */}
             <Typography
               sx={{
-                fontSize: 13,
+                fontSize: { xs: 11, sm: 13 },
                 fontWeight: 400,
                 color: alpha(theme.palette.text.primary, 0.8),
                 lineHeight: 1.4,
@@ -264,43 +343,55 @@ export default function DesktopCopilotPreview() {
                 fontFamily: "inherit",
               }}
             >
-              {isSentOrLater ? "" : displayedText}
-              {phase === "typing" && (
-                <Box
-                  component={motion.span}
-                  variants={cursorVariants}
-                  animate="blink"
-                  sx={{
-                    display: "inline-block",
-                    width: "1.5px",
-                    height: "14px",
-                    backgroundColor: alpha(theme.palette.common.white, 0.6),
-                    ml: "1px",
-                    verticalAlign: "text-bottom",
-                  }}
-                />
-              )}
-              {isSentOrLater && (
+              {isSentOrLater ? (
                 <Box
                   component="span"
                   sx={{
                     color: alpha(theme.palette.text.primary, 0.25),
                     fontStyle: "italic",
-                    fontSize: 12,
+                    fontSize: { xs: 10, sm: 12 },
                   }}
                 >
                   Ask anything...
                 </Box>
+              ) : (
+                <>
+                  {displayedText}
+                  {phase === "typing" && (
+                    <Box
+                      component={motion.span}
+                      variants={textCursorVariants}
+                      animate="blink"
+                      sx={{
+                        display: "inline-block",
+                        width: "1.5px",
+                        height: "14px",
+                        backgroundColor: alpha(
+                          theme.palette.common.white,
+                          0.6
+                        ),
+                        ml: "1px",
+                        verticalAlign: "text-bottom",
+                      }}
+                    />
+                  )}
+                </>
               )}
             </Typography>
 
             {/* Send button */}
             <Box
+              ref={sendBtnRef}
               component={motion.div}
               animate={{
-                scale: phase === "send-hover" ? 0.88 : showSendActive ? 1.08 : 1,
-                backgroundColor: showSendActive
-                  ? alpha(theme.palette.common.white, 0.18)
+                scale:
+                  phase === "cursor-click"
+                    ? 0.82
+                    : sendActive
+                      ? 1.08
+                      : 1,
+                backgroundColor: sendActive
+                  ? alpha(theme.palette.common.white, 0.2)
                   : alpha(theme.palette.common.white, 0.08),
               }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -326,7 +417,7 @@ export default function DesktopCopilotPreview() {
                   d="M14.5 1.5L7 9M14.5 1.5L10 14.5L7 9M14.5 1.5L1.5 6L7 9"
                   stroke={alpha(
                     theme.palette.common.white,
-                    showSendActive ? 0.9 : 0.4
+                    sendActive ? 0.9 : 0.4
                   )}
                   strokeWidth="1.5"
                   strokeLinecap="round"
@@ -365,12 +456,7 @@ export default function DesktopCopilotPreview() {
                       damping: 25,
                     }}
                   >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                      }}
-                    >
+                    <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                       <Box
                         sx={{
                           backgroundColor: alpha(
@@ -385,7 +471,7 @@ export default function DesktopCopilotPreview() {
                       >
                         <Typography
                           sx={{
-                            fontSize: 12,
+                            fontSize: { xs: 10, sm: 12 },
                             color: alpha(theme.palette.text.primary, 0.85),
                             lineHeight: 1.4,
                             fontFamily: "inherit",
@@ -406,12 +492,7 @@ export default function DesktopCopilotPreview() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, delay: 0.1 }}
                     >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
+                      <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
                         <Box
                           sx={{
                             backgroundColor: alpha(
