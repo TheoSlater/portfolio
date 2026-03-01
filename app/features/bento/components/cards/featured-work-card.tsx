@@ -1,6 +1,5 @@
 import type { SxProps, Theme } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { alpha } from "@mui/material/styles";
 import { AutoAwesome } from "@mui/icons-material";
 import { BentoCard } from "../../ui/bento-card";
 import CardLabelWithIcon from "./card-label-with-icon";
@@ -42,7 +41,8 @@ export default function FeaturedWorkCard({
       <Typography
         sx={{
           fontSize: 12,
-          color: (t) => alpha(t.palette.text.primary, 0.45),
+          color: "text.secondary",
+          opacity: 0.65,
           lineHeight: 1.4,
           mt: -0.25,
           mb: 0.5,
