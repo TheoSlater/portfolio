@@ -1,31 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import {
-  motion,
-  AnimatePresence,
-  type Variants,
-} from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 const PROMPTS = [
-  "Summarize my last meeting notes",
+  "Summarize my last meeting",
   "Draft a reply to this email",
-  "What's on my calendar today?",
   "Explain this error message",
 ];
 
-const RESPONSES = [
-  "3 action items identified from standup...",
-  "Sure, here's a polite follow-up draft...",
-  "2 meetings scheduled this afternoon...",
-  "The null reference occurs on line 42...",
-];
+type Phase =
+  | "idle"
+  | "typing"
+  | "send-hover"
+  | "sent"
+  | "thinking"
+  | "responding"
+  | "done";
 
 const overlayVariants: Variants = {
-  hidden: { opacity: 0, y: 20, scale: 0.96 },
+  hidden: { opacity: 0, y: 16, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
@@ -58,21 +55,28 @@ const dotVariants: Variants = {
   }),
 };
 
+/* Skeleton line widths for the AI "response" */
+const SKELETON_LINES = ["85%", "100%", "70%", "90%", "50%"];
+
 export default function DesktopCopilotPreview() {
   const theme = useTheme();
   const [mounted, setMounted] = useState(false);
   const [promptIndex, setPromptIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const [phase, setPhase] = useState<"idle" | "thinking" | "responding" | "done">("idle");
-  const [responseText, setResponseText] = useState("");
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [sendHovered, setSendHovered] = useState(false);
 
-  // Only start animations after client mount to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Type out the prompt
+  const resetCycle = useCallback(() => {
+    setDisplayedText("");
+    setPhase("idle");
+    setSendHovered(false);
+  }, []);
+
+  /* Phase 1: Type out the prompt */
   useEffect(() => {
     if (!mounted) return;
 
@@ -80,70 +84,76 @@ export default function DesktopCopilotPreview() {
     let charIndex = 0;
     let timeout: ReturnType<typeof setTimeout>;
 
-    setDisplayedText("");
-    setIsTyping(true);
-    setPhase("idle");
-    setResponseText("");
+    resetCycle();
 
     const typeChar = () => {
       if (charIndex < currentPrompt.length) {
         setDisplayedText(currentPrompt.slice(0, charIndex + 1));
         charIndex++;
-        timeout = setTimeout(typeChar, 65);
+        timeout = setTimeout(typeChar, 60);
       } else {
-        setIsTyping(false);
-        timeout = setTimeout(() => setPhase("thinking"), 400);
+        // Brief pause then hover send button
+        timeout = setTimeout(() => {
+          setSendHovered(true);
+          setPhase("send-hover");
+        }, 500);
       }
     };
 
-    timeout = setTimeout(typeChar, 800);
+    timeout = setTimeout(() => {
+      setPhase("typing");
+      typeChar();
+    }, 700);
 
     return () => clearTimeout(timeout);
-  }, [promptIndex, mounted]);
+  }, [promptIndex, mounted, resetCycle]);
 
-  // Thinking phase -> then type out the response
+  /* Phase 2: Send hover -> press send */
   useEffect(() => {
-    if (phase !== "thinking") return;
-    const timeout = setTimeout(() => setPhase("responding"), 1200);
+    if (phase !== "send-hover") return;
+    const timeout = setTimeout(() => setPhase("sent"), 450);
     return () => clearTimeout(timeout);
   }, [phase]);
 
-  // Type out the response text
+  /* Phase 3: Sent -> thinking */
+  useEffect(() => {
+    if (phase !== "sent") return;
+    const timeout = setTimeout(() => setPhase("thinking"), 300);
+    return () => clearTimeout(timeout);
+  }, [phase]);
+
+  /* Phase 4: Thinking -> responding */
+  useEffect(() => {
+    if (phase !== "thinking") return;
+    const timeout = setTimeout(() => setPhase("responding"), 1400);
+    return () => clearTimeout(timeout);
+  }, [phase]);
+
+  /* Phase 5: Responding -> done */
   useEffect(() => {
     if (phase !== "responding") return;
-
-    const currentResponse = RESPONSES[promptIndex];
-    let charIndex = 0;
-    let timeout: ReturnType<typeof setTimeout>;
-
-    setResponseText("");
-
-    const typeChar = () => {
-      if (charIndex < currentResponse.length) {
-        setResponseText(currentResponse.slice(0, charIndex + 1));
-        charIndex++;
-        timeout = setTimeout(typeChar, 35);
-      } else {
-        setPhase("done");
-      }
-    };
-
-    timeout = setTimeout(typeChar, 100);
+    const timeout = setTimeout(() => setPhase("done"), 1800);
     return () => clearTimeout(timeout);
-  }, [phase, promptIndex]);
+  }, [phase]);
 
-  // After done, wait then cycle to next prompt
+  /* Phase 6: Done -> next prompt */
   useEffect(() => {
     if (phase !== "done") return;
     const timeout = setTimeout(() => {
       setPromptIndex((prev) => (prev + 1) % PROMPTS.length);
-    }, 1800);
+    }, 2000);
     return () => clearTimeout(timeout);
   }, [phase]);
 
   const inputBg = alpha(theme.palette.common.white, 0.06);
   const inputBorder = alpha(theme.palette.common.white, 0.1);
-  const subtleText = alpha(theme.palette.text.primary, 0.4);
+  const subtleText = alpha(theme.palette.text.primary, 0.35);
+  const isSentOrLater =
+    phase === "sent" ||
+    phase === "thinking" ||
+    phase === "responding" ||
+    phase === "done";
+  const showSendActive = sendHovered || phase === "send-hover";
 
   return (
     <Box
@@ -159,7 +169,7 @@ export default function DesktopCopilotPreview() {
         overflow: "hidden",
       }}
     >
-      {/* Subtle glow behind the overlay */}
+      {/* Subtle glow */}
       <Box
         sx={{
           position: "absolute",
@@ -254,8 +264,8 @@ export default function DesktopCopilotPreview() {
                 fontFamily: "inherit",
               }}
             >
-              {displayedText}
-              {isTyping && (
+              {isSentOrLater ? "" : displayedText}
+              {phase === "typing" && (
                 <Box
                   component={motion.span}
                   variants={cursorVariants}
@@ -270,12 +280,65 @@ export default function DesktopCopilotPreview() {
                   }}
                 />
               )}
+              {isSentOrLater && (
+                <Box
+                  component="span"
+                  sx={{
+                    color: alpha(theme.palette.text.primary, 0.25),
+                    fontStyle: "italic",
+                    fontSize: 12,
+                  }}
+                >
+                  Ask anything...
+                </Box>
+              )}
             </Typography>
+
+            {/* Send button */}
+            <Box
+              component={motion.div}
+              animate={{
+                scale: phase === "send-hover" ? 0.88 : showSendActive ? 1.08 : 1,
+                backgroundColor: showSendActive
+                  ? alpha(theme.palette.common.white, 0.18)
+                  : alpha(theme.palette.common.white, 0.08),
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              sx={{
+                flexShrink: 0,
+                width: 26,
+                height: 26,
+                borderRadius: "8px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "default",
+              }}
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.5 1.5L7 9M14.5 1.5L10 14.5L7 9M14.5 1.5L1.5 6L7 9"
+                  stroke={alpha(
+                    theme.palette.common.white,
+                    showSendActive ? 0.9 : 0.4
+                  )}
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Box>
           </Box>
 
-          {/* Response area */}
+          {/* Chat area: user bubble + AI response */}
           <AnimatePresence mode="wait">
-            {(phase === "thinking" || phase === "responding" || phase === "done") && (
+            {isSentOrLater && (
               <motion.div
                 key={promptIndex}
                 initial={{ opacity: 0, height: 0 }}
@@ -289,60 +352,150 @@ export default function DesktopCopilotPreview() {
                     pt: 1,
                     display: "flex",
                     flexDirection: "column",
-                    gap: 0.75,
+                    gap: 1,
                   }}
                 >
-                  {/* Thinking dots - visible during thinking phase */}
-                  {phase === "thinking" && (
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
-                      {[0, 1, 2].map((i) => (
-                        <Box
-                          key={i}
-                          component={motion.div}
-                          custom={i}
-                          variants={dotVariants}
-                          animate="pulse"
-                          sx={{
-                            width: 4,
-                            height: 4,
-                            borderRadius: "50%",
-                            backgroundColor: alpha(
-                              theme.palette.common.white,
-                              0.5
-                            ),
-                          }}
-                        />
-                      ))}
-                    </Box>
-                  )}
-
-                  {/* Typed response - visible during responding/done phase */}
-                  {(phase === "responding" || phase === "done") && (
-                    <Typography
+                  {/* User message bubble */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 25,
+                    }}
+                  >
+                    <Box
                       sx={{
-                        fontSize: 12,
-                        color: alpha(theme.palette.text.primary, 0.6),
-                        lineHeight: 1.5,
-                        fontFamily: "inherit",
+                        display: "flex",
+                        justifyContent: "flex-end",
                       }}
                     >
-                      {responseText}
-                      {phase === "responding" && (
-                        <Box
-                          component={motion.span}
-                          variants={cursorVariants}
-                          animate="blink"
+                      <Box
+                        sx={{
+                          backgroundColor: alpha(
+                            theme.palette.common.white,
+                            0.1
+                          ),
+                          borderRadius: "10px 10px 2px 10px",
+                          px: 1.5,
+                          py: 0.75,
+                          maxWidth: "85%",
+                        }}
+                      >
+                        <Typography
                           sx={{
-                            display: "inline-block",
-                            width: "1.5px",
-                            height: "12px",
-                            backgroundColor: alpha(theme.palette.common.white, 0.4),
-                            ml: "1px",
-                            verticalAlign: "text-bottom",
+                            fontSize: 12,
+                            color: alpha(theme.palette.text.primary, 0.85),
+                            lineHeight: 1.4,
+                            fontFamily: "inherit",
                           }}
-                        />
-                      )}
-                    </Typography>
+                        >
+                          {PROMPTS[promptIndex]}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </motion.div>
+
+                  {/* AI response area */}
+                  {(phase === "thinking" ||
+                    phase === "responding" ||
+                    phase === "done") && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            backgroundColor: alpha(
+                              theme.palette.common.white,
+                              0.04
+                            ),
+                            border: `1px solid ${alpha(theme.palette.common.white, 0.06)}`,
+                            borderRadius: "10px 10px 10px 2px",
+                            px: 1.5,
+                            py: 1,
+                            maxWidth: "90%",
+                            width: "90%",
+                          }}
+                        >
+                          {/* Thinking dots */}
+                          {phase === "thinking" && (
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 0.75,
+                                py: 0.25,
+                              }}
+                            >
+                              {[0, 1, 2].map((i) => (
+                                <Box
+                                  key={i}
+                                  component={motion.div}
+                                  custom={i}
+                                  variants={dotVariants}
+                                  animate="pulse"
+                                  sx={{
+                                    width: 4,
+                                    height: 4,
+                                    borderRadius: "50%",
+                                    backgroundColor: alpha(
+                                      theme.palette.common.white,
+                                      0.5
+                                    ),
+                                  }}
+                                />
+                              ))}
+                            </Box>
+                          )}
+
+                          {/* Skeleton lines */}
+                          {(phase === "responding" || phase === "done") && (
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 0.75,
+                              }}
+                            >
+                              {SKELETON_LINES.map((width, i) => (
+                                <motion.div
+                                  key={i}
+                                  initial={{ opacity: 0, scaleX: 0 }}
+                                  animate={{ opacity: 1, scaleX: 1 }}
+                                  transition={{
+                                    duration: 0.35,
+                                    delay: i * 0.12,
+                                    ease: "easeOut",
+                                  }}
+                                  style={{ originX: 0 }}
+                                >
+                                  <Box
+                                    sx={{
+                                      height: 6,
+                                      width,
+                                      borderRadius: "3px",
+                                      backgroundColor: alpha(
+                                        theme.palette.common.white,
+                                        0.08
+                                      ),
+                                    }}
+                                  />
+                                </motion.div>
+                              ))}
+                            </Box>
+                          )}
+                        </Box>
+                      </Box>
+                    </motion.div>
                   )}
                 </Box>
               </motion.div>
@@ -350,7 +503,7 @@ export default function DesktopCopilotPreview() {
           </AnimatePresence>
         </Box>
 
-        {/* Hotkey hint below the overlay */}
+        {/* Hotkey hint */}
         <Box
           sx={{
             display: "flex",
