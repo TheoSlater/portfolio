@@ -1,4 +1,6 @@
 import type { SxProps, Theme } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { alpha } from "@mui/material/styles";
 import { AutoAwesome } from "@mui/icons-material";
 import { BentoCard } from "../../ui/bento-card";
 import CardLabelWithIcon from "./card-label-with-icon";
@@ -37,6 +39,18 @@ export default function FeaturedWorkCard({
       >
         Desktop Copilot
       </CardLabelWithIcon>
+      <Typography
+        sx={{
+          fontSize: 12,
+          color: (t) => alpha(t.palette.text.primary, 0.45),
+          lineHeight: 1.4,
+          mt: -0.25,
+          mb: 0.5,
+          px: 0.5,
+        }}
+      >
+        AI overlay for Windows & macOS
+      </Typography>
       <DesktopCopilotPreview />
     </BentoCard>
   );

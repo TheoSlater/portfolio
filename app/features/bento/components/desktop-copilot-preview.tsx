@@ -17,6 +17,13 @@ const PROMPTS = [
   "Explain this error message",
 ];
 
+const RESPONSES = [
+  "3 action items identified from standup...",
+  "Sure, here's a polite follow-up draft...",
+  "2 meetings scheduled this afternoon...",
+  "The null reference occurs on line 42...",
+];
+
 const overlayVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.96 },
   visible: {
@@ -57,13 +64,15 @@ export default function DesktopCopilotPreview() {
   const [promptIndex, setPromptIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [showResponse, setShowResponse] = useState(false);
+  const [phase, setPhase] = useState<"idle" | "thinking" | "responding" | "done">("idle");
+  const [responseText, setResponseText] = useState("");
 
   // Only start animations after client mount to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Type out the prompt
   useEffect(() => {
     if (!mounted) return;
 
@@ -73,7 +82,8 @@ export default function DesktopCopilotPreview() {
 
     setDisplayedText("");
     setIsTyping(true);
-    setShowResponse(false);
+    setPhase("idle");
+    setResponseText("");
 
     const typeChar = () => {
       if (charIndex < currentPrompt.length) {
@@ -82,7 +92,7 @@ export default function DesktopCopilotPreview() {
         timeout = setTimeout(typeChar, 65);
       } else {
         setIsTyping(false);
-        timeout = setTimeout(() => setShowResponse(true), 600);
+        timeout = setTimeout(() => setPhase("thinking"), 400);
       }
     };
 
@@ -91,13 +101,45 @@ export default function DesktopCopilotPreview() {
     return () => clearTimeout(timeout);
   }, [promptIndex, mounted]);
 
+  // Thinking phase -> then type out the response
   useEffect(() => {
-    if (!showResponse) return;
+    if (phase !== "thinking") return;
+    const timeout = setTimeout(() => setPhase("responding"), 1200);
+    return () => clearTimeout(timeout);
+  }, [phase]);
+
+  // Type out the response text
+  useEffect(() => {
+    if (phase !== "responding") return;
+
+    const currentResponse = RESPONSES[promptIndex];
+    let charIndex = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    setResponseText("");
+
+    const typeChar = () => {
+      if (charIndex < currentResponse.length) {
+        setResponseText(currentResponse.slice(0, charIndex + 1));
+        charIndex++;
+        timeout = setTimeout(typeChar, 35);
+      } else {
+        setPhase("done");
+      }
+    };
+
+    timeout = setTimeout(typeChar, 100);
+    return () => clearTimeout(timeout);
+  }, [phase, promptIndex]);
+
+  // After done, wait then cycle to next prompt
+  useEffect(() => {
+    if (phase !== "done") return;
     const timeout = setTimeout(() => {
       setPromptIndex((prev) => (prev + 1) % PROMPTS.length);
-    }, 2200);
+    }, 1800);
     return () => clearTimeout(timeout);
-  }, [showResponse]);
+  }, [phase]);
 
   const inputBg = alpha(theme.palette.common.white, 0.06);
   const inputBorder = alpha(theme.palette.common.white, 0.1);
@@ -233,7 +275,7 @@ export default function DesktopCopilotPreview() {
 
           {/* Response area */}
           <AnimatePresence mode="wait">
-            {showResponse && (
+            {(phase === "thinking" || phase === "responding" || phase === "done") && (
               <motion.div
                 key={promptIndex}
                 initial={{ opacity: 0, height: 0 }}
@@ -246,39 +288,62 @@ export default function DesktopCopilotPreview() {
                     borderTop: `1px solid ${alpha(theme.palette.common.white, 0.06)}`,
                     pt: 1,
                     display: "flex",
-                    alignItems: "center",
+                    flexDirection: "column",
                     gap: 0.75,
                   }}
                 >
-                  {/* Animated thinking dots */}
-                  {[0, 1, 2].map((i) => (
-                    <Box
-                      key={i}
-                      component={motion.div}
-                      custom={i}
-                      variants={dotVariants}
-                      animate="pulse"
+                  {/* Thinking dots - visible during thinking phase */}
+                  {phase === "thinking" && (
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+                      {[0, 1, 2].map((i) => (
+                        <Box
+                          key={i}
+                          component={motion.div}
+                          custom={i}
+                          variants={dotVariants}
+                          animate="pulse"
+                          sx={{
+                            width: 4,
+                            height: 4,
+                            borderRadius: "50%",
+                            backgroundColor: alpha(
+                              theme.palette.common.white,
+                              0.5
+                            ),
+                          }}
+                        />
+                      ))}
+                    </Box>
+                  )}
+
+                  {/* Typed response - visible during responding/done phase */}
+                  {(phase === "responding" || phase === "done") && (
+                    <Typography
                       sx={{
-                        width: 4,
-                        height: 4,
-                        borderRadius: "50%",
-                        backgroundColor: alpha(
-                          theme.palette.common.white,
-                          0.5
-                        ),
+                        fontSize: 12,
+                        color: alpha(theme.palette.text.primary, 0.6),
+                        lineHeight: 1.5,
+                        fontFamily: "inherit",
                       }}
-                    />
-                  ))}
-                  <Typography
-                    sx={{
-                      fontSize: 11,
-                      color: subtleText,
-                      ml: 0.5,
-                      fontStyle: "italic",
-                    }}
-                  >
-                    Thinking...
-                  </Typography>
+                    >
+                      {responseText}
+                      {phase === "responding" && (
+                        <Box
+                          component={motion.span}
+                          variants={cursorVariants}
+                          animate="blink"
+                          sx={{
+                            display: "inline-block",
+                            width: "1.5px",
+                            height: "12px",
+                            backgroundColor: alpha(theme.palette.common.white, 0.4),
+                            ml: "1px",
+                            verticalAlign: "text-bottom",
+                          }}
+                        />
+                      )}
+                    </Typography>
+                  )}
                 </Box>
               </motion.div>
             )}
