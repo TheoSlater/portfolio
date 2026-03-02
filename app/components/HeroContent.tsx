@@ -1,7 +1,9 @@
 "use client";
 
-import { Chip, IconButton, Stack, Typography } from "@mui/material";
+import { Button, Chip, IconButton, Stack, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import EmailIcon from "@mui/icons-material/Email";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion } from "framer-motion";
 import GreenPulse from "./Icons/GreenPulse";
 
@@ -33,6 +35,22 @@ const itemVariants = {
 };
 
 export function HeroContent() {
+  const scrollToNextSection = () => {
+    const projectsSection = document.getElementById("bento");
+    if (projectsSection) {
+      const viewportHeight = window.innerHeight;
+      const sectionHeight = projectsSection.offsetHeight;
+      const headerOffset = 60;
+      const centerOffset =
+        Math.max(0, (viewportHeight - sectionHeight) / 2) + headerOffset;
+      const offsetPosition =
+        projectsSection.getBoundingClientRect().top +
+        window.pageYOffset -
+        centerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    }
+  };
+
   return (
     <Stack
       spacing={4}
@@ -47,7 +65,10 @@ export function HeroContent() {
       initial="hidden"
       animate="visible"
     >
-      <motion.div variants={itemVariants} style={{ willChange: "filter, transform, opacity" }}>
+      <motion.div
+        variants={itemVariants}
+        style={{ willChange: "filter, transform, opacity" }}
+      >
         <Chip
           icon={<GreenPulse />}
           label="Available for projects"
@@ -62,14 +83,20 @@ export function HeroContent() {
         />
       </motion.div>
 
-      <motion.div variants={itemVariants} style={{ willChange: "filter, transform, opacity" }}>
+      <motion.div
+        variants={itemVariants}
+        style={{ willChange: "filter, transform, opacity" }}
+      >
         <Typography variant="h3" fontWeight={450}>
           Hi, I&apos;m Theo.
           <br />A software engineer.
         </Typography>
       </motion.div>
 
-      <motion.div variants={itemVariants} style={{ willChange: "filter, transform, opacity" }}>
+      <motion.div
+        variants={itemVariants}
+        style={{ willChange: "filter, transform, opacity" }}
+      >
         <Typography
           variant="subtitle1"
           color="text.secondary"
@@ -85,17 +112,68 @@ export function HeroContent() {
         </Typography>
       </motion.div>
 
-      <motion.div variants={itemVariants} style={{ willChange: "filter, transform, opacity" }}>
-        <IconButton
-          component="a"
-          href="https://github.com/TheoSlater"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{ width: "fit-content" }}
-          aria-label="GitHub profile"
-        >
-          <GitHubIcon />
-        </IconButton>
+      <motion.div
+        variants={itemVariants}
+        style={{ willChange: "filter, transform, opacity" }}
+      >
+        <Stack direction="row" spacing={2} alignItems="center">
+          <IconButton
+            component="a"
+            href="mailto:theoslater1@gmail.com"
+            aria-label="Email"
+            sx={(theme) => ({
+              border: `1px solid ${theme.palette.divider}`,
+              color: theme.palette.text.secondary,
+              transition: "all 0.2s ease",
+              "&:hover": {
+                color: theme.palette.primary.main,
+                borderColor: theme.palette.primary.main,
+              },
+            })}
+          >
+            <EmailIcon />
+          </IconButton>
+          <IconButton
+            component="a"
+            href="https://github.com/TheoSlater"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+            sx={(theme) => ({
+              border: `1px solid ${theme.palette.divider}`,
+              color: theme.palette.text.secondary,
+              transition: "all 0.2s ease",
+              "&:hover": {
+                color: theme.palette.primary.main,
+                borderColor: theme.palette.primary.main,
+              },
+            })}
+          >
+            <GitHubIcon />
+          </IconButton>
+          <Button
+            variant="outlined"
+            endIcon={<KeyboardArrowDownIcon />}
+            onClick={scrollToNextSection}
+            sx={(theme) => ({
+              border: `1px solid ${theme.palette.divider}`,
+              color: theme.palette.text.secondary,
+              borderRadius: "8px",
+              px: 2.5,
+              py: 1,
+              textTransform: "none",
+              fontWeight: 500,
+              transition: "all 0.2s ease",
+              "&:hover": {
+                borderColor: theme.palette.primary.main,
+                color: theme.palette.primary.main,
+                backgroundColor: "transparent",
+              },
+            })}
+          >
+            Explore more
+          </Button>
+        </Stack>
       </motion.div>
     </Stack>
   );
