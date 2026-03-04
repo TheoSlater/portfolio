@@ -5,8 +5,7 @@ import Providers from "./providers";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
 import { Geist } from "next/font/google";
-import GradualBlur from "./components/GradualBlur";
-import ConstructionDialog from "./components/ConstructionDialog";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
   title: "Theo Slater | Full-Stack Developer",
@@ -30,6 +29,10 @@ export const metadata: Metadata = {
 const geist = Geist({
   subsets: ["latin"],
 });
+
+const GradualBlur = dynamic(() => import("./components/GradualBlur"));
+
+const ConstructionDialog = dynamic(() => import("./components/ConstructionDialog"));
 
 export default function RootLayout({
   children,

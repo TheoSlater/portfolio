@@ -3,8 +3,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true,
+  experimental: {
+    optimizePackageImports: ['@mui/material', '@mui/icons-material', 'framer-motion'],
   },
 }
 
