@@ -2,8 +2,8 @@
 
 import { Box } from "@mui/material";
 import { useCallback, useState } from "react";
-import { LoadingScreen } from "./LoadingScreen";
-import { HeroSection } from "./HeroSection";
+import { LoadingScreen } from "./layout/loading-screen";
+import { HeroSection } from "./sections/hero-section";
 
 export function HomeClient() {
   const [ready, setReady] = useState(false);

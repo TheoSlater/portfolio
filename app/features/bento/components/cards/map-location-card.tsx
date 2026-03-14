@@ -1,6 +1,6 @@
 import type { SxProps, Theme } from "@mui/material";
 import { Place } from "@mui/icons-material";
-import { BentoCard } from "../../ui/bento-card";
+import { BentoCard } from "../../../../components/ui/bento-card";
 import CardLabelWithIcon from "./card-label-with-icon";
 import MapLocation from "../map-location";
 

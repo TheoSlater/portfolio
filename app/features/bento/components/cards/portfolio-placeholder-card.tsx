@@ -1,6 +1,6 @@
 import { CollectionsBookmark } from "@mui/icons-material";
 
-import { BentoCard } from "../../ui/bento-card";
+import { BentoCard } from "../../../../components/ui/bento-card";
 import CardLabelWithIcon from "./card-label-with-icon";
 
 export default function PortfolioPlaceholderCard() {

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material";
-import { BentoCard } from "./bento-card";
+import { BentoCard } from "../../../components/ui/bento-card";
 
 interface BentoLinkCardProps {
   href: string;

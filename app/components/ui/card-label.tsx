@@ -44,22 +44,15 @@ const resolveLocationStyles = (location: CardLabelLocation): SxProps<Theme> => {
   return styles;
 };
 
+import UniversalChip from "./universal-chip";
+
 export default function CardLabel({
   children,
   location = DEFAULT_LOCATION,
 }: CardLabelProps) {
   return (
     <Box sx={resolveLocationStyles(location)}>
-      <Chip
-        label={children}
-        sx={{
-          alignItems: "center",
-          ".MuiChip-label": {
-            display: "inline-flex",
-            alignItems: "center",
-          },
-        }}
-      />
+      <UniversalChip variant="outlined" label={children} />
     </Box>
   );
 }

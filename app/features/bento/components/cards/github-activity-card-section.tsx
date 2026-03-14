@@ -1,7 +1,7 @@
 import type { SxProps, Theme } from "@mui/material";
 import { GitHub } from "@mui/icons-material";
 import { Typography } from "@mui/material";
-import { BentoCard } from "../../ui/bento-card";
+import { BentoCard } from "../../../../components/ui/bento-card";
 import type { GithubContributionData } from "@/lib/types/github-types";
 import GitHubActivityCard from "../github-activity-card";
 import CardLabelWithIcon from "./card-label-with-icon";

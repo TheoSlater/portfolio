@@ -4,10 +4,11 @@ import { Button, Chip, IconButton, Stack, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailIcon from "@mui/icons-material/Email";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { motion } from "framer-motion";
-import GreenPulse from "./Icons/GreenPulse";
+import { motion, type Variants } from "framer-motion";
+import { Foreground } from "../layout/foreground";
+import GreenPulse from "../Icons/GreenPulse";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -17,7 +18,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 14,

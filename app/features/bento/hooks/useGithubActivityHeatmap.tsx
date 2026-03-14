@@ -49,7 +49,7 @@ const createRectRenderer =
 
 export function useGithubActivityHeatmap(data: GithubContributionData) {
   const theme = useTheme();
-  const { startDate, endDate } = React.useMemo(getDateRange, []);
+  const { startDate, endDate } = React.useMemo(() => getDateRange(), []);
 
   const filledContributions = React.useMemo(() => {
     const contributions = data.contributions ?? [];

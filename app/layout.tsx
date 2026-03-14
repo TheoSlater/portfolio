@@ -30,9 +30,9 @@ const geist = Geist({
   subsets: ["latin"],
 });
 
-const GradualBlur = dynamic(() => import("./components/GradualBlur"));
+const GradualBlur = dynamic(() => import("./components/layout/gradual-blur"));
 
-const ConstructionDialog = dynamic(() => import("./components/ConstructionDialog"));
+const ConstructionDialog = dynamic(() => import("./components/layout/construction-dialog"));
 
 export default function RootLayout({
   children,

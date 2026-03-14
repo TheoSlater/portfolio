@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import type { ElementType } from "react";
-import { BentoGrid } from "../ui/bento-grid";
+import { BentoGrid } from "../../../components/ui/bento-grid";
 
 import { getGithubContributions } from "@/app/features/bento/server/github-contributions";
 import TypingSpeedCard from "./typing-speed-card";

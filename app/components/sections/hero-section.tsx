@@ -1,7 +1,7 @@
-import { Background } from "./Background";
-import DarkVeil from "./DarkVeil";
-import { Foreground } from "./Foreground";
-import { HeroContent } from "./HeroContent";
+import { Background } from "../layout/background";
+import DarkVeil from "../layout/dark-veil";
+import { Foreground } from "../layout/foreground";
+import { HeroContent } from "./hero-content";
 
 type HeroSectionProps = {
   onReady: () => void;

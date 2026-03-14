@@ -9,8 +9,8 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import TranslateIcon from "@mui/icons-material/Translate";
 import Link from "next/link";
-import CardLabel from "../ui/card-label";
-import { BentoCard } from "../ui/bento-card";
+import CardLabel from "../../../components/ui/card-label";
+import { BentoCard } from "../../../components/ui/bento-card";
 import { useTypingSpeed } from "@/app/features/bento/hooks/useTypingSpeed";
 
 const MONKEYTYPE_PROFILE_URL = "https://monkeytype.com/profile/TheoSlater";

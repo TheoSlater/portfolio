@@ -14,16 +14,19 @@ const HomeClient = dynamic(
 );
 
 const UnderConstruction = dynamic(() =>
-  import("./components/UnderConstruction").then((mod) => ({
+  import("./components/layout/under-construction").then((mod) => ({
     default: mod.UnderConstruction,
   })),
 );
+
+import ProjectsSection from "./features/projects/components/ProjectsSection";
 
 export default function Home() {
   return (
     <>
       <HomeClient />
       <GridSection component="section" />
+      <ProjectsSection />
       <UnderConstruction />
     </>
   );

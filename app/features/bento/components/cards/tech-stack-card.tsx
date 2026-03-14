@@ -1,6 +1,6 @@
 import type { SxProps, Theme } from "@mui/material";
 import { Code } from "@mui/icons-material";
-import { BentoCard } from "../../ui/bento-card";
+import { BentoCard } from "../../../../components/ui/bento-card";
 import CardLabelWithIcon from "./card-label-with-icon";
 import TechStackCarousel from "../techstack-carousel";
 

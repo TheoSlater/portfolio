@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import type { ReactNode } from "react";
-import CardLabel, { type CardLabelLocation } from "../../ui/card-label";
+import CardLabel, { type CardLabelLocation } from "../../../../components/ui/card-label";
 
 interface CardLabelWithIconProps {
   icon: ReactNode;

@@ -1,7 +1,7 @@
 import type { SxProps, Theme } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { WorkOutline } from "@mui/icons-material";
-import { BentoCard } from "../../ui/bento-card";
+import { BentoCard } from "../../../../components/ui/bento-card";
 import CardLabelWithIcon from "./card-label-with-icon";
 import DesktopCopilotPreview from "../desktop-copilot-preview";
 
