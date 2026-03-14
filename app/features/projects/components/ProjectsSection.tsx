@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Container, Typography, Button } from "@mui/material";
-import WorkIcon from "@mui/icons-material/Work";
+import { WorkOutline } from "@mui/icons-material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ProjectCard from "./ProjectCard";
 import UniversalChip from "../../../components/ui/universal-chip";
@@ -43,9 +43,13 @@ export default function ProjectsSection() {
                   label={
                     <Box
                       component="span"
-                      sx={{ display: "inline-flex", alignItems: "center", gap: 1 }}
+                      sx={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 1,
+                      }}
                     >
-                      <WorkIcon fontSize="small" sx={{ fontSize: 16 }} />
+                      <WorkOutline fontSize="small" sx={{ fontSize: 16 }} />
                       Projects
                     </Box>
                   }
@@ -77,8 +81,9 @@ export default function ProjectsSection() {
                   maxWidth: "600px",
                 }}
               >
-                Each project marks a step forward, showcasing my growth and journey as a developer.
-                Explore how I&apos;ve tackled challenges and built solutions along the way.
+                Each project marks a step forward, showcasing my growth and
+                journey as a developer. Explore how I&apos;ve tackled challenges
+                and built solutions along the way.
               </Typography>
             </Box>
 
