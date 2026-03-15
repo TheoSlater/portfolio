@@ -14,7 +14,6 @@ export function Background({ children }: Props) {
       sx={{
         position: "relative",
         minHeight: "100vh",
-        overflow: "hidden",
 
         display: "flex",
         alignItems: "center",

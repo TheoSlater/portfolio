@@ -7,6 +7,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion, type Variants } from "framer-motion";
 import { Foreground } from "../layout/foreground";
 import GreenPulse from "../Icons/GreenPulse";
+import Magnetic from "../ui/magnetic";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -88,7 +89,15 @@ export function HeroContent() {
         variants={itemVariants}
         style={{ willChange: "filter, transform, opacity" }}
       >
-        <Typography variant="h3" fontWeight={450}>
+        <Typography
+          variant="h3"
+          fontWeight={450}
+          sx={{
+            letterSpacing: "-0.03em",
+            lineHeight: 1.1,
+            color: "text.primary",
+          }}
+        >
           Hi, I&apos;m Theo.
           <br />A software engineer.
         </Typography>
@@ -106,6 +115,8 @@ export function HeroContent() {
               xs: "100%",
               sm: "32rem",
             },
+            lineHeight: 1.6,
+            fontSize: "1.05rem",
           }}
         >
           Mainly working with modern languages, I focus on learning,
@@ -118,62 +129,68 @@ export function HeroContent() {
         style={{ willChange: "filter, transform, opacity" }}
       >
         <Stack direction="row" spacing={2} alignItems="center">
-          <IconButton
-            component="a"
-            href="mailto:theoslater1@gmail.com"
-            aria-label="Email"
-            sx={(theme) => ({
-              border: `1px solid ${theme.palette.divider}`,
-              color: theme.palette.text.secondary,
-              transition: "all 0.2s ease",
-              "&:hover": {
-                color: theme.palette.primary.main,
-                borderColor: theme.palette.primary.main,
-              },
-            })}
-          >
-            <EmailIcon />
-          </IconButton>
-          <IconButton
-            component="a"
-            href="https://github.com/TheoSlater"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub profile"
-            sx={(theme) => ({
-              border: `1px solid ${theme.palette.divider}`,
-              color: theme.palette.text.secondary,
-              transition: "all 0.2s ease",
-              "&:hover": {
-                color: theme.palette.primary.main,
-                borderColor: theme.palette.primary.main,
-              },
-            })}
-          >
-            <GitHubIcon />
-          </IconButton>
-          <Button
-            variant="outlined"
-            endIcon={<KeyboardArrowDownIcon />}
-            onClick={scrollToNextSection}
-            sx={(theme) => ({
-              border: `1px solid ${theme.palette.divider}`,
-              color: theme.palette.text.secondary,
-              borderRadius: "8px",
-              px: 2.5,
-              py: 1,
-              textTransform: "none",
-              fontWeight: 500,
-              transition: "all 0.2s ease",
-              "&:hover": {
-                borderColor: theme.palette.primary.main,
-                color: theme.palette.primary.main,
-                backgroundColor: "transparent",
-              },
-            })}
-          >
-            Explore more
-          </Button>
+          <Magnetic>
+            <IconButton
+              component="a"
+              href="mailto:theoslater1@gmail.com"
+              aria-label="Email"
+              sx={(theme) => ({
+                border: `1px solid ${theme.palette.divider}`,
+                color: theme.palette.text.secondary,
+                transition: "all 0.2s ease",
+                "&:hover": {
+                  color: theme.palette.primary.main,
+                  borderColor: theme.palette.primary.main,
+                },
+              })}
+            >
+              <EmailIcon />
+            </IconButton>
+          </Magnetic>
+          <Magnetic>
+            <IconButton
+              component="a"
+              href="https://github.com/TheoSlater"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              sx={(theme) => ({
+                border: `1px solid ${theme.palette.divider}`,
+                color: theme.palette.text.secondary,
+                transition: "all 0.2s ease",
+                "&:hover": {
+                  color: theme.palette.primary.main,
+                  borderColor: theme.palette.primary.main,
+                },
+              })}
+            >
+              <GitHubIcon />
+            </IconButton>
+          </Magnetic>
+          <Magnetic intensity={0.2}>
+            <Button
+              variant="outlined"
+              endIcon={<KeyboardArrowDownIcon />}
+              onClick={scrollToNextSection}
+              sx={(theme) => ({
+                border: `1px solid ${theme.palette.divider}`,
+                color: theme.palette.text.secondary,
+                borderRadius: "8px",
+                px: 2.5,
+                py: 1,
+                textTransform: "none",
+                fontWeight: 500,
+                transition: "all 0.2s ease",
+                "&:hover": {
+                  borderColor: theme.palette.primary.main,
+                  color: theme.palette.primary.main,
+                  backgroundColor: "transparent",
+                },
+              })}
+            >
+              Explore more
+            </Button>
+          </Magnetic>
         </Stack>
       </motion.div>
     </Stack>

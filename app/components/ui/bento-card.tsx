@@ -3,6 +3,7 @@
 import { Box, useTheme } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material";
 import type { ElementType, ReactNode } from "react";
+import { motion } from "framer-motion";
 
 const toCssSize = (value?: number | string) =>
   typeof value === "number" ? `${value}px` : value;
@@ -53,12 +54,13 @@ export function BentoCard({
   const cardMinHeight = toCssSize(minHeight) ?? DEFAULT_MIN_HEIGHT;
   const cardPadding = toCssSize(padding) ?? "24px";
   const sizeToSpan = { xs: 1, sm: 1, md: 2, lg: 3, xl: 4 } as const;
-  const resolvedWidthSize = widthSize ?? size;
-  const resolvedHeightSize = heightSize ?? size;
+  const resolvedWidthSize = widthSize ?? (size as any);
+  const resolvedHeightSize = heightSize ?? (size as any);
   const resolvedColSpan =
-    colSpan ?? (resolvedWidthSize ? sizeToSpan[resolvedWidthSize] : 1);
+    colSpan ?? (resolvedWidthSize ? (sizeToSpan as any)[resolvedWidthSize] : 1);
   const resolvedRowSpan =
-    rowSpan ?? (resolvedHeightSize ? sizeToSpan[resolvedHeightSize] : 1);
+    rowSpan ?? (resolvedHeightSize ? (sizeToSpan as any)[resolvedHeightSize] : 1);
+  
   const componentProps = component
     ? { component, href, target, rel, "aria-label": ariaLabel }
     : {};
@@ -74,6 +76,7 @@ export function BentoCard({
     display: "flex",
     flexDirection: "column",
     position: "relative",
+    overflow: "hidden", 
   };
 
   if (width !== undefined) {
@@ -88,7 +91,10 @@ export function BentoCard({
 
   return (
     <Box
-      {...componentProps}
+      {...(componentProps as any)}
+      component={motion.div}
+      whileHover={{ y: -4, scale: 1.01 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
       sx={[
         cardStyles,
         {

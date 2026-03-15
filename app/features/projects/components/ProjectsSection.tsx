@@ -9,6 +9,7 @@ import UniversalChip from "../../../components/ui/universal-chip";
 const projectsData = [
   {
     year: "2026",
+    slug: "desktop-copilot",
     title: "Desktop Copilot",
     description:
       "An always-on-top AI overlay for your desktop. Built with Tauri, routing all AI requests locally via Ollama.",
@@ -22,6 +23,8 @@ export default function ProjectsSection() {
       component="section"
       sx={{
         py: { xs: 10, md: 16 },
+        position: "relative",
+        zIndex: 1,
         // Use standard background matching the app's default paper/bg
       }}
     >
@@ -127,6 +130,7 @@ export default function ProjectsSection() {
                 <Box style={{ height: "100%" }}>
                   <ProjectCard
                     year={project.year || "2024"}
+                    slug={project.slug}
                     title={project.title}
                     description={project.description}
                     image={project.image}

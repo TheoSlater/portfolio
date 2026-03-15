@@ -19,7 +19,7 @@ export default async function GridSection({
   const contributions = await getGithubContributions();
 
   return (
-    <Container component={component} id="bento" maxWidth="lg">
+    <Container component={component} id="bento" maxWidth="lg" sx={{ position: "relative", zIndex: 10 }}>
       <BentoGrid
         columns={12}
         gap={16}

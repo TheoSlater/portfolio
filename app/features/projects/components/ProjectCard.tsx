@@ -14,6 +14,7 @@ interface ProjectCardProps {
   year: string;
   title: string;
   description: string;
+  slug?: string;
   url?: string;
   image?: string;
 }
@@ -22,9 +23,11 @@ export default function ProjectCard({
   year,
   title,
   description,
-  url = "#",
+  slug,
+  url,
   image,
 }: ProjectCardProps) {
+  const href = slug ? `/projects/${slug}` : (url ?? "#");
   const theme = useTheme();
 
   return (
@@ -38,6 +41,10 @@ export default function ProjectCard({
           boxShadow: "none",
           backgroundImage: "none",
           borderRadius: 2,
+          transition: "transform 0.3s ease-in-out",
+          "&:hover": {
+            transform: "translateY(-4px)",
+          },
           "& .MuiCardContent-root": {
             padding: 0,
             paddingTop: 3,
@@ -49,7 +56,7 @@ export default function ProjectCard({
           sx={{
             width: "100%",
             aspectRatio: "16/9",
-            bgcolor: "#1a1f26", // Dark gray placeholder color
+            background: "linear-gradient(135deg, #1a1f26 0%, #0d1117 100%)",
             borderRadius: 2,
             display: "flex",
             alignItems: "center",
@@ -57,6 +64,9 @@ export default function ProjectCard({
             overflow: "hidden",
             position: "relative",
             border: `1px solid ${theme.palette.divider}`,
+            "&:hover img": {
+              transform: "scale(1.05)",
+            },
           }}
         >
           {image ? (
@@ -68,6 +78,7 @@ export default function ProjectCard({
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                transition: "transform 0.5s ease",
               }}
             />
           ) : (
@@ -105,6 +116,7 @@ export default function ProjectCard({
               mb: 1.5,
               lineHeight: 1.3,
               fontSize: { xs: "1rem", sm: "1.1rem" },
+              letterSpacing: "-0.01em",
             }}
           >
             {title}
@@ -123,7 +135,7 @@ export default function ProjectCard({
           </Typography>
 
           <Link
-            href={url}
+            href={href}
             underline="none"
             sx={{
               display: "inline-flex",
@@ -133,6 +145,10 @@ export default function ProjectCard({
               fontSize: "0.875rem",
               gap: 1,
               width: "fit-content",
+              transition: "opacity 0.2s ease",
+              "&:hover": {
+                opacity: 0.8,
+              },
               "&:hover .arrow-icon": {
                 transform: "translateX(4px)",
               },

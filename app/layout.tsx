@@ -21,6 +21,20 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Theo Slater" }],
   creator: "Theo Slater",
+  openGraph: {
+    title: "Theo Slater | Full-Stack Developer",
+    description: "15-year-old Full-Stack Developer & Founder of Monolabs.",
+    url: "https://theoslater.is-a.dev",
+    siteName: "Theo Slater",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Theo Slater | Full-Stack Developer",
+    description: "15-year-old Full-Stack Developer & Founder of Monolabs.",
+    creator: "@theoslater",
+  },
   other: {
     "google-site-verification": "google987579226cc311be.html",
   },

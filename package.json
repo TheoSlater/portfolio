@@ -12,6 +12,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/mdx": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@mui/icons-material": "^7.3.6",
     "@mui/material": "^7.3.6",
@@ -28,6 +29,8 @@
     "react": "19.0.0-rc.1",
     "react-dom": "19.0.0-rc.1",
     "react-leaflet": "5.0.0-rc.2",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
     "simple-icons": "^16.6.1"
   },
   "devDependencies": {
