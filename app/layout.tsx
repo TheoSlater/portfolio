@@ -47,6 +47,7 @@ const geist = Geist({
 const GradualBlur = dynamic(() => import("./components/layout/gradual-blur"));
 
 const ConstructionDialog = dynamic(() => import("./components/layout/construction-dialog"));
+const Footer = dynamic(() => import("./components/layout/footer"));
 
 export default function RootLayout({
   children,
@@ -68,7 +69,10 @@ export default function RootLayout({
           zIndex={2000}
         />
         <ConstructionDialog />
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Footer />
+        </Providers>
         <Analytics />
       </body>
     </html>
