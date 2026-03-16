@@ -27,7 +27,7 @@ export default function Home() {
       <HomeClient />
       <GridSection component="section" />
       <ProjectsSection />
-      <UnderConstruction />
+      {/*<UnderConstruction />*/}
     </>
   );
 }
