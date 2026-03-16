@@ -1,59 +1,56 @@
 ---
 title: "Desktop Copilot"
 year: "2026"
-description: "An always-on-top AI overlay for your desktop. Built with Tauri, routing all AI requests locally via Ollama."
+description: "An always-on-top AI overlay for your desktop. Built with Tauri, powered locally by Ollama."
 image: "/desktop-copilot-mockup.png"
 slug: "desktop-copilot"
 ---
 
 ## Overview
 
-Desktop Copilot is an always-on-top AI assistant overlay for your desktop. The goal was to create a distraction-free, keyboard-driven AI interface that lives at your fingertips — without ever leaving your current application.
+Desktop Copilot is an always-on-top AI assistant that lives on your desktop, not inside a browser tab, not locked to a specific app. Hit a shortcut, ask something, get an answer, keep working.
 
-It routes all AI requests locally via [Ollama](https://ollama.ai), meaning your data stays on your machine. No cloud, no subscriptions, no latency from remote calls.
+All inference runs locally through [Ollama](https://ollama.ai). No cloud, no subscription, no data leaving your machine.
 
-## Goals and Motivation
+## Why I Built This
 
-I wanted a tool that felt native to my workflow. Existing AI assistants either require switching context (web browser) or are locked to a specific application. Desktop Copilot aims to be OS-level and universal.
+I kept running into the same friction: I'd want to ask a quick question, switch to a browser, lose my train of thought, and spend the next few minutes getting back to where I was. Every AI tool I tried either lived in the browser or was deeply baked into one editor.
 
-Key goals:
-- **Zero-latency**: Local inference via Ollama, no round-trips to external servers.
-- **Always-on-top**: Overlay that appears on any application with a global shortcut.
-- **Minimal UI**: A clean interface that doesn't distract from your work.
+I wanted something OS-level, something that could float above whatever I was already doing and disappear just as fast. So I built it.
 
-## Tech Stack Used
+## Tech Stack
 
 | Technology | Purpose |
 |---|---|
 | **Tauri** | Cross-platform desktop shell (Rust backend, WebView frontend) |
-| **React** | UI framework for the overlay interface |
-| **Ollama** | Local LLM inference engine |
+| **React** | Overlay UI |
+| **Ollama** | Local LLM inference |
 | **TypeScript** | End-to-end type safety |
-| **Framer Motion** | Smooth show/hide animations |
+| **Framer Motion** | Show/hide animations |
 
 ## Features
 
 ### Global Shortcut
-Summon the copilot from any application using a configurable global keyboard shortcut. The overlay appears on top of whatever you're doing and dismisses just as quickly.
+Summon the overlay from anywhere with a configurable keyboard shortcut. It appears instantly on top of whatever you're doing and dismisses just as fast.
 
-### Local AI Inference
-By routing requests to a local Ollama instance, Desktop Copilot achieves near-instant response times for smaller models while keeping all data private.
+### Fully Local
+Requests go to a local Ollama instance, no round-trips, no rate limits, no privacy tradeoffs. Smaller models respond near-instantly; larger ones are slower but still private.
 
-### Context-Aware
-The overlay can optionally capture a screenshot of your current screen to provide context to the model — useful for code review, design feedback, or answering questions about what's on your screen.
+### Screen Context
+The overlay can optionally capture a screenshot of your current screen and pass it to the model. Handy for asking questions about code on screen, getting feedback on a design, or just pointing at something and saying "what is this."
 
-## Challenges and How I Dealt with Them
+## What Was Hard
 
-The primary challenge was managing the overlay window lifecycle in Tauri. Tauri's webview windows don't natively support being "always on top" across all desktop environments, and required specific platform-level configuration for macOS, Windows, and Linux.
+Getting the always-on-top window behavior working correctly across macOS, Windows, and Linux took longer than I expected. Tauri doesn't handle this uniformly, and each platform needed its own configuration.
 
-Another tricky area was the global shortcut registration. On macOS, registering global shortcuts requires accessibility permissions, and handling the permission prompt gracefully was important for a good first-run experience.
+Global shortcut registration on macOS was another headache. It requires accessibility permissions, and the first-run experience around that prompt is easy to get wrong. Getting it to feel smooth rather than alarming took some iteration.
 
 ## Demo
 
-The demo below shows the copilot being summoned, a question being typed, and the local Ollama model (Llama 3.2) streaming a response in real time.
+The demo below shows the overlay being summoned, a question typed, and Llama 3.2 streaming a response via Ollama in real time.
 
-> *Demo GIF coming soon — stay tuned.*
+> *Demo GIF coming soon.*
 
 ## Repository
 
-The source code is available on GitHub. The project is still in active development, so expect rough edges.
+Source is on GitHub at [monolabsdev/desktop-copilot](https://github.com/monolabsdev/desktop-copilot). Still actively in development, rough edges guaranteed.

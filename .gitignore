@@ -3,3 +3,4 @@
 /.env
 /.env.local
 .claude/settings.local.json
+.claude/agents/frontend-ui-agent.md

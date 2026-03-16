@@ -1,147 +1,194 @@
-import Link from "next/link";
+"use client";
+
+import { Box, Typography, Link } from "@mui/material";
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        borderTop: "1px solid divider",
-        padding: "2rem 1.5rem",
-        marginTop: "4rem",
-        display: "flex",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
-        gap: "2rem",
-
-        marginLeft: "auto",
-        marginRight: "auto",
+    <Box
+      component="footer"
+      sx={{
+        borderTop: 1,
+        borderColor: "divider",
+        pt: 4,
+        pb: 2,
+        px: { xs: 2, sm: 3 },
+        mt: { xs: 3, md: 6 },
         zIndex: 2100,
         position: "relative",
       }}
     >
-      <div>
-        <div
-          style={{
-            fontSize: "1.1rem",
-            fontWeight: 600,
-            marginBottom: "0.25rem",
-          }}
-        >
-          Theo Slater
-        </div>
-        <div
-          style={{
-            fontSize: "0.85rem",
-            color: "#888",
-          }}
-        >
-          Amateur Full-Stack Developer
-        </div>
-      </div>
-
-      <div
-        style={{
+      <Box
+        sx={{
           display: "flex",
-          gap: "2rem",
-          flexWrap: "wrap",
-          fontSize: "0.9rem",
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: "space-between",
+          gap: { xs: 3, md: 4 },
         }}
       >
-        <div>
-          <div
-            style={{
+        {/* Left side - Name and subtitle */}
+        <Box sx={{ mb: { xs: 1, md: 0 } }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
               fontWeight: 600,
-              marginBottom: "0.5rem",
-              fontSize: "0.8rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              color: "#666",
+              fontSize: "1.1rem",
+              mb: 0.5,
             }}
           >
-            Me
-          </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}
-          >
-            <Link
-              href="/projects"
-              style={{ color: "#f5f5f9", textDecoration: "none" }}
-            >
-              Projects
-            </Link>
-            <Link
-              href="/blog"
-              style={{ color: "#f5f5f9", textDecoration: "none" }}
-            >
-              Blog
-            </Link>
-          </div>
-        </div>
-
-        <div>
-          <div
-            style={{
-              fontWeight: 600,
-              marginBottom: "0.5rem",
-              fontSize: "0.8rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              color: "#666",
+            Theo Slater
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              color: "text.secondary",
+              fontSize: "0.85rem",
             }}
           >
-            This site
-          </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}
-          >
-            <a
-              href="https://github.com/theoslater/theoslater.is-a.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#f5f5f9", textDecoration: "none" }}
+            Amateur Full-Stack Developer
+          </Typography>
+        </Box>
+
+        {/* Right side - Link columns */}
+        <Box
+          sx={{
+            display: "flex",
+            gap: { xs: 3, sm: 4, md: 5 },
+            flexWrap: "wrap",
+          }}
+        >
+          {/* Me column */}
+          <Box>
+            <Typography
+              variant="overline"
+              sx={{
+                color: "text.secondary",
+                fontSize: "0.7rem",
+                letterSpacing: "0.08em",
+                mb: 1,
+                display: "block",
+                opacity: 0.7,
+              }}
             >
-              Source code
-            </a>
-          </div>
-        </div>
+              Me
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+              <Link
+                href="/projects"
+                sx={{
+                  color: "text.primary",
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                  fontSize: "0.9rem",
+                  "&:hover": {
+                    color: "primary.main",
+                  },
+                }}
+              >
+                Projects
+              </Link>
+              <Link
+                href="/blog"
+                sx={{
+                  color: "text.primary",
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                  fontSize: "0.9rem",
+                  "&:hover": {
+                    color: "primary.main",
+                  },
+                }}
+              >
+                Blog
+              </Link>
+            </Box>
+          </Box>
 
-        <div>
-          <div
-            style={{
-              fontWeight: 600,
-              marginBottom: "0.5rem",
-              fontSize: "0.8rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              color: "#666",
-            }}
-          >
-            Elsewhere
-          </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}
-          >
-            <a
-              href="https://monkeytype.com/profile/theoslater"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#f5f5f9", textDecoration: "none" }}
+          {/* This site column */}
+          <Box>
+            <Typography
+              variant="overline"
+              sx={{
+                color: "text.secondary",
+                fontSize: "0.7rem",
+                letterSpacing: "0.08em",
+                mb: 1,
+                display: "block",
+                opacity: 0.7,
+              }}
             >
-              Monkeytype
-            </a>
-          </div>
-        </div>
-      </div>
+              This site
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+              <Link
+                href="https://github.com/theoslater/theoslater.is-a.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: "text.primary",
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                  fontSize: "0.9rem",
+                  "&:hover": {
+                    color: "primary.main",
+                  },
+                }}
+              >
+                Source code
+              </Link>
+            </Box>
+          </Box>
 
-      <div
-        style={{
-          width: "100%",
+          {/* Elsewhere column */}
+          <Box>
+            <Typography
+              variant="overline"
+              sx={{
+                color: "text.secondary",
+                fontSize: "0.7rem",
+                letterSpacing: "0.08em",
+                mb: 1,
+                display: "block",
+                opacity: 0.7,
+              }}
+            >
+              Elsewhere
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+              <Link
+                href="https://monkeytype.com/profile/theoslater"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: "text.primary",
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                  fontSize: "0.9rem",
+                  "&:hover": {
+                    color: "primary.main",
+                  },
+                }}
+              >
+                Monkeytype
+              </Link>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
+      {/* Copyright */}
+      <Typography
+        variant="caption"
+        sx={{
+          display: "block",
+          mt: 4,
+          color: "text.secondary",
+          opacity: 0.6,
           fontSize: "0.75rem",
-          color: "#555",
         }}
       >
         © Theo Slater - All rights reserved
-      </div>
-    </footer>
+      </Typography>
+    </Box>
   );
 }
