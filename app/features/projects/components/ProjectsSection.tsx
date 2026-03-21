@@ -21,11 +21,11 @@ export default function ProjectsSection() {
   return (
     <Box
       component="section"
+      id="projects"
       sx={{
         py: { xs: 10, md: 16 },
         position: "relative",
         zIndex: 1,
-        // Use standard background matching the app's default paper/bg
       }}
     >
       <Container maxWidth="lg">
@@ -93,9 +93,9 @@ export default function ProjectsSection() {
             <Button
               variant="outlined"
               endIcon={<ArrowForwardIcon />}
-              href="#" // Update link as needed
+              href="#"
               sx={{
-                borderRadius: "50px", // Fully rounded as per image
+                borderRadius: "50px",
                 px: 3,
                 py: 1,
                 borderColor: "divider",
@@ -105,7 +105,7 @@ export default function ProjectsSection() {
                 fontSize: "0.9rem",
                 "&:hover": {
                   borderColor: "text.primary",
-                  bgcolor: "rgba(255, 255, 255, 0.05)",
+                  bgcolor: "rgba(255, 255,  255, 0.05)",
                 },
               }}
             >
@@ -113,7 +113,6 @@ export default function ProjectsSection() {
             </Button>
           </Box>
 
-          {/* Grid container with explicit max-width applied to constraint the project cards, leaving empty space to the right */}
           <Box
             sx={{
               display: "grid",
@@ -125,18 +124,15 @@ export default function ProjectsSection() {
               justifyContent: "flex-start",
             }}
           >
-            {projectsData.map((project, index) => (
-              <Box key={index}>
-                <Box style={{ height: "100%" }}>
-                  <ProjectCard
-                    year={project.year || "2024"}
-                    slug={project.slug}
-                    title={project.title}
-                    description={project.description}
-                    image={project.image}
-                  />
-                </Box>
-              </Box>
+            {projectsData.map((project) => (
+              <ProjectCard
+                key={project.slug}
+                year={project.year}
+                slug={project.slug}
+                title={project.title}
+                description={project.description}
+                image={project.image}
+              />
             ))}
           </Box>
         </Box>

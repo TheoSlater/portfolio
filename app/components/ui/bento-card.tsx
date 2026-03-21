@@ -4,9 +4,7 @@ import { Box, useTheme } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material";
 import type { ElementType, ReactNode } from "react";
 import { motion } from "framer-motion";
-
-const toCssSize = (value?: number | string) =>
-  typeof value === "number" ? `${value}px` : value;
+import { toCssSize } from "@/lib/formatters";
 
 const DEFAULT_MIN_HEIGHT = "160px";
 

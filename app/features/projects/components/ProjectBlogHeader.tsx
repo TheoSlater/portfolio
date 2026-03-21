@@ -8,7 +8,6 @@ type Props = {
 export default function ProjectBlogHeader({ project }: Props) {
   return (
     <Box sx={{ mb: 6 }}>
-      {/* Year badge */}
       <Typography
         variant="overline"
         sx={{
@@ -22,7 +21,6 @@ export default function ProjectBlogHeader({ project }: Props) {
         {project.year}
       </Typography>
 
-      {/* Title */}
       <Typography
         component="h1"
         variant="h3"
@@ -37,7 +35,6 @@ export default function ProjectBlogHeader({ project }: Props) {
         {project.title}
       </Typography>
 
-      {/* Description */}
       <Typography
         variant="body1"
         sx={{
@@ -51,7 +48,6 @@ export default function ProjectBlogHeader({ project }: Props) {
         {project.description}
       </Typography>
 
-      {/* Hero image */}
       {project.image && (
         <Box
           sx={{

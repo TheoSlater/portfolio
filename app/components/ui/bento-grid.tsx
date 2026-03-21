@@ -3,9 +3,7 @@
 import { Box } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material";
 import type { ReactNode } from "react";
-
-const toCssSize = (value?: number | string) =>
-  typeof value === "number" ? `${value}px` : value;
+import { toCssSize } from "@/lib/formatters";
 
 const DEFAULT_ROW_HEIGHT = "minmax(160px, auto)";
 

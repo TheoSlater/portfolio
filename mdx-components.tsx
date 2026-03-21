@@ -1,14 +1,7 @@
 import type { MDXComponents } from 'mdx/types';
 import { Box, Typography, Divider, Link as MuiLink } from "@mui/material";
 import type { ReactNode } from "react";
-
-function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .trim();
-}
+import { slugify } from "@/lib/formatters";
 
 export const MDX_COMPONENTS: MDXComponents = {
   h1: ({ children }) => (

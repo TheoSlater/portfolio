@@ -46,7 +46,9 @@ const geist = Geist({
 
 const GradualBlur = dynamic(() => import("./components/layout/gradual-blur"));
 
-const ConstructionDialog = dynamic(() => import("./components/layout/construction-dialog"));
+const ConstructionDialog = dynamic(
+  () => import("./components/layout/construction-dialog"),
+);
 const Footer = dynamic(() => import("./components/layout/footer"));
 
 export default function RootLayout({

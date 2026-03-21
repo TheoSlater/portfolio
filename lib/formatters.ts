@@ -14,6 +14,16 @@ export const formatMonthDay = (value: Date): string =>
     day: "numeric",
   }).format(value);
 
+export const slugify = (text: string): string =>
+  text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .trim();
+
+export const toCssSize = (value?: number | string): string | undefined =>
+  typeof value === "number" ? `${value}px` : value;
+
 // const suffixes: Record<number, string> = {
 //   1: "st",
 //   2: "nd",

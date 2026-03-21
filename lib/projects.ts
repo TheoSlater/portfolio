@@ -69,19 +69,25 @@ function parseYaml(yamlBlock: string, content: string): { data: ProjectFrontmatt
 
 
 export function getAllProjects(): ProjectFrontmatter[] {
-  if (!fs.existsSync(CONTENT_DIR)) return [];
-  const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx"));
-  return files.map((file) => {
-    const raw = fs.readFileSync(path.join(CONTENT_DIR, file), "utf8");
-    const { data } = parseFrontmatter(raw);
-    return data;
-  });
+  try {
+    const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx"));
+    return files.map((file) => {
+      const raw = fs.readFileSync(path.join(CONTENT_DIR, file), "utf8");
+      const { data } = parseFrontmatter(raw);
+      return data;
+    });
+  } catch {
+    return [];
+  }
 }
 
 export function getProjectBySlug(slug: string): Project | null {
-  const filePath = path.join(CONTENT_DIR, `${slug}.mdx`);
-  if (!fs.existsSync(filePath)) return null;
-  const raw = fs.readFileSync(filePath, "utf8");
-  const { data, content } = parseFrontmatter(raw);
-  return { ...data, content };
+  try {
+    const filePath = path.join(CONTENT_DIR, `${slug}.mdx`);
+    const raw = fs.readFileSync(filePath, "utf8");
+    const { data, content } = parseFrontmatter(raw);
+    return { ...data, content };
+  } catch {
+    return null;
+  }
 }

@@ -1,16 +1,9 @@
 import { Box, Container } from "@mui/material";
 import type { ReactNode } from "react";
 import type { ProjectFrontmatter } from "@/lib/projects";
+import { slugify } from "@/lib/formatters";
 import ProjectBlogHeader from "./ProjectBlogHeader";
 import TableOfContents, { type Heading } from "./TableOfContents";
-
-function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .trim();
-}
 
 type Props = {
   project: ProjectFrontmatter & { content: string };
@@ -37,7 +30,6 @@ export default function ProjectBlogLayout({ project, children }: Props) {
       }}
     >
       <Container maxWidth="lg">
-        {/* Two-column grid — header + content share left column, ToC in right */}
         <Box
           sx={{
             display: "grid",
@@ -49,7 +41,6 @@ export default function ProjectBlogLayout({ project, children }: Props) {
             alignItems: "start",
           }}
         >
-          {/* Left column: header + body content share the same edge */}
           <Box>
             <Box sx={{ mb: 8 }}>
               <ProjectBlogHeader project={project} />
@@ -57,7 +48,6 @@ export default function ProjectBlogLayout({ project, children }: Props) {
             <Box sx={{ minWidth: 0 }}>{children}</Box>
           </Box>
 
-          {/* Right column: sticky ToC sidebar — offset to align with body text */}
           <Box sx={{ display: { xs: "none", md: "block" }, pt: { md: 12 } }}>
             <TableOfContents headings={headings} />
           </Box>

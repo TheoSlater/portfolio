@@ -10,7 +10,7 @@ export function HomeClient() {
   const handleReady = useCallback(() => setReady(true), [setReady]);
 
   return (
-    <>
+    <Box component="section" id="hi">
       {!ready && <LoadingScreen />}
       <Box
         sx={{
@@ -20,6 +20,6 @@ export function HomeClient() {
       >
         <HeroSection onReady={handleReady} />
       </Box>
-    </>
+    </Box>
   );
 }
