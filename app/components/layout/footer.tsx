@@ -25,27 +25,49 @@ export default function Footer() {
           gap: { xs: 3, md: 4 },
         }}
       >
-        {/* Left side - Name and subtitle */}
-        <Box sx={{ mb: { xs: 1, md: 0 } }}>
+        {/* Left side - Name, subtitle, and copyright */}
+        <Box
+          sx={{
+            mb: { xs: 1, md: 0 },
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                fontWeight: 600,
+                fontSize: "1.1rem",
+                mb: 0.5,
+              }}
+            >
+              Theo Slater
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "text.secondary",
+                fontSize: "0.85rem",
+              }}
+            >
+              Amateur Full-Stack Developer
+            </Typography>
+          </Box>
+
           <Typography
-            variant="h6"
-            component="div"
+            variant="caption"
             sx={{
-              fontWeight: 600,
-              fontSize: "1.1rem",
-              mb: 0.5,
-            }}
-          >
-            Theo Slater
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
+              mt: { xs: 2, md: "auto" },
+              pt: { md: 12 },
               color: "text.secondary",
-              fontSize: "0.85rem",
+              opacity: 0.6,
+              fontSize: "0.75rem",
             }}
           >
-            Amateur Full-Stack Developer
+            © Theo Slater - All rights reserved
           </Typography>
         </Box>
 
@@ -175,20 +197,6 @@ export default function Footer() {
           </Box>
         </Box>
       </Box>
-
-      {/* Copyright */}
-      <Typography
-        variant="caption"
-        sx={{
-          display: "block",
-          mt: 4,
-          color: "text.secondary",
-          opacity: 0.6,
-          fontSize: "0.75rem",
-        }}
-      >
-        © Theo Slater - All rights reserved
-      </Typography>
     </Box>
   );
 }
