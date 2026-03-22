@@ -7,7 +7,7 @@ export default function UniversalChip(props: ChipProps) {
       sx={[
         {
           alignItems: "center",
-          borderRadius: "16px",
+          borderRadius: "9999px",
           ".MuiChip-label": {
             display: "inline-flex",
             alignItems: "center",

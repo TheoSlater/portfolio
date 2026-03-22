@@ -182,7 +182,7 @@ export const Dock = () => {
   const lastScrollY = useRef(0);
   const showTimer = useRef<NodeJS.Timeout | null>(null);
 
-  useMotionValueEvent(scrollY, "change", (latest: any) => {
+  useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = lastScrollY.current;
     const diff = latest - previous;
 
@@ -224,12 +224,12 @@ export const Dock = () => {
       href: "/about",
       icon: <HandPalm />,
     },
-    {
-      name: "archive",
-      label: "Archive",
-      href: "/archive",
-      icon: <Bookmark />,
-    },
+    // {
+    //   name: "archive",
+    //   label: "Archive",
+    //   href: "/archive",
+    //   icon: <Bookmark />,
+    // },
   ];
 
   return (
@@ -260,13 +260,13 @@ export const Dock = () => {
         border: `1px solid ${alpha(theme.palette.common.white, 0.08)}`,
         boxShadow: `0 12px 40px 0 ${alpha("#000000", 0.9)}`,
       }}
-      onMouseMove={(e: any) => {
+      onMouseMove={(e) => {
         if (document.body.classList.contains("disable-scroll")) return;
 
         mouseX.set(e.pageX);
         mouseY.current = e.pageY;
       }}
-      onMouseLeave={(e: any) => {
+      onMouseLeave={(e) => {
         if (mouseX.get() !== e.pageX || mouseY.current !== e.pageY)
           return mouseX.set(Infinity);
 

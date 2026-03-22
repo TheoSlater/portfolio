@@ -1,10 +1,11 @@
 "use client";
 
-import { Box, Container, Typography, Button } from "@mui/material";
+import { Box, Container, Typography, Button, alpha } from "@mui/material";
 import { WorkOutline } from "@mui/icons-material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ProjectCard from "./ProjectCard";
 import UniversalChip from "../../../components/ui/universal-chip";
+import { MotionWrapper } from "../../../components/ui/MotionWrapper";
 
 const projectsData = [
   {
@@ -29,113 +30,137 @@ export default function ProjectsSection() {
       }}
     >
       <Container maxWidth="lg">
-        <Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              justifyContent: "space-between",
-              alignItems: { xs: "flex-start", md: "flex-end" },
-              mb: { xs: 6, md: 9 },
-              gap: 4,
-            }}
-          >
-            <Box sx={{ maxWidth: "500px" }}>
-              <Box sx={{ mb: 3.5 }}>
-                <UniversalChip
-                  label={
-                    <Box
-                      component="span"
-                      sx={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 1,
-                      }}
-                    >
-                      <WorkOutline fontSize="small" sx={{ fontSize: 16 }} />
-                      Projects
-                    </Box>
-                  }
-                />
-              </Box>
-
-              <Typography
-                variant="h2"
-                component="h2"
-                sx={{
-                  fontWeight: 600,
-                  mb: 3,
-                  fontSize: { xs: "2.25rem", md: "3rem" },
-                  lineHeight: 1.1,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                Milestones in the
-                <br />
-                learning journey
-              </Typography>
-
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "text.secondary",
-                  fontSize: { xs: "0.95rem", md: "1.05rem" },
-                  lineHeight: 1.6,
-                  maxWidth: "600px",
-                }}
-              >
-                Each project marks a step forward, showcasing my growth and
-                journey as a developer. Explore how I&apos;ve tackled challenges
-                and built solutions along the way.
-              </Typography>
-            </Box>
-
-            <Button
-              variant="outlined"
-              endIcon={<ArrowForwardIcon />}
-              href="#"
+        <MotionWrapper variant="container">
+          <Box>
+            <Box
               sx={{
-                borderRadius: "50px",
-                px: 3,
-                py: 1,
-                borderColor: "divider",
-                color: "text.primary",
-                textTransform: "none",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                "&:hover": {
-                  borderColor: "text.primary",
-                  bgcolor: "rgba(255, 255,  255, 0.05)",
-                },
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                justifyContent: "space-between",
+                alignItems: { xs: "flex-start", md: "flex-end" },
+                mb: { xs: 6, md: 9 },
+                gap: 4,
               }}
             >
-              View all projects
-            </Button>
-          </Box>
+              <Box sx={{ maxWidth: "500px" }}>
+                <MotionWrapper variant="slideUp" noTrigger>
+                  <Box sx={{ mb: 3.5 }}>
+                    <UniversalChip
+                      sx={{
+                        backgroundColor: alpha("#10b981", 0.1),
+                        border: `1px solid ${alpha("#10b981", 0.2)}`,
+                        color: "#10b981",
+                        fontWeight: 600,
+                        p: 1,
+                        px: 2,
+                        height: "auto",
+                        "& .MuiChip-label": {
+                          p: 0,
+                        },
+                      }}
+                      label={
+                        <Box
+                          component="span"
+                          sx={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: 1,
+                          }}
+                        >
+                          <WorkOutline fontSize="small" sx={{ fontSize: 16 }} />
+                          Projects
+                        </Box>
+                      }
+                    />
+                  </Box>
+                </MotionWrapper>
 
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                md: "repeat(2, minmax(0, 380px))",
-              },
-              gap: { xs: 3, md: 4 },
-              justifyContent: "flex-start",
-            }}
-          >
-            {projectsData.map((project) => (
-              <ProjectCard
-                key={project.slug}
-                year={project.year}
-                slug={project.slug}
-                title={project.title}
-                description={project.description}
-                image={project.image}
-              />
-            ))}
+                <MotionWrapper variant="slideUp" noTrigger>
+                  <Typography
+                    variant="h2"
+                    component="h2"
+                    sx={{
+                      fontWeight: 500,
+                      mb: 3,
+                      fontSize: { xs: "2.25rem", md: "3rem" },
+                      lineHeight: 1.1,
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    Milestones in the
+                    <br />
+                    learning journey
+                  </Typography>
+                </MotionWrapper>
+
+                <MotionWrapper variant="slideUp" noTrigger>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: "text.secondary",
+                      fontSize: { xs: "0.95rem", md: "1.05rem" },
+                      lineHeight: 1.6,
+                      maxWidth: "600px",
+                    }}
+                  >
+                    Each project marks a step forward, showcasing my growth and
+                    journey as a developer. Explore how I&apos;ve tackled
+                    challenges and built solutions along the way.
+                  </Typography>
+                </MotionWrapper>
+              </Box>
+
+              <MotionWrapper variant="slideUp" noTrigger>
+                <Button
+                  variant="outlined"
+                  endIcon={<ArrowForwardIcon />}
+                  href="#"
+                  sx={{
+                    borderRadius: "50px",
+                    px: 3,
+                    py: 1,
+                    borderColor: "divider",
+                    color: "text.primary",
+                    textTransform: "none",
+                    fontWeight: 600,
+                    fontSize: "0.9rem",
+                    "&:hover": {
+                      borderColor: "text.primary",
+                      bgcolor: "rgba(255, 255,  255, 0.05)",
+                    },
+                  }}
+                >
+                  View all projects
+                </Button>
+              </MotionWrapper>
+            </Box>
+
+            <MotionWrapper variant="slideUp" noTrigger>
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "1fr",
+                    md: "repeat(2, minmax(0, 380px))",
+                  },
+                  gap: { xs: 3, md: 4 },
+                  justifyContent: "flex-start",
+                }}
+              >
+                {projectsData.map((project) => (
+                  <ProjectCard
+                    key={project.slug}
+                    year={project.year}
+                    slug={project.slug}
+                    title={project.title}
+                    description={project.description}
+                    image={project.image}
+                  />
+                ))}
+              </Box>
+            </MotionWrapper>
           </Box>
-        </Box>
+        </MotionWrapper>
       </Container>
     </Box>
   );

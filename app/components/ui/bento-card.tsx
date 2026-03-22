@@ -8,13 +8,16 @@ import { toCssSize } from "@/lib/formatters";
 
 const DEFAULT_MIN_HEIGHT = "160px";
 
+const sizeToSpan = { xs: 1, sm: 1, md: 2, lg: 3, xl: 4 } as const;
+type BentoSize = keyof typeof sizeToSpan;
+
 interface BentoCardProps {
   children?: ReactNode;
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: BentoSize;
   colSpan?: number;
   rowSpan?: number;
-  widthSize?: "xs" | "sm" | "md" | "lg" | "xl";
-  heightSize?: "xs" | "sm" | "md" | "lg" | "xl";
+  widthSize?: BentoSize;
+  heightSize?: BentoSize;
   width?: number | string;
   height?: number | string;
   minHeight?: number | string;
@@ -51,13 +54,12 @@ export function BentoCard({
   const theme = useTheme();
   const cardMinHeight = toCssSize(minHeight) ?? DEFAULT_MIN_HEIGHT;
   const cardPadding = toCssSize(padding) ?? "24px";
-  const sizeToSpan = { xs: 1, sm: 1, md: 2, lg: 3, xl: 4 } as const;
-  const resolvedWidthSize = widthSize ?? (size as any);
-  const resolvedHeightSize = heightSize ?? (size as any);
-  const resolvedColSpan =
-    colSpan ?? (resolvedWidthSize ? (sizeToSpan as any)[resolvedWidthSize] : 1);
-  const resolvedRowSpan =
-    rowSpan ?? (resolvedHeightSize ? (sizeToSpan as any)[resolvedHeightSize] : 1);
+  
+  const resolvedWidthSize = widthSize ?? size;
+  const resolvedHeightSize = heightSize ?? size;
+  
+  const resolvedColSpan = colSpan ?? (resolvedWidthSize ? sizeToSpan[resolvedWidthSize] : 1);
+  const resolvedRowSpan = rowSpan ?? (resolvedHeightSize ? sizeToSpan[resolvedHeightSize] : 1);
   
   const componentProps = component
     ? { component, href, target, rel, "aria-label": ariaLabel }

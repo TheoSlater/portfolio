@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Chip, IconButton, Stack, Typography } from "@mui/material";
+import { Button, Chip, IconButton, Stack, Typography, Box } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailIcon from "@mui/icons-material/Email";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -9,6 +9,7 @@ import { Foreground } from "../layout/foreground";
 import GreenPulse from "../Icons/GreenPulse";
 import Magnetic from "../ui/magnetic";
 import { MotionWrapper } from "../ui/MotionWrapper";
+import UniversalChip from "../ui/universal-chip";
 
 
 
@@ -30,46 +31,50 @@ export function HeroContent() {
   };
 
   return (
-    <Stack
-      spacing={4}
-      alignItems="flex-start"
-      textAlign="left"
-      sx={{
-        width: "100%",
-        maxWidth: "min(640px, 100%)",
-      }}
-      component={motion.div}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.12,
-            delayChildren: 0.1,
-          },
-        },
-      }}
-      initial="hidden"
-      animate="visible"
-    >
-      <MotionWrapper variant="slideUp">
-        <Chip
-          icon={<GreenPulse />}
-          label="Available for projects"
+    <MotionWrapper variant="container">
+      <Stack
+        spacing={4}
+        alignItems="flex-start"
+        textAlign="left"
+        sx={{
+          width: "100%",
+          maxWidth: "min(640px, 100%)",
+        }}
+      >
+      <MotionWrapper variant="slideUp" noTrigger>
+        <UniversalChip
+          label={
+            <Box
+              component="span"
+              sx={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 1,
+                color: (theme) => theme.palette.primary.main,
+                fontWeight: 500,
+              }}
+            >
+              <GreenPulse />
+              Available for projects
+            </Box>
+          }
           sx={(theme) => ({
-            p: 1,
-            width: "fit-content",
-            fontWeight: 500,
-            color: theme.palette.primary.main,
             backgroundColor: "transparent",
             border: `1px solid ${theme.palette.divider}`,
+            height: "auto",
+            p: 1,
+            overflow: "visible",
+            "& .MuiChip-label": {
+              overflow: "visible",
+            },
           })}
         />
       </MotionWrapper>
 
-      <MotionWrapper variant="slideUp">
+      <MotionWrapper variant="slideUp" noTrigger>
         <Typography
           variant="h3"
-          fontWeight={450}
+          fontWeight={400}
           sx={{
             letterSpacing: "-0.03em",
             lineHeight: 1.1,
@@ -81,7 +86,7 @@ export function HeroContent() {
         </Typography>
       </MotionWrapper>
 
-      <MotionWrapper variant="slideUp">
+      <MotionWrapper variant="slideUp" noTrigger>
         <Typography
           variant="subtitle1"
           color="text.secondary"
@@ -99,7 +104,7 @@ export function HeroContent() {
         </Typography>
       </MotionWrapper>
 
-      <MotionWrapper variant="slideUp">
+      <MotionWrapper variant="slideUp" noTrigger>
         <Stack direction="row" spacing={2} alignItems="center">
           <Magnetic>
             <IconButton
@@ -166,5 +171,6 @@ export function HeroContent() {
         </Stack>
       </MotionWrapper>
     </Stack>
-  );
+  </MotionWrapper>
+);
 }
