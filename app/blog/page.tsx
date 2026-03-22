@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Container, Typography, useTheme, alpha } from "@mui/material";
-import { EditRounded } from "@mui/icons-material";
+import { ConstructionOutlined, EditRounded } from "@mui/icons-material";
 import UniversalChip from "../components/ui/universal-chip";
 import { MotionWrapper } from "../components/ui/MotionWrapper";
 
@@ -10,7 +10,7 @@ export default function BlogPage() {
 
   return (
     <Box sx={{ pt: 16, pb: 10 }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <MotionWrapper variant="container">
           <MotionWrapper variant="slideUp" noTrigger>
             <Box sx={{ mb: 4 }}>
@@ -50,7 +50,7 @@ export default function BlogPage() {
               sx={{
                 fontWeight: 500,
                 mb: 4,
-                fontSize: { xs: "2.5rem", md: "4rem" },
+                fontSize: { xs: "2.25rem", md: "3rem" },
                 lineHeight: 1.1,
                 letterSpacing: "-0.03em",
                 color: "text.primary",
@@ -67,15 +67,15 @@ export default function BlogPage() {
               variant="body1"
               sx={{
                 color: "text.secondary",
-                fontSize: "1.1rem",
+                fontSize: { xs: "0.95rem", md: "1.05rem" },
                 lineHeight: 1.6,
                 maxWidth: "600px",
                 mb: 8,
               }}
             >
               Insights and experiences from my journey as a developer—exploring
-              ideas, overcoming challenges, and sharing lessons learned along the
-              way.
+              ideas, overcoming challenges, and sharing lessons learned along
+              the way.
             </Typography>
           </MotionWrapper>
 
@@ -89,8 +89,9 @@ export default function BlogPage() {
                 textAlign: "center",
               }}
             >
+              <ConstructionOutlined sx={{ fontSize: 48, mb: 2 }} />
               <Typography variant="body1" color="text.secondary">
-                Stay tuned! The blog is currently under development.
+                The blog is currently under development.
               </Typography>
             </Box>
           </MotionWrapper>
