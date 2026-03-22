@@ -51,6 +51,8 @@ const ConstructionDialog = dynamic(
 );
 const Footer = dynamic(() => import("./components/layout/footer"));
 
+import { Dock } from "./components/ui/Dock";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -74,6 +76,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <Footer />
+          <Dock />
         </Providers>
         <Analytics />
       </body>

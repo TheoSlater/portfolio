@@ -10,7 +10,7 @@ const nextConfig = {
     optimizePackageImports: [
       "@mui/material",
       "@mui/icons-material",
-      "framer-motion",
+      "motion",
     ],
   },
 };

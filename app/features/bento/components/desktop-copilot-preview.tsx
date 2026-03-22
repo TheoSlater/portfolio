@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "motion/react";
 
 const PROMPTS = [
   "Summarize my last meeting",

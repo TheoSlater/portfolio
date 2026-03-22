@@ -4,37 +4,13 @@ import { Button, Chip, IconButton, Stack, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailIcon from "@mui/icons-material/Email";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "motion/react";
 import { Foreground } from "../layout/foreground";
 import GreenPulse from "../Icons/GreenPulse";
 import Magnetic from "../ui/magnetic";
+import { MotionWrapper } from "../ui/MotionWrapper";
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-};
 
-const itemVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 14,
-    filter: "blur(10px)",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
 
 export function HeroContent() {
   const scrollToNextSection = () => {
@@ -63,14 +39,19 @@ export function HeroContent() {
         maxWidth: "min(640px, 100%)",
       }}
       component={motion.div}
-      variants={containerVariants}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.12,
+            delayChildren: 0.1,
+          },
+        },
+      }}
       initial="hidden"
       animate="visible"
     >
-      <motion.div
-        variants={itemVariants}
-        style={{ willChange: "filter, transform, opacity" }}
-      >
+      <MotionWrapper variant="slideUp">
         <Chip
           icon={<GreenPulse />}
           label="Available for projects"
@@ -83,12 +64,9 @@ export function HeroContent() {
             border: `1px solid ${theme.palette.divider}`,
           })}
         />
-      </motion.div>
+      </MotionWrapper>
 
-      <motion.div
-        variants={itemVariants}
-        style={{ willChange: "filter, transform, opacity" }}
-      >
+      <MotionWrapper variant="slideUp">
         <Typography
           variant="h3"
           fontWeight={450}
@@ -101,12 +79,9 @@ export function HeroContent() {
           Hi, I&apos;m Theo.
           <br />A software engineer.
         </Typography>
-      </motion.div>
+      </MotionWrapper>
 
-      <motion.div
-        variants={itemVariants}
-        style={{ willChange: "filter, transform, opacity" }}
-      >
+      <MotionWrapper variant="slideUp">
         <Typography
           variant="subtitle1"
           color="text.secondary"
@@ -122,12 +97,9 @@ export function HeroContent() {
           Mainly working with modern languages, I focus on learning,
           problem-solving, and building.
         </Typography>
-      </motion.div>
+      </MotionWrapper>
 
-      <motion.div
-        variants={itemVariants}
-        style={{ willChange: "filter, transform, opacity" }}
-      >
+      <MotionWrapper variant="slideUp">
         <Stack direction="row" spacing={2} alignItems="center">
           <Magnetic>
             <IconButton
@@ -192,7 +164,7 @@ export function HeroContent() {
             </Button>
           </Magnetic>
         </Stack>
-      </motion.div>
+      </MotionWrapper>
     </Stack>
   );
 }

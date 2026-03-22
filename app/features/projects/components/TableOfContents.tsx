@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Box, Typography, Link } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 export type Heading = {
   id: string;
