@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     "Learn about Theo Slater — 16-year-old Full-Stack Developer, Founder of Monolabs, and passionate builder of minimal, powerful software using React, TypeScript, and Go.",
   alternates: {
-    canonical: "https://theoslater.is-a.dev/about",
+    canonical: "https://theoslater.xyz/about",
   },
   openGraph: {
     title: "About Theo Slater",
     description:
       "Theo Slater — 16-year-old Full-Stack Developer & Founder of Monolabs.",
-    url: "https://theoslater.is-a.dev/about",
+    url: "https://theoslater.xyz/about",
   },
 };
 

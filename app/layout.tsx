@@ -8,7 +8,7 @@ import { Geist } from "next/font/google";
 import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://theoslater.is-a.dev"),
+  metadataBase: new URL("https://theoslater.xyz"),
   title: {
     default: "Theo Slater | Full-Stack Developer",
     template: "%s | Theo Slater",
@@ -28,16 +28,16 @@ export const metadata: Metadata = {
     "web developer",
     "software engineer",
   ],
-  authors: [{ name: "Theo Slater", url: "https://theoslater.is-a.dev" }],
+  authors: [{ name: "Theo Slater", url: "https://theoslater.xyz" }],
   creator: "Theo Slater",
   alternates: {
-    canonical: "https://theoslater.is-a.dev",
+    canonical: "https://theoslater.xyz",
   },
   openGraph: {
     title: "Theo Slater | Full-Stack Developer",
     description:
       "Theo Slater — 16-year-old Full-Stack Developer & Founder of Monolabs. Building minimal, powerful software.",
-    url: "https://theoslater.is-a.dev",
+    url: "https://theoslater.xyz",
     siteName: "Theo Slater",
     locale: "en_US",
     type: "website",
@@ -71,7 +71,7 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Theo Slater",
-  url: "https://theoslater.is-a.dev",
+  url: "https://theoslater.xyz",
   sameAs: ["https://github.com/theoslater", "https://monolabs.site"],
   jobTitle: "Full-Stack Developer",
   description:
