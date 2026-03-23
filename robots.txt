@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 Disallow: /cgi-bin/
-Sitemap: https://theoslater.xyz/sitemap.xml
+Sitemap: https://theoslater.is-a.dev/sitemap.xml
