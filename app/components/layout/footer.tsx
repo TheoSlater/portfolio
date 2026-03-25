@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Typography, Link, Container, alpha, useTheme } from "@mui/material";
+import { Box, Typography, Link, Container, alpha } from "@mui/material";
 
 export default function Footer() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, HTMLMotionProps, Variants } from "motion/react";
-import React from "react";
+import type { ReactNode } from "react";
 
 /**
  * Variants for different animation types
@@ -52,7 +52,7 @@ export const animationVariants: Record<string, Variants> = {
 };
 
 interface MotionWrapperProps extends HTMLMotionProps<"div"> {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: keyof typeof animationVariants;
   delay?: number;
   viewportOnce?: boolean;

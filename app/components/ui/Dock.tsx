@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -19,7 +19,6 @@ import {
   Briefcase,
   ChatTeardropDots,
   HandPalm,
-  Bookmark,
 } from "../Icons/NavIcons";
 
 const DEFAULT_MAGNIFICATION = 60;

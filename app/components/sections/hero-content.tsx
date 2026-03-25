@@ -5,7 +5,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import EmailIcon from "@mui/icons-material/Email";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion } from "motion/react";
-import { Foreground } from "../layout/foreground";
 import GreenPulse from "../Icons/GreenPulse";
 import Magnetic from "../ui/magnetic";
 import { MotionWrapper } from "../ui/MotionWrapper";

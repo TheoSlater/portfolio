@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import React from "react";
+import type { ReactNode } from "react";
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function Template({ children }: { children: ReactNode }) {
   return (
     <motion.main
       initial={{ opacity: 0, y: 15 }}
