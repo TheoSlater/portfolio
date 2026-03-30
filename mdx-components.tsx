@@ -2,6 +2,7 @@ import type { MDXComponents } from 'mdx/types';
 import { Box, Typography, Divider, Link as MuiLink } from "@mui/material";
 import type { ReactNode } from "react";
 import { slugify } from "@/lib/formatters";
+import { CodeBlock } from "@/app/components/ui/code-block";
 
 export const MDX_COMPONENTS: MDXComponents = {
   h1: ({ children }) => (
@@ -87,24 +88,9 @@ export const MDX_COMPONENTS: MDXComponents = {
     </Box>
   ),
   pre: ({ children }) => (
-    <Box
-      component="pre"
-      sx={{
-        bgcolor: "#0d1117",
-        border: "1px solid",
-        borderColor: "divider",
-        borderRadius: "8px",
-        p: 2.5,
-        my: 3,
-        overflowX: "auto",
-        fontFamily: "monospace",
-        fontSize: "0.875rem",
-        lineHeight: 1.7,
-        "& code": { bgcolor: "transparent", border: "none", p: 0 },
-      }}
-    >
-      {children as ReactNode}
-    </Box>
+    <CodeBlock>
+      {children}
+    </CodeBlock>
   ),
   table: ({ children }) => (
     <Box sx={{ overflowX: "auto", my: 3 }}>

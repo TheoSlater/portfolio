@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getProjectBySlug, getAllProjects } from "@/lib/projects";
+import { getBlogPostBySlug, getAllBlogPosts } from "@/lib/blog";
 import ProjectBlogLayout from "@/app/features/projects/components/ProjectBlogLayout";
 import { Metadata } from "next";
 import { evaluate } from "@mdx-js/mdx";
@@ -13,33 +13,33 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const projects = getAllProjects();
-  return projects.map((p) => ({ slug: p.slug }));
+  const posts = getAllBlogPosts();
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
-  if (!project) return {};
+  const post = getBlogPostBySlug(slug);
+  if (!post) return {};
   return {
-    title: `${project.title} | Theo Slater`,
-    description: project.description,
+    title: `${post.title} | Theo Slater`,
+    description: post.description,
   };
 }
 
-export default async function ProjectPage({ params }: Props) {
+export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
-  if (!project) notFound();
+  const post = getBlogPostBySlug(slug);
+  if (!post) notFound();
 
-  const { default: MDXContent } = await evaluate(project.content, {
+  const { default: MDXContent } = await evaluate(post.content, {
     ...runtime,
     remarkPlugins: [remarkGfm],
     rehypePlugins: [rehypeStarryNight],
   });
 
   return (
-    <ProjectBlogLayout project={project}>
+    <ProjectBlogLayout project={post as any}>
       <MDXContent components={MDX_COMPONENTS} />
     </ProjectBlogLayout>
   );

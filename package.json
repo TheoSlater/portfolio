@@ -20,6 +20,7 @@
     "@types/mdx": "^2.0.13",
     "@uiw/react-heat-map": "^2.3.3",
     "@vercel/analytics": "^1.6.1",
+    "@wooorm/starry-night": "^3.9.0",
     "graphql-request": "^7.4.0",
     "leaflet": "^1.9.4",
     "mathjs": "^15.1.0",
@@ -29,6 +30,7 @@
     "react": "19.0.0-rc.1",
     "react-dom": "19.0.0-rc.1",
     "react-leaflet": "5.0.0-rc.2",
+    "rehype-starry-night": "^2.2.0",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "simple-icons": "^16.6.1"

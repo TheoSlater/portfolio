@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Box, Typography, Link } from "@mui/material";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 
 export type Heading = {
   id: string;
@@ -36,7 +36,7 @@ export default function TableOfContents({ headings }: Props) {
       {
         rootMargin: "0px 0px -60% 0px",
         threshold: 0,
-      }
+      },
     );
 
     headingElements.forEach((el) => observerRef.current?.observe(el));

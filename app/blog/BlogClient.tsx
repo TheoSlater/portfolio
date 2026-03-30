@@ -1,11 +1,17 @@
 "use client";
 
-import { Box, Container, Typography, alpha } from "@mui/material";
+import { Box, Container, Typography, alpha, Grid } from "@mui/material";
 import { ConstructionOutlined, EditRounded } from "@mui/icons-material";
 import UniversalChip from "../components/ui/universal-chip";
 import { MotionWrapper } from "../components/ui/MotionWrapper";
+import { BlogFrontmatter } from "@/lib/blog";
+import ProjectCard from "../features/projects/components/ProjectCard";
 
-export function BlogClient() {
+interface BlogClientProps {
+  posts: BlogFrontmatter[];
+}
+
+export function BlogClient({ posts }: BlogClientProps) {
   return (
     <Box sx={{ pt: 16, pb: 10 }}>
       <Container maxWidth="lg">
@@ -77,22 +83,48 @@ export function BlogClient() {
             </Typography>
           </MotionWrapper>
 
-          <MotionWrapper variant="slideUp" noTrigger>
-            <Box
-              sx={{
-                p: 4,
-                borderRadius: 4,
-                border: "1px dashed",
-                borderColor: "divider",
-                textAlign: "center",
-              }}
-            >
-              <ConstructionOutlined sx={{ fontSize: 48, mb: 2 }} />
-              <Typography variant="body1" color="text.secondary">
-                The blog is currently under development.
-              </Typography>
-            </Box>
-          </MotionWrapper>
+          {posts.length > 0 ? (
+            <MotionWrapper variant="slideUp" noTrigger>
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "1fr",
+                    md: "repeat(2, minmax(0, 500px))",
+                  },
+                  gap: { xs: 4, md: 6 },
+                }}
+              >
+                {posts.map((post) => (
+                  <ProjectCard
+                    key={post.slug}
+                    year={post.year}
+                    title={post.title}
+                    description={post.description}
+                    image={post.image}
+                    url={`/blog/${post.slug}`}
+                  />
+                ))}
+              </Box>
+            </MotionWrapper>
+          ) : (
+            <MotionWrapper variant="slideUp" noTrigger>
+              <Box
+                sx={{
+                  p: 4,
+                  borderRadius: 4,
+                  border: "1px dashed",
+                  borderColor: "divider",
+                  textAlign: "center",
+                }}
+              >
+                <ConstructionOutlined sx={{ fontSize: 48, mb: 2 }} />
+                <Typography variant="body1" color="text.secondary">
+                  The blog is currently under development.
+                </Typography>
+              </Box>
+            </MotionWrapper>
+          )}
         </MotionWrapper>
       </Container>
     </Box>
