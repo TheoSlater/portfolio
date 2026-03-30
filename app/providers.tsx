@@ -3,6 +3,8 @@ import { ReactNode } from "react";
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { bentoPalette } from "@/lib/theme/bento";
+import { BlogProvider } from "@/app/features/blog/context/BlogContext";
+
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -55,8 +57,10 @@ const theme = createTheme({
 export default function Providers({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
+      <BlogProvider>
+        <CssBaseline />
+        {children}
+      </BlogProvider>
     </ThemeProvider>
   );
 }

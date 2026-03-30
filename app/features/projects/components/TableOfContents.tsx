@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Box, Typography, Link } from "@mui/material";
 import { motion } from "motion/react";
+import { useBlog } from "@/app/features/blog/context/BlogContext";
 
 export type Heading = {
   id: string;
@@ -15,7 +16,7 @@ type Props = {
 };
 
 export default function TableOfContents({ headings }: Props) {
-  const [activeId, setActiveId] = useState<string>("");
+  const { activeId, setActiveId } = useBlog();
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function TableOfContents({ headings }: Props) {
     headingElements.forEach((el) => observerRef.current?.observe(el));
 
     return () => observerRef.current?.disconnect();
-  }, [headings]);
+  }, [headings, setActiveId]);
 
   if (headings.length === 0) return null;
 
@@ -86,10 +87,11 @@ export default function TableOfContents({ headings }: Props) {
                 underline="none"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById(h.id)?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
+                  const element = document.getElementById(h.id);
+                  if (element) {
+                    const top = element.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top, behavior: "smooth" });
+                  }
                 }}
                 sx={{
                   display: "block",

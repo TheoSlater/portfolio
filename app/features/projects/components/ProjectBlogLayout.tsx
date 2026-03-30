@@ -4,6 +4,7 @@ import type { ProjectFrontmatter } from "@/lib/projects";
 import { slugify } from "@/lib/formatters";
 import ProjectBlogHeader from "./ProjectBlogHeader";
 import TableOfContents, { type Heading } from "./TableOfContents";
+import { BlogClientWrapper } from "@/app/features/blog/context/BlogClientWrapper";
 
 type Props = {
   project: ProjectFrontmatter & { content: string };
@@ -22,37 +23,39 @@ export default function ProjectBlogLayout({ project, children }: Props) {
     });
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        pt: { xs: 8, md: 12 },
-        pb: { xs: 12, md: 20 },
-      }}
-    >
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "1fr",
-              md: "minmax(0, 740px) minmax(180px, 220px)",
-            },
-            gap: { xs: 0, md: "60px" },
-            alignItems: "start",
-          }}
-        >
-          <Box>
-            <Box sx={{ mb: 8 }}>
-              <ProjectBlogHeader project={project} />
+    <BlogClientWrapper headings={headings}>
+      <Box
+        sx={{
+          minHeight: "100vh",
+          pt: { xs: 8, md: 12 },
+          pb: { xs: 12, md: 20 },
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                md: "minmax(0, 740px) minmax(180px, 220px)",
+              },
+              gap: { xs: 0, md: "60px" },
+              alignItems: "start",
+            }}
+          >
+            <Box>
+              <Box sx={{ mb: 8 }}>
+                <ProjectBlogHeader project={project} />
+              </Box>
+              <Box sx={{ minWidth: 0 }}>{children}</Box>
             </Box>
-            <Box sx={{ minWidth: 0 }}>{children}</Box>
-          </Box>
 
-          <Box sx={{ display: { xs: "none", md: "block" }, pt: { md: 12 } }}>
-            <TableOfContents headings={headings} />
+            <Box sx={{ display: { xs: "none", md: "block" }, pt: { md: 12 } }}>
+              <TableOfContents headings={headings} />
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+    </BlogClientWrapper>
   );
 }
