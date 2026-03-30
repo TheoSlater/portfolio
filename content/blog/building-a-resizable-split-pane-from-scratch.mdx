@@ -38,6 +38,8 @@ The layout is a flex row with three children: pane A, a divider, and pane B. Pan
 
 As the user drags, we convert the pointer position into a percentage of the container width and write it straight to `paneA.style.flexBasis`. No state updates, no re-renders. Just a direct DOM write, which keeps it smooth even on slower machines.
 
+<SplitPaneDemo />
+
 ---
 
 ## The hook

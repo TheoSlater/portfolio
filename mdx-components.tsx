@@ -3,8 +3,10 @@ import { Box, Typography, Divider, Link as MuiLink } from "@mui/material";
 import type { ReactNode } from "react";
 import { slugify } from "@/lib/formatters";
 import { CodeBlock } from "@/app/components/ui/code-block";
+import { SplitPaneDemo } from "@/app/components/ui/SplitPaneDemo";
 
 export const MDX_COMPONENTS: MDXComponents = {
+  SplitPaneDemo,
   h1: ({ children }) => (
     <Typography component="h1" variant="h3" sx={{ fontWeight: 700, letterSpacing: "-0.03em", mt: 6, mb: 2 }}>
       {children as ReactNode}
