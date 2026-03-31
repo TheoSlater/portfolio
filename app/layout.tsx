@@ -65,7 +65,7 @@ const ConstructionDialog = dynamic(
 );
 const Footer = dynamic(() => import("./components/layout/footer"));
 
-import { Dock } from "./components/ui/Dock";
+import { Dock } from "./components/ui/dock";
 
 const personJsonLd = {
   "@context": "https://schema.org",

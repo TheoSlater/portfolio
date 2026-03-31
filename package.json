@@ -23,6 +23,7 @@
     "@wooorm/starry-night": "^3.9.0",
     "graphql-request": "^7.4.0",
     "leaflet": "^1.9.4",
+    "lucide-react": "^1.7.0",
     "mathjs": "^15.1.0",
     "motion": "^12.38.0",
     "next": "16.0.7",
@@ -34,7 +35,8 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "simple-icons": "^16.6.1",
-    "vscode-oniguruma": "^2.0.1"
+    "vscode-oniguruma": "^2.0.1",
+    "web-haptics": "^0.0.6"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.21",

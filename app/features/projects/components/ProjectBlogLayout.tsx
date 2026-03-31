@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import type { ProjectFrontmatter } from "@/lib/projects";
 import { slugify } from "@/lib/formatters";
 import ProjectBlogHeader from "./ProjectBlogHeader";
-import TableOfContents, { type Heading } from "./TableOfContents";
 import { BlogClientWrapper } from "@/app/features/blog/context/BlogClientWrapper";
+import { type Heading } from "./TableOfContents";
 
 type Props = {
   project: ProjectFrontmatter & { content: string };
@@ -34,25 +34,15 @@ export default function ProjectBlogLayout({ project, children }: Props) {
         <Container maxWidth="lg">
           <Box
             sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                md: "minmax(0, 740px) minmax(180px, 220px)",
-              },
-              gap: { xs: 0, md: "60px" },
-              alignItems: "start",
+              maxWidth: "740px",
+              mx: "auto",
+              width: "100%",
             }}
           >
-            <Box>
-              <Box sx={{ mb: 8 }}>
-                <ProjectBlogHeader project={project} />
-              </Box>
-              <Box sx={{ minWidth: 0 }}>{children}</Box>
+            <Box sx={{ mb: 8 }}>
+              <ProjectBlogHeader project={project} />
             </Box>
-
-            <Box sx={{ display: { xs: "none", md: "block" }, pt: { md: 12 } }}>
-              <TableOfContents headings={headings} />
-            </Box>
+            <Box sx={{ minWidth: 0 }}>{children}</Box>
           </Box>
         </Container>
       </Box>
