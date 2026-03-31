@@ -304,14 +304,13 @@ export const Dock = () => {
         }}
       >
         {/*
-          Island container — width and borderRadius use CSS transitions
-          to avoid the shrink-then-expand jitter that plagued the old
-          Framer animate approach. CSS transitions smoothly interpolate
-          from the current computed width to the target. When collapsed
-          width is unset (auto-sizes to content). When expanded it's a
-          fixed px value. No "undefined" frame ever occurs.
+          Island container — width and borderRadius use Framer Motion layout
+          to ensure all child elements (icons, 'On this page' button)
+          morph naturally in sync with the container.
         */}
-        <div
+        <motion.div
+          layout
+          transition={ISLAND_SPRING}
           style={{
             display: "flex",
             flexDirection: "column",
@@ -328,8 +327,6 @@ export const Dock = () => {
             borderRadius: isExpanded ? 24 : 48,
             width: isExpanded ? "min(420px, 92vw)" : undefined,
             maxWidth: "92vw",
-            transition:
-              "width 0.45s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
           {/* TOC panel — always in DOM, height morphs to 0 when closed */}
@@ -441,6 +438,7 @@ export const Dock = () => {
 
           {/* Bottom bar — nav icons always functional + toggle */}
           <motion.div
+            layout
             initial={false}
             animate={{
               paddingTop: isExpanded ? 12 : 4,
@@ -457,16 +455,17 @@ export const Dock = () => {
               justifyContent: "space-between",
             }}
           >
-            <Box
-              component="ul"
-              sx={{
+            <motion.ul
+              layout
+              style={{
                 display: "flex",
                 alignItems: "center",
                 margin: 0,
                 padding: 0,
-                gap: 1,
+                gap: 8,
                 opacity: isExpanded ? 0.3 : 1,
                 transition: "opacity 0.3s ease",
+                listStyle: "none",
               }}
             >
               {navItems.map((item) => (
@@ -481,60 +480,71 @@ export const Dock = () => {
                   {item.icon}
                 </DockIcon>
               ))}
-            </Box>
+            </motion.ul>
 
-            {hasHeadings && (
-              <Box
-                component="button"
-                onClick={toggleExpanded}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                  padding: "8px 16px",
-                  borderRadius: "2rem",
-                  backgroundColor: alpha(
-                    theme.palette.primary.main,
-                    isExpanded ? 0.2 : 0.08,
-                  ),
-                  border: `1px solid ${alpha(
-                    theme.palette.primary.main,
-                    0.15,
-                  )}`,
-                  color: theme.palette.primary.main,
-                  cursor: "pointer",
-                  transition:
-                    "background-color 0.2s ease, border-color 0.2s ease",
-                  "&:hover": {
-                    backgroundColor: alpha(
-                      theme.palette.primary.main,
-                      0.15,
-                    ),
-                  },
-                  "&:active": {
-                    backgroundColor: alpha(
-                      theme.palette.primary.main,
-                      0.25,
-                    ),
-                  },
-                }}
-              >
-                <Typography
-                  variant="caption"
-                  sx={{ fontWeight: 700, fontSize: "0.82rem" }}
-                >
-                  {isExpanded ? "Close" : "On this page"}
-                </Typography>
+            <AnimatePresence mode="popLayout">
+              {hasHeadings && (
                 <motion.div
-                  animate={{ rotate: isExpanded ? 180 : 0 }}
+                  key="on-this-page-button"
+                  layout
+                  initial={{ opacity: 0, scale: 0.8, x: 20, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, scale: 1, x: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, scale: 0.8, x: 20, filter: "blur(4px)" }}
                   transition={ISLAND_SPRING}
                 >
-                  <CaretUp style={{ fontSize: "1rem" }} />
+                  <Box
+                    component="button"
+                    onClick={toggleExpanded}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                      padding: "8px 16px",
+                      borderRadius: "2rem",
+                      backgroundColor: alpha(
+                        theme.palette.primary.main,
+                        isExpanded ? 0.2 : 0.08,
+                      ),
+                      border: `1px solid ${alpha(
+                        theme.palette.primary.main,
+                        0.15,
+                      )}`,
+                      color: theme.palette.primary.main,
+                      cursor: "pointer",
+                      transition:
+                        "background-color 0.2s ease, border-color 0.2s ease",
+                      "&:hover": {
+                        backgroundColor: alpha(
+                          theme.palette.primary.main,
+                          0.15,
+                        ),
+                      },
+                      "&:active": {
+                        backgroundColor: alpha(
+                          theme.palette.primary.main,
+                          0.25,
+                        ),
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="caption"
+                      sx={{ fontWeight: 700, fontSize: "0.82rem" }}
+                    >
+                      {isExpanded ? "Close" : "On this page"}
+                    </Typography>
+                    <motion.div
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={ISLAND_SPRING}
+                    >
+                      <CaretUp style={{ fontSize: "1rem" }} />
+                    </motion.div>
+                  </Box>
                 </motion.div>
-              </Box>
-            )}
+              )}
+            </AnimatePresence>
           </motion.div>
-        </div>
+        </motion.div>
       </motion.nav>
     </div>
   );
