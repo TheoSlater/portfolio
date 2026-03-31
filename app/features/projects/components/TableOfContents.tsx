@@ -87,10 +87,9 @@ export default function TableOfContents({ headings }: Props) {
                 underline="none"
                 onClick={(e) => {
                   e.preventDefault();
-                  const element = document.getElementById(h.id);
-                  if (element) {
-                    const top = element.getBoundingClientRect().top + window.scrollY - 80;
-                    window.scrollTo({ top, behavior: "smooth" });
+                  const target = document.getElementById(h.id);
+                  if (target) {
+                    target.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
                 sx={{
