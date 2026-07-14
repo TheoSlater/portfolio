@@ -1,6 +1,7 @@
 "use client";
 
 import type { Map as MapLeaflet } from "leaflet";
+import "leaflet/dist/leaflet.css";
 import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { alpha, Box, useTheme } from "@mui/material";

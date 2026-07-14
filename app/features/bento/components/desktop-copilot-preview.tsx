@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
@@ -89,9 +89,24 @@ export default function DesktopCopilotPreview() {
   const [promptIndex, setPromptIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [phase, setPhase] = useState<Phase>("idle");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const visibleRef = useRef(true);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const resetCycle = useCallback(() => {
@@ -110,6 +125,10 @@ export default function DesktopCopilotPreview() {
     resetCycle();
 
     const typeChar = () => {
+      if (!visibleRef.current) {
+        timeout = setTimeout(typeChar, 100);
+        return;
+      }
       if (charIndex < currentPrompt.length) {
         setDisplayedText(currentPrompt.slice(0, charIndex + 1));
         charIndex++;
@@ -132,6 +151,14 @@ export default function DesktopCopilotPreview() {
   /* Phase 2: Cursor arrives -> click */
   useEffect(() => {
     if (phase !== "cursor-move") return;
+    if (!visibleRef.current) {
+      const t = setTimeout(() => {
+        if (!visibleRef.current) {
+          setPhase("done");
+        }
+      }, 100);
+      return () => clearTimeout(t);
+    }
     const timeout = setTimeout(() => setPhase("cursor-click"), 600);
     return () => clearTimeout(timeout);
   }, [phase]);
@@ -194,6 +221,7 @@ export default function DesktopCopilotPreview() {
 
   return (
     <Box
+      ref={containerRef}
       sx={{
         position: "relative",
         flex: 1,

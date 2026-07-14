@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import Providers from "./providers";
 import "./globals.css";
-import "leaflet/dist/leaflet.css";
 import { Geist } from "next/font/google";
 import dynamic from "next/dynamic";
 
@@ -65,7 +64,9 @@ const ConstructionDialog = dynamic(
 );
 const Footer = dynamic(() => import("./components/layout/footer"));
 
-import { Dock } from "./components/ui/dock";
+const Dock = dynamic(() =>
+  import("./components/ui/dock").then((mod) => ({ default: mod.Dock })),
+);
 
 const personJsonLd = {
   "@context": "https://schema.org",

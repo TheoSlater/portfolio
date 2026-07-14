@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Image from "next/image";
 
 
 interface ProjectCardProps {
@@ -70,17 +71,15 @@ export default function ProjectCard({
           }}
         >
           {image ? (
-            <Box
-              component="img"
-              src={image}
-              alt={title}
-              sx={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                transition: "transform 0.5s ease",
-              }}
-            />
+            <Box sx={{ position: "relative", width: "100%", height: "100%", transition: "transform 0.5s ease" }}>
+              <Image
+                src={image}
+                alt={title}
+                fill
+                sizes="(max-width: 600px) 100vw, 380px"
+                style={{ objectFit: "cover" }}
+              />
+            </Box>
           ) : (
             <Typography
               variant="h6"

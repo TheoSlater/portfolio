@@ -1,4 +1,5 @@
 import { Box, Typography, Chip } from "@mui/material";
+import Image from "next/image";
 import type { ProjectFrontmatter } from "@/lib/projects";
 
 type Props = {
@@ -59,16 +60,15 @@ export default function ProjectBlogHeader({ project }: Props) {
             bgcolor: "rgba(255,255,255,0.03)",
           }}
         >
-          <Box
-            component="img"
-            src={project.image}
-            alt={project.title}
-            sx={{
-              width: "100%",
-              display: "block",
-              objectFit: "cover",
-            }}
-          />
+          <Box sx={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 900px) 100vw, 900px"
+              style={{ objectFit: "cover" }}
+            />
+          </Box>
         </Box>
       )}
     </Box>

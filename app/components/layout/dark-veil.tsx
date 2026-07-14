@@ -103,6 +103,7 @@ export default function DarkVeil({
     const parent = canvas.parentElement as HTMLElement;
 
     let hasRendered = false;
+    let visible = true;
 
     const renderer = new Renderer({
       dpr: Math.min(window.devicePixelRatio, 2),
@@ -138,31 +139,45 @@ export default function DarkVeil({
     window.addEventListener("resize", resize);
     resize();
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+      },
+      { threshold: 0 },
+    );
+    observer.observe(canvas);
+
     const start = performance.now();
     let frame = 0;
+    let lastRender = 0;
+    const frameInterval = 1000 / 30;
 
-    const loop = () => {
-      program.uniforms.uTime.value =
-        ((performance.now() - start) / 1000) * speed;
-      program.uniforms.uHueShift.value = hueShift;
-      program.uniforms.uNoise.value = noiseIntensity;
-      program.uniforms.uScan.value = scanlineIntensity;
-      program.uniforms.uScanFreq.value = scanlineFrequency;
-      program.uniforms.uWarp.value = warpAmount;
-      renderer.render({ scene: mesh });
+    const loop = (now: number) => {
+      if (visible && now - lastRender >= frameInterval) {
+        lastRender = now;
+        program.uniforms.uTime.value =
+          ((now - start) / 1000) * speed;
+        program.uniforms.uHueShift.value = hueShift;
+        program.uniforms.uNoise.value = noiseIntensity;
+        program.uniforms.uScan.value = scanlineIntensity;
+        program.uniforms.uScanFreq.value = scanlineFrequency;
+        program.uniforms.uWarp.value = warpAmount;
+        renderer.render({ scene: mesh });
 
-      if (!hasRendered) {
-        hasRendered = true;
-        onReadyAction?.();
+        if (!hasRendered) {
+          hasRendered = true;
+          onReadyAction?.();
+        }
       }
 
       frame = requestAnimationFrame(loop);
     };
 
-    loop();
+    requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(frame);
+      observer.disconnect();
       window.removeEventListener("resize", resize);
     };
   }, [

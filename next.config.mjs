@@ -6,6 +6,12 @@ const nextConfig = {
   images: {
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 60,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+    ],
   },
   experimental: {
     optimizePackageImports: [
